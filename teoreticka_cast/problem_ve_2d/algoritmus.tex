@@ -1,7 +1,7 @@
 \section{Algoritmus}
 \label{sec:algoritmus}
 
-Nechť $V$ je množina bodů v rovině, pro každé dva body $u, v \in V$ označme $d(u, v)$ vzdálenost mezi nimi. Pomocí funkce $d$ definujeme graf $G = (V, E, w)$, kde hrany $E = \{\{u, v\} \mid u, v \in V\}$ a váha, neboli ohodnocení $w(\{u, v\}) = d(u, v)$. Nyní chceme najít trojúhelník. Náhodně si vybereme jednu hranu $\{u, v\} \in E$ a odebereme ji z množiny hran $E$. Nyní chceme najít nejkratší cestu (O tom co je cesta si můžete přečíst v Appendixu idk) mezi body $u, v$. K tomuto použijeme Dijkstrův algoritmus. Pokud nějaká cesta existuje, společně s hranou $\{u, v\}$ tvoří nějaký mnohoúhelník. Není těžké si rozmyslet, že tento útvar bude trojúhelník. Cesta se bude skládat ze dvou hran $\{u, j\}$ a $\{j, v\}$, které společně s hranou $\{u, v\}$ tvoří trojúhelník $T = (V, E, w)$, kde $V = \{u, j, v\}$, $E = \{uj, jv, uv\}$ a váha $w = w(\{u, v\}) + w(\{u, j\}) + w(\{j, v\})$. Pokud je tato váha menší než nejmenší váha, kterou jsme doposud našli, uložíme si tento trojúhelník. Nezapomene znovu přidat hranu $\{u, v\}$ zpátky do množiny hran $E$. Tento postup opakujeme, dokud nevyčerpáme všechny hrany. Výsledkem bude trojúhelník s nejmenším obvodem.
+Nechť $V$ je množina bodů v rovině, pro každé dva body $u, v \in V$ označme $d(u, v)$ vzdálenost mezi nimi. Pomocí funkce $d$ definujeme graf $G = (V, E, w)$, kde hrany $E = \{\{u, v\} \mid u, v \in V\}$ a váha, neboli ohodnocení $w(\{u, v\}) = d(u, v)$. Nyní chceme najít trojúhelník. Náhodně si vybereme jednu hranu $\{u, v\} \in E$ a odebereme ji z množiny hran $E$. Nyní chceme najít nejkratší cestu (O tom co je cesta si můžete přečíst v Appendixu idk) mezi body $u, v$. K tomuto použijeme Dijkstrův algoritmus. Pokud nějaká cesta existuje, společně s hranou $\{u, v\}$ tvoří nějaký mnohoúhelník. Není těžké si rozmyslet, že tento útvar bude trojúhelník. Cesta se bude skládat ze dvou hran $\{u, j\}$ a $\{j, v\}$, které společně s hranou $\{u, v\}$ tvoří trojúhelník $T = (V_T, E_T, w)$, kde $V_T = \{u, j, v\}$, $E_T = \{\{u,j\}, \{j,v\}, \{u,v\}\}$ a váha $w = w(\{u, v\}) + w(\{u, j\}) + w(\{j, v\})$. Pokud je tato váha menší než nejmenší váha, kterou jsme doposud našli, uložíme si tento trojúhelník. Nezapomene znovu přidat hranu $\{u, v\}$ zpátky do množiny hran $E$. Tento postup opakujeme, dokud nevyčerpáme všechny hrany. Výsledkem bude trojúhelník s nejmenším obvodem.
 
 
 
@@ -26,7 +26,7 @@ Nechť $V$ je množina bodů v rovině, pro každé dva body $u, v \in V$ označ
         $d(u, v) = dijkstra(G, u, v)$\;
         \If{$d(u, v) < min$}{
             $min = d(u, v)$\;
-            $T = (V, E, w)$\;
+            $T = (V_T, E_T, w)$\;
         }
         $E = E \cup \{\{u, v\}\}$\;
     }
