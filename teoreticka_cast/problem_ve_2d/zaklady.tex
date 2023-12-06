@@ -1,0 +1,15 @@
+\section{Základní pojmy}
+\label{sec:zakladni-pojmy}
+
+
+\begin{definition}[Ohodnocený graf]
+    $G = (V, E, w)$ je \textbf{ohodnocený graf}, kde $V$ je konečná množina vrcholů, $E$ je konečná množina hran jako dvojic vrcholů $E \subseteq{{V}\choose{2}}$ a $w$ je libovolné zobrazení $E \rightarrow \mathds{R}^+$.
+\end{definition}
+
+\begin{definition}[Úplný ohodnocený graf]
+    Úplný ohodnocený graf $G = (V, E, w)$ (Úplný graf je obvykle značen $K_n$) je graf, který má $n$ vrcholů a každé dva vrcholy jsou spojeny hranou, neboli $\#E = {{\#V}\choose{2}}$. Takový graf můžeme zapsat jako $K_n = (V, {{V}\choose{2}}, w)$.
+\end{definition}
+
+\begin{definition}[Cyklus]
+    Cyklem v grafu nazveme posloupnost vrcholů $v_1, v_2, \dots, v_n, v_1$, pokud  $v_i \neq v_j~\forall i \neq j$ a také~  $\forall i \in \{1,\dots, n-1\}$ platí $\{v_i, v_{i+1}\} \in E$ a $\{v_n, v_1\} \in E$. Délkou cyklu nazveme počet hran v cyklu.
+\end{definition}
