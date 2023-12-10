@@ -11,22 +11,27 @@ Nechť $V$ je množina bodů v rovině, pro každé dva body $u, v \in V$ označ
     \SetKwInOut{Output}{output}
     \SetKw{KwReturn}{return}
    
-    \Input{Souvislý ohodnocený graf $G = (V,E,w)$}
-    \Output{Trojúhelník $T = (V, E, w)$}
+    \Input{Množina bodů $V$ v rovině, kde každý bod je reprezentován jako dvojice souřadnic $(v_x, v_y)$}
+    \Output{Trojúhelník $T = (V_T, E_T, w)$}
     \BlankLine
     \For{$u \in V$}{
         \For{$v \in V$}{
         $d(u, v) = \sqrt{(v_x-u_x)^2+(v_y-u_y)^2}$\;
         }
     }
+    $ E = {{V}\choose{2}}$\;
+    $ G = (V, E, w)$\;
+    $min_T = \infty$\;
     \For{$\{u, v\} \in E$}{
-        $E = E \setminus \{\{u, v\}\}$\;
-        $d(u, v) = dijkstra(G, u, v)$\;
-        \If{$d(u, v) < min$}{
-            $min = d(u, v)$\;
+        $E = E \setminus \{u, v\}$\;
+        $d(u, j, v) = dijkstra(G, u, v)$\;
+        \If{$d(u, j, v) + d(u, v) < min_T$}{
+            $min_T = d(u, v) + d(u, v)$\;
+            $V_T = \{u, j, v\}$\;
+            $E_T = \{\{u,j\}, \{j,v\}, \{u,v\}\}$\;
             $T = (V_T, E_T, w)$\;
         }
-        $E = E \cup \{\{u, v\}\}$\;
+        $E = E \cup \{u, v\}$\;
     }
     \KwReturn{$T$}\;
    \end{algorithm}
