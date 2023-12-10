@@ -26,7 +26,7 @@ Nechť $V$ je množina bodů v rovině, pro každé dva body $u, v \in V$ označ
         $E = E \setminus \{u, v\}$\;
         $d(u, j, v) = dijkstra(G, u, v)$\;
         \If{$d(u, j, v) + d(u, v) < min_T$}{
-            $min_T = d(u, v) + d(u, v)$\;
+            $min_T = d(u, j, v) + d(u, v)$\;
             $V_T = \{u, j, v\}$\;
             $E_T = \{\{u,j\}, \{j,v\}, \{u,v\}\}$\;
             $T = (V_T, E_T, w)$\;
