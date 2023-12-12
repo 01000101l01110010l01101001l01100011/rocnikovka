@@ -1,0 +1,15 @@
+\section{Adaptace Dijkstrova algoritmu}
+\label{sec:dijkstra}
+
+Dijkstrův algoritmus, pojmenovaný po Edsger W. Dijkstrovi, je algoritmus na hledání nejkratší cesty mezi dvěma body v ohodnoceném grafu. Obecně taková cesta může mít několik vrcholů, ale protože náš graf je úplný, tak nejkratší cesta mezi vrcholy $u$ a $v$ by byla hrana $\{u, v\}$. Tuto hranu ale z grafu odebereme a až teď budeme hledat nejkratší cestu mezi $u$ a $v$. Nejkratší cesta povede právě přes jeden vrchol, který nazveme $j$, a bude se skládat právě ze dvou hran. Z trojúhelníkové nerovnosti (\myref{definice}{definice:trojuhelnikova_nerovnost}) víme, že nejkratší cesta mezi dvěma body ($u$ a $j$ nebo $j$ a $v$) se skládá právě z jedné hrany.
+
+\subsection{Popis algoritmu}
+\label{subsec:popis-algoritmu}
+
+\begin{enumerate}
+    \item Vytvoříme si množinu všech nenavštívených bodů a vybereme si startovní a cílový bod. Nastavíme všechny body jako nenavštívené. 
+    \item Ke každému bodu přiřadíme vzdálenost od počátečního bodu. Prozatím tuto vzdálenost u všech bodů nastavíme na $\infty$. Vzdálenost počátečního bodu od sebe samého nastavíme na $0$.
+    \item Od počátečního bodu začneme procházet všechny jeho sousedy. Pro každého souseda spočítáme vzdálenost od počátečního bodu (teď pouze váha hrany vedoucí z počátečního bodu do souseda). Tuto vzdálenost připíšeme sousedovi, protože ta vzdálenost bude menší, než $\infty$. Až zkontrolujeme všechny jeho sousedy, můžeme počáteční bod odebrat z množiny nenavštívených bodů.
+    \item Potom se přesuneme na nenavštívený bod s nejmenší vzdáleností od počátečního bodu. Tento bod se stane aktuálním bodem a budeme kontrolovat vzdálenosti všech jeho nenavštívených sousedů tak, že se podíváme na vzdálenost aktuálního bodu a váhu hrany vedoucí k sousedovi a tyto hodnoty sečteme. Pokud výsledná hodnota bude menší, než ta, kterou má u sebe uloženou soused, tak ji změníme. Pozor na to, že když přepíšu vzdálenost souseda od startovního bodu, souseda nenavštěvuji. Až zkontrolujeme všechny jeho sousedy, můžeme počáteční bod odebrat z množiny nenavštívených bodů.
+    \item Bod 4 opakujeme dokud nevybereme za aktuální bod cílový bod. V tomto okamžiku jsme našli nejkratší cestu.
+\end{enumerate}

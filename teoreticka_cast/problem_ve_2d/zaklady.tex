@@ -1,0 +1,64 @@
+\section{Základní pojmy}
+\label{sec:zakladni-pojmy}
+
+
+\begin{definition}[Ohodnocený graf]
+    \label{definice:ohodnoceny_graf}
+    $G = (V, E, w)$ je ohodnocený graf, kde $V$ je konečná množina vrcholů, $E$ je konečná množina hran jako dvojic vrcholů $E \subseteq{{V}\choose{2}}$ a $w$ je libovolné zobrazení $E \rightarrow \mathds{R}^+$, které hranám přiřazuje jejich váhu.
+\end{definition}
+
+\begin{definition}[Úplný ohodnocený graf]
+    \label{definice:uplny_ohodnoceny_graf}
+    Úplný ohodnocený graf $G = (V, E, w)$ je graf, který má $n$ vrcholů a každé dva vrcholy jsou spojeny hranou, neboli $E = {{V}\choose{2}}$. Takový graf můžeme také zapsat jako $K_n = (V, {{V}\choose{2}}, w)$.
+    \begin{figure}[h]
+        \centering
+        \begin{subfigure}[b]{0.3\textwidth}
+            \completeG{3}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.3\textwidth}
+            \completeG{5}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.3\textwidth}
+            \completeG{10}
+        \end{subfigure}
+        \caption{Tři úplné grafy}
+    \end{figure}
+\end{definition}
+
+\begin{definition}[cesta]
+    \label{definice:cesta}
+    Cestou v grafu nazveme posloupnost \textbf{různých} vrcholů $v_1, \dots, v_n$, pokud $\forall i \in \{1,\dots, n-1\}$ platí $\{v_i, v_{i+1}\} \in E$.  
+\end{definition}
+
+\begin{definition}[Cyklus]
+    \label{definice:cyklus}
+    Cyklem v grafu nazveme posloupnost vrcholů $v_1, v_2, \dots, v_n, v_1$, pokud  $v_i \neq v_j~\forall i \neq j$ a také~  $\forall i \in \{1,\dots, n-1\}$ platí $\{v_i, v_{i+1}\} \in E$ a $\{v_n, v_1\} \in E$. Délkou cyklu nazveme počet hran v cyklu.
+\end{definition}
+
+\begin{definition}[Cyklus jako cesta]
+    \label{definice:cyklus_jako_cesta}
+    Cyklus tvoří cesta z bodu $u$ do bodu $v$ a koncový bod $u$.    
+\end{definition}
+
+\begin{definition}[trojúhelníková nerovnost]
+    \label{definice:trojuhelnikova_nerovnost}
+    Trojúhelníková nerovnost říká, že pro každé tři různé body $A, B, C$ platí \textcolor{myblue}{$|AC|+|CB|$} $\geq$ \textcolor{myred}{$|AB|$}, neboli vzdálenost mezi dvěma body je vždy menší než součet vzdáleností mezi těmito body a třetím bodem. 
+
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}
+            \label{obr:trojuhelnikova_nerovnost}
+            \coordinate[label=below left:$A$] (A) at (0,0);
+            \coordinate[label=below right:$B$] (B) at (6,0);
+            \coordinate[label=above:$C$] (C) at (3,2);
+            \draw[myred, line width=1.5pt] (A) -- node[below] {c} (B);
+            \draw[myblue, line width=1.5pt] (B) -- node[right=10pt] {a} (C);
+            \draw[myblue, line width=1.5pt] (C) -- node[left=10pt] {b} (A);
+            \fill (A) circle[radius=2pt];
+            \fill (B) circle[radius=2pt];
+            \fill (C) circle[radius=2pt];
+        \end{tikzpicture}
+        \caption{Trojúhelníková nerovnost}
+    \end{figure}
+    
+\end{definition}
