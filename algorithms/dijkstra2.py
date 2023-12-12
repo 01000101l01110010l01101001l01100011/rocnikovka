@@ -1,24 +1,31 @@
-def dijkstra(graph, start, end):
-    distances = {vertex: float('inf') for vertex in graph.vertices}
+from objects import Graph, Vertex
+def dijkstra(graph:Graph, start:Vertex, end:Vertex):
 
     Q = set(graph.vertices)
+
+    distances = {vertex: float('inf') for vertex in graph.vertices}
+
     neighbors = set(graph.vertices)
     distances[start] = 0
-    point = None
-
+    previous = {}
+    previous_vertex = None
+    current = start
     while Q:
-        current = min(Q, key=lambda vertex: distances[vertex])
+        current = min(Q, key=lambda vertex: distances[vertex]) 
+        if current is not start:
+            previous[current] = previous_vertex
         Q.remove(current)
         neighbors = set(Q)
-        if current == start or current == end:
+        if current == start:
             neighbors.remove(end)
+        elif current == end:
+            return distances[end], previous[end]
         else:
-            neighbors.remove(current)
+            neighbors.add(end)
         for neighbor in neighbors:
             alt = distances[current] + graph.distance(current, neighbor)
             if alt < distances[neighbor]:
                 distances[neighbor] = alt
-                point = current
+        previous_vertex = current
 
-    print(distances[end])
-    return distances[end]
+    return distances[end], previous[end]

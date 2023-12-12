@@ -1,21 +1,21 @@
-from itertools import combinations
 class Graph:
     """ A complete graph"""
     def __init__(self, vertices: set):
         self.vertices = vertices
-        self.edges = list(combinations(self.vertices, 2))
-        self.weights = {}
-
+        self.weights = dict()
+        for vertex in vertices:
+            for other in vertices:
+                if vertex != other:
+                    self.weights[(vertex, other)] = ((vertex.x - other.x)**2 + (vertex.y - other.y)**2)**0.5
+        self.edges = list(self.weights.keys())
     def distance(self, first, other):
         """ Distance between two vertices"""
-        try:
-            return self.weights[(first, other)]
-        except KeyError:
-            return self.weights[(other, first)]
+        return self.weights[(first, other)]
 
 
-class Verticle:
-    """ A verticle in a graph"""
+class Vertex:
+    """ A vertex in a graph"""
     def __init__(self, x, y):
         self.x = x
         self.y = y
+        self.coordinates = (x, y)
