@@ -44,7 +44,7 @@
 \usepackage{graphicx}
 \usepackage{tikz}
 \usetikzlibrary{%
- positioning
+ positioning, graphs, graphs.standard
 }
 
 % Tables %
@@ -93,32 +93,6 @@
 
 % Extra custom commands %
 \newcommand{\myref}[2]{\hyperref[#2]{#1~\ref*{#2}}}
-\newcommand{\completeG}[1]{
-    \centering
-    \begin{tikzpicture}
-        \def\n{#1} % Change the value of n here
-        
-        % Draw vertices
-        \foreach \i in {1,...,\n} {
-            \coordinate (V\i) at ({360/\n * (\i - 1)}:2);
-            \fill (V\i) circle[radius=2pt];
-        }
-        % Draw edges
-        \foreach \i in {1,...,\n} {
-            \foreach \j in {\i,...,\n} {
-                \ifnum\i=\j\relax
-                \else
-                    \draw (V\i) -- (V\j);
-                \fi
-            }
-        }
-        % Vertex names
-        \foreach \i in {1,...,\n} {
-            \node at (V\i) [xshift=10pt] {$v_{\i}$};
-        }
-    \end{tikzpicture}
-    \caption{Úplný graf $K_{#1}$}
-}
 
 % Algorithms %
 \usepackage[ruled,vlined,linesnumbered,czech]{algorithm2e}
@@ -126,3 +100,4 @@
 % Colors %
 \definecolor{myred}{RGB}{170, 55, 55}
 \definecolor{myblue}{RGB}{55, 100, 170}
+\definecolor{mygreen}{RGB}{55, 120, 55}
