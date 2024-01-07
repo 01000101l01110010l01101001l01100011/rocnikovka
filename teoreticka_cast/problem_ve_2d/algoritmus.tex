@@ -1,8 +1,8 @@
 \section{Algoritmus}
 \label{sec:algoritmus}
 
-Nechť $V$ je množina bodů v rovině a pro každé dva body $u, v \in V$ označme $d(u, v)$ jejich vzájemnou vzdálenost. Pomocí funkce $d$ definujeme ohodnocený graf $G = (V, E, w)$. Množinu hran označíme $E = \{\{u, v\} \mid u, v \in V\}$ a váhu, neboli ohodnocení, nám určuje zobrazení $w(\{u, v\}) = d(u, v)$. Nyní chceme najít cyklus délky tři. Náhodně vybereme jednu hranu $\{u, v\} \in E$ a odebereme ji z množiny hran $E$. Dále potřebujeme najít nejkratší cestu mezi body $u$ a  $v$. K tomuto použijeme Dijkstrův algoritmus. Pokud nějaká cesta existuje, společně s hranou $\{u, v\}$ tvoří nějaký cyklus. Není těžké si rozmyslet, že tento cyklus bude mít délku tři. Cestu tvoří dvě hrany $\{u, j\}$ a $\{j, v\}$, které společně s hranou $\{u, v\}$ tvoří trojúhelník $T = (V_T, E_T, w)$, kde $V_T = \{u, j, v\}$, $E_T = \{\{u,j\}, \{j,v\}, \{u,v\}\}$ a váha hran se zachová. Pokud-li trojúhelník (cyklus délky tři) bude mít celkovou váhu menší než ten, který jsme doposud našli, uložíme tento trojúhelník.
-Nezapomeneme znovu přidat hranu $\{u, v\}$ zpátky do množiny hran $E$. Tento postup opakujeme do vyčerpání hran. Výsledkem bude trojúhelník s minimálním obvodem.
+Nechť $V$ je množina bodů v rovině a pro každé dva body $u, v \in V$ označme $d(u, v)$ jejich vzájemnou vzdálenost. Pomocí zobrazení $d$ definujeme ohodnocený graf $G = (V, E, w)$. Množinu hran označíme $E = \{\{u, v\} \mid u, v \in V\}$ a váhu, neboli ohodnocení, nám určuje zobrazení $w$ dané předpisem $w(\{u, v\}) \coloneqq d(u, v), \forall (u, v) \in E$. Nyní chceme najít cyklus délky tři. Náhodně vybereme jednu hranu $\{u, v\} \in E$ a odebereme ji z množiny hran $E$. Dále potřebujeme najít cestu s minimální váhou mezi body $u$ a  $v$. K tomuto použijeme Dijkstrův algoritmus. Když cesta existuje, společně s hranou $\{u, v\}$ tvoří cyklus. Není těžké si rozmyslet, že tento cyklus bude mít délku tři. Cestu tvoří dvě hrany $\{u, j\}$ a $\{j, v\}$, které společně s hranou $\{u, v\}$ tvoří podgraf ve tvaru trojúhelníku $T = (V_T, E_T, w)$, kde $V_T = \{u, j, v\}$, $E_T = \{\{u,j\}, \{j,v\}, \{u,v\}\}$ a váha hran se zachová. Pokud trojúhelník (cyklus délky tři) bude mít celkovou váhu menší než ten, který jsme doposud našli, uložíme tento trojúhelník.
+Nezapomeneme vrátit hranu $\{u, v\}$ do množiny hran $E$. Tento postup opakujeme do vyčerpání hran. Výsledkem bude trojúhelník s minimálním obvodem.
 
 \begin{algorithm}
     \caption{Algoritmus na hledání trojúhelníku s nejkratším obvodem.}
@@ -18,9 +18,10 @@ Nezapomeneme znovu přidat hranu $\{u, v\}$ zpátky do množiny hran $E$. Tento 
     \For{$u \in V$}{
         \For{$v \in V$}{
         $d(u, v) \leftarrow \sqrt{(v_x-u_x)^2+(v_y-u_y)^2}$\;
+        $ w(\{u, v\}) \leftarrow d(u, v)$\;
         }
     }
-    $ w({u, v}) \leftarrow d(u, v)$\;
+    
     $ E \leftarrow{\binom{V}{2}}$\;
     $ G \leftarrow (V, E, w)$\;
     $min_T \leftarrow \infty$\;

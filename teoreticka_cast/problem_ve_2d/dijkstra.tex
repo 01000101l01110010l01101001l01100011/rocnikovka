@@ -1,7 +1,7 @@
 \section{Adaptace Dijkstrova algoritmu}
 \label{sec:dijkstra}
 
-Dijkstrův algoritmus, pojmenovaný po Edsgerovi W. Dijkstrovi, je algoritmus na hledání cesty s minimální váhou mezi dvěma body v ohodnoceném grafu. Obecně taková cesta může mít několik vrcholů, ale protože náš graf je úplný a převzatý z roviny, tak cesta s minimální váhou mezi vrcholy $u$ a $v$ je hrana $\{u, v\}$. Pozor! Toto funguje pouze protože náš graf je převzatý z roviny. Situace na \myref{obrázku}{obr:troj_ner_graf} by v rovině a našem grafu nemohla nastat kvůli \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníkové nerovnosti}. Aby nám vznikl trojúhelník, tak hranu $\{u, v\}$ z grafu odebereme a až teď budeme hledat nejkratší cestu mezi body $u$ a $v$. Nejkratší cesta povede právě přes jeden vrchol (plyne z \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníkové nerovnosti}), který nazveme $j$, a bude se skládat právě ze dvou hran. Jedna hrana bude vést z $u$ do $j$ a druhá z $j$ do $v$. 
+Dijkstrův algoritmus, pojmenovaný po Edsgeru W. Dijkstrovi, je algoritmus na hledání cesty s minimální váhou mezi dvěma body v ohodnoceném grafu. Obecně taková cesta může mít několik vrcholů, ale protože náš graf je převzatý z~roviny, tak cesta s~minimální váhou mezi vrcholy $u$ a $v$ je hrana $\{u, v\}$. Kdyby náš graf nebyl převzatý z~roviny, tak by mohla nastat situace na \myref{obrázku}{obr:troj_ner_graf}. Aby nám vznikl trojúhelník, tak hranu $\{u, v\}$ z grafu odebereme, a až teď budeme hledat cestu s miniální váhou mezi body $u$ a $v$. Taková cesta povede právě přes jeden vrchol (plyne z \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníkové nerovnosti}), který nazveme $j$, a bude se skládat právě ze dvou hran. Jedna hrana bude vést z $u$ do $j$ a druhá z $j$ do $v$. 
 
 
 
@@ -26,7 +26,7 @@ Dijkstrův algoritmus, pojmenovaný po Edsgerovi W. Dijkstrovi, je algoritmus na
         \draw[mygreen, line width=1.5pt] (A) -- node[below] {3} (C);
         \draw[mygreen, line width=1.5pt] (D) -- node[above] {7} (E);
     \end{tikzpicture}
-    \caption{V obecném grafu nemusí fungovat trojúhelníková nerovnost.}
+    \caption{V obecném grafu nemusí platit \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníková nerovnost}.}
     \label{obr:troj_ner_graf}
 \end{figure}
 
@@ -37,10 +37,12 @@ Dijkstrův algoritmus, pojmenovaný po Edsgerovi W. Dijkstrovi, je algoritmus na
 \label{subsec:popis-algoritmu}
 
 \begin{enumerate}
-    \item Vytvoříme si množinu všech nenavštívených bodů a vybereme si startovní a cílový bod. Označíme všechny body nenavštívenými. 
+    \item Vytvoříme množinu všech nenavštívených bodů a vybereme startovní a cílový bod. Označíme všechny body nenavštívenými. 
     \item Každému bodu přiřadíme vzdálenost od počátečního bodu; prozatím na $\infty$. Vzdálenost počátečního bodu od sebe samého nastavíme na $0$. 
-    \item Nejdříve projdeme všechny sousedy počátečního bodu. Každému sousedovi spočítáme vzdálenost od počátečního bodu (v tomto případě váha hrany vedoucí z počátečního bodu do souseda) a připíšeme ji sousedovi, bude-li menší než $\infty$. Až zkontrolujeme všechny jeho sousedy, můžeme počáteční bod odebrat z množiny nenavštívených bodů.
+    \item Nejdříve projdeme všechny sousedy počátečního bodu. Každému sousedu spočítáme vzdálenost od počátečního bodu (v tomto případě váha hrany vedoucí z~počátečního bodu do souseda) a připíšeme ji sousedovi, bude-li menší než $\infty$. Až zkontrolujeme všechny jeho sousedy, odebereme počáteční bod z množiny nenavštívených bodů.
     \item Potom se přesuneme na nenavštívený bod s minimální vzdáleností od počátečního bodu. 
-    Tento bod označíme jako aktuální a začneme kontrolovat jeho sousedy. Budeme se dívat, jestli vzdálenost od počátečního bodu do aktuálního + váha hrany vedoucí k sousedovi nejsou menší než vzdálenost, kterou má soused u sebe uloženou. Pokud výsledná hodnota bude menší než ta, kterou má u sebe uloženou soused, změníme ji. Je třeba myslet na to, že když přepíšeme vzdálenost souseda od startovního bodu, souseda nenavštěvujeme. Počáteční bod můžeme odebrat z množiny nenavštívených bodů až zkontrolujeme všechny jeho sousedy.
+    Tento bod označíme jako aktuální a začneme kontrolovat jeho sousedy. 
+    Je-li součet vzdálenosti od počátečního bodu do aktuálního s váhou hrany vedoucí k sousedu menší než vzdálenost, kterou má u sebe soused uloženou, změníme ji.
+    Je třeba myslet na to, že když přepíšeme vzdálenost souseda od startovního bodu, souseda neoznačujeme za navštíveného. Počáteční bod odebereme z množiny nenavštívených bodů, až zkontrolujeme všechny jeho sousedy.
     \item Čtvrtý bod opakujeme, dokud nevybereme za aktuální bod ten cílový. V tomto okamžiku jsme našli nejkratší cestu.
 \end{enumerate}

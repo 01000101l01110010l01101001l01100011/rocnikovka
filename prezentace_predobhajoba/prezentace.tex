@@ -1,0 +1,206 @@
+\documentclass{beamer}
+\usetheme{CambridgeUS}
+\usecolortheme{spruce}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[czech]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{tikz}
+
+\usetikzlibrary {perspective, shapes}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\definecolor{myred}{RGB}{170, 55, 55}
+\definecolor{myblue}{RGB}{88,118,199}
+\definecolor{mygreen}{RGB}{55, 120, 55}
+\definecolor{graph}{RGB}{102,138,224}
+\definecolor{graph2}{RGB}{224,102,138}
+
+\definecolor{green1}{RGB}{5,147,84}
+\definecolor{green2}{RGB}{2,123,54}
+\definecolor{green3}{RGB}{29,105,68}
+
+\definecolor{white1}{RGB}{220,250,250}
+\definecolor{vyzkum_color}{RGB}{119,96,210}
+
+\setbeamercolor{structure}{fg=mygreen} % Change the color of structural elements to "myred"
+% \setbeamercolor{block title}{bg=blue!70!black, fg=white} % Change the color of block titles
+\setbeamercolor{block title}{bg=myblue, fg=white}
+
+\setbeamercolor{palette primary}{bg=green1}
+\setbeamercolor{palette secondary}{bg=green2}
+\setbeamercolor{palette tertiary}{bg=green3}
+
+
+\setbeamercolor{title in head/foot}{fg=white1}
+\setbeamercolor{author in head/foot}{fg=white1}
+\setbeamercolor{date in head/foot}{fg=white1}
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{section in head/foot}{fg=white1}
+\setbeamercolor{subsection in head/foot}{fg=white1}
+
+\newenvironment<>{vyzkum}[1]{%
+  \setlength{\textwidth}{1\textwidth}
+  \setbeamercolor{block title}{fg=white,bg=vyzkum_color}%
+  \begin{block}#2{#1}}{\end{block}}
+
+
+
+\usepackage{enumitem,amssymb}
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\done}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}%
+\hspace{-2.5pt}}
+\newcommand{\wontfix}{\rlap{$\square$}{\large\hspace{1pt}\xmark}}
+
+\newtheorem{definice}{Definice}
+
+\begin{document}
+
+\title[Ročníková práce]{Hledání polytopu maximální dimenze a minimálním obvodem s vrcholy v dané množině bodů.}
+\author{Eric Dusart}
+\date{9. ledna 2024}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{Obsah}
+    \tableofcontents
+\end{frame}
+
+\section{Co je to polytop a o čem píšu}
+\subsection{Definice polytopu}
+\begin{frame}
+    \frametitle{Definice polytopu}
+    \begin{definice}[Polytop]
+        amogus
+    \end{definice}
+
+    \begin{itemize}
+        \item Geometrický útvar.
+        \item Zobecnění mnohoúhelník na n dimenzí.
+        \item Bod, úsečka, mnohoúhelník, mnohostěn, polychor, \dots
+    \end{itemize}
+
+    \begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \begin{tikzpicture}
+                \draw[myred, thick] (0,0) -- (2,0);
+                \fill[myred] (0,0) circle (1pt);
+                \fill[myred] (2,0) circle (1pt);
+            \end{tikzpicture}
+            \caption{Úsečka}
+            \label{fig:line_segment}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \begin{tikzpicture}
+                \draw[myblue, thick] (0,0) -- (1,1) -- (2,0) -- cycle;
+                \fill[myblue] (0,0) circle (1pt);
+                \fill[myblue] (1,1) circle (1pt);
+                \fill[myblue] (2,0) circle (1pt);
+            \end{tikzpicture}
+            \caption{Mnohoúhelník}
+            \label{fig:polygon}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \begin{tikzpicture}[3d view]
+                \draw[green2, thick, dotted] (1,0,0) -- (0,1,0);
+                \draw[green2, thick] (0,1,0) -- (0,0,2);
+                \draw[green2, thick] (0,-1,0) -- (1,0,0);
+                \draw[green2, thick] (1,0,0) -- (0,0,2);
+                \draw[green2, thick] (0,-1,0) -- (0,0,2);
+                \draw[green2, thick] (0,1,0) -- (0,-1,0);
+                \fill[green3] (1,0,0) circle (1pt);
+                \fill[green3] (0,1,0) circle (1pt);
+                \fill[green3] (0,-1,0) circle (1pt);
+                \fill[green3] (1,0,0) circle (1pt);
+                \fill[green3] (0,0,1.99) circle (1pt);
+            \end{tikzpicture}
+            \caption{Mnohostěn}
+            \label{fig:polygonds}
+        \end{subfigure}
+    \end{figure}
+
+\end{frame}
+\section{Moje práce}
+\begin{frame}
+    \frametitle{Moje práce}
+    \begin{vyzkum}{Výzkumná otázka}
+        Jak najít polytop maximální dimenze a minimálním obvodem s vrcholy v dané množině bodů?
+    \end{vyzkum}
+    \begin{description}
+        \item[Vstup:] Množina bodů $v \in V$, $n \in \mathbb{N}$ značící dimenzi bodů: $v \in \mathbb{R}^n$.
+        \item[Krok 1:] Převod na grafovou úlohu\footnote[1]{\tiny V grafu nezáleží na uspořádání bodů, ani na vzdálenostech.}.
+        \item[Krok 2:] Spočítat všechny vzdálenosti mezi body.
+        \item[Krok 3:] Pomocí algoritmu najít cyklus délky $n+1$ (polytop). 
+        \item[Cíl:] Polytop maximální dimenze s minimálním obvodem. 
+    \end{description}
+    
+\end{frame}
+\subsection{Postup}
+\begin{frame}
+    \frametitle{Můj postup v psaní práce}
+    \begin{todolist}
+        \item Problém ve 2D
+        \begin{todolist}
+            \item[\done] Najít algoritmus.
+            \item Dokázat, že funguje.
+            \item Naprogramovat algoritmus.
+        \end{todolist}
+        \item Zobecnění na $n$ dimenzí
+        \begin{todolist}
+            \item Najít algoritmus.
+            \item Dokázat, že funguje.
+            \item Naprogramovat algoritmus.
+        \end{todolist}
+    \end{todolist}
+\end{frame}
+
+\section{Závěr}
+\subsection{Děkuji za pozornost}
+\begin{frame}
+    \frametitle{To je prozatím všechno}
+    \pgfdeclarelayer{background layer}
+    \pgfdeclarelayer{foreground layer}
+    \pgfsetlayers{background layer,main,foreground layer}
+
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \begin{pgfonlayer}{foreground layer}
+            \foreach \i in {1,...,11} {
+                \pgfmathsetmacro{\x}{rand*6}
+                \pgfmathsetmacro{\y}{rand*3}
+                \node[fill=graph2,inner sep=2pt, circle](x\i) at (\x, \y){};
+            }
+            % \fill[red] (x3) circle (2pt);
+            \end{pgfonlayer}
+            \begin{pgfonlayer}{background layer}
+                
+
+            \foreach \i in {1,...,11} {
+                \foreach \j in {1,...,11}{
+                    \draw[graph] (x\i) -- (x\j);
+                }
+            }
+            \end{pgfonlayer}
+        \end{tikzpicture}
+        \caption{Náhodný úplný graf $K_{11}$}
+        \label{fig:body}
+    \end{figure}
+\end{frame}
+
+
+\end{document}

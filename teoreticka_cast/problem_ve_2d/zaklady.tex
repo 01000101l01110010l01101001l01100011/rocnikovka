@@ -3,17 +3,17 @@
 
 \begin{definition}[Vzdálenost]
     \label{definice:vzdalenost}
-    Vzdálenost mezi dvěma body $u$ a $v$ nám určuje zobrazení \\$d(u, v)~\rightarrow~\mathds{R}^+$ s předpisem: $d(u, v) = \sqrt{(v_x-u_x)^2+(v_y-u_y)^2}$, kde $v_x$ a $v_y$ jsou souřadnice bodu $v$. 
+    Zobrazení $d: \mathbb{R}^2~\times~\mathbb{R}^2~\rightarrow~\mathbb{R}^+$ nám udává vzdálenost dvou bodů $u, v \in \mathbb{R}^2$ podle předpisu $d(u, v) \coloneqq \sqrt{(v_x-u_x)^2+(v_y-u_y)^2}$, kde $v_x$ a $v_y$ jsou souřadnice bodu $v$. 
 \end{definition}
 
 \begin{definition}[Ohodnocený graf]
     \label{definice:ohodnoceny_graf}
-    $G = (V, E, w)$ je ohodnocený graf, kde $V$ je množina vrcholů, $E$ je dvojprvková podmnožina $E \subseteq \binom{V}{2}$ a $w$ je libovolné zobrazení $E \rightarrow \mathds{R}^+$, které hranám přiřazuje jejich váhu.
+    $G = (V, E, w)$ je ohodnocený graf, kde $V$ je množina vrcholů, $E$ je množina dvojprvkových podmnožin $E \subseteq \binom{V}{2}$ a $w$ je libovolné zobrazení $E \rightarrow \mathds{R}^+$, které hranám přiřazuje jejich váhu.
 \end{definition}
 
 \begin{definition}[Úplný ohodnocený graf]
     \label{definice:uplny_ohodnoceny_graf}
-    Úplný ohodnocený graf $G = (V, E, w)$ má každé dva vrcholy spojeny hranou, neboli $E = \binom{V}{2}$. Takový graf můžeme také zapsat jako $K_n = (V, \binom{V}{2}, w)$.
+    Úplný ohodnocený graf $G = (V, E, w)$ má každé dva vrcholy spojeny hranou, neboli $E = \binom{V}{2}$. Takový graf můžeme také zapsat jako $K_n \coloneqq (V,\binom{V}{2},w)$.
     \begin{figure}[h]
         \centering
         \begin{subfigure}[b]{0.3\textwidth}
@@ -42,40 +42,40 @@
 
 \begin{definition}[Cesta]
     \label{definice:cesta}
-    Cestou v grafu nazveme posloupnost \textbf{různých} vrcholů $v_1, \dots, v_n$, pokud $\forall i \in \{1,\dots, n-1\}$ platí $\{v_i, v_{i+1}\} \in E$.  
+    Cestou v grafu nazveme posloupnost \textbf{různých} vrcholů $v_1, \ldots, v_n$, pokud $\forall i \in \{1,\ldots, n-1\}$ platí $\{v_i, v_{i+1}\} \in E$.  
 \end{definition}
 
 \begin{definition}[Váha cesty]
     \label{definice:vaha_cesty}
-    Pokud cestu tvoří posloupnost vrcholů $v_1, \dots, v_n$, tak váha cesty bude rovna \[ \sum_{i=1}^{n-1}w(\{v_i, v_{i+1}\}) \]
+    Pokud cestu tvoří posloupnost vrcholů $v_1, \ldots, v_n$, tak váha cesty je rovna \[ \sum_{i=1}^{n-1}w(\{v_i, v_{i+1}\}). \]
     
 \end{definition}
 
 \begin{definition}[Cyklus]
     \label{definice:cyklus}
-    Cyklus tvoří cesta z bodu $u$ do bodu $v$ a koncový bod $u$.    
+    Cyklus je posloupnost vrcholů $v_1,\ldots,v_n,v_1$, kde $v_1,\ldots,v_n$ je cesta a poslední dva vrcholy $\{v_1,v_n\} \in E$.
 \end{definition}
 
 \begin{definition}[Váha cyklu]
     \label{definice:vaha_cyklu}
-    Pokud cyklus tvoří posloupnost vrcholů $v_1, \dots, v_n$, tak váha \\cesty bude rovna \[ w(\{v_1, v_n\}) + \sum_{i=1}^{n-1}w(\{v_i, v_{i+1}\}) \]
+    Pokud cyklus tvoří posloupnost vrcholů $v_1, \ldots, v_n$, tak váha \\cesty je rovna \[ w(\{v_1, v_n\}) + \sum_{i=1}^{n-1}w(\{v_i, v_{i+1}\}). \]
     
 \end{definition}
 
 \begin{definition}[Trojúhelníková nerovnost]
     \label{definice:trojuhelnikova_nerovnost}
-    Trojúhelníková nerovnost říká, že pro každé tři různé body $A, B, C$ platí \textcolor{myblue}{$d(A, B)+d(C, B)$} $\geq$ \textcolor{myred}{$d(A,B)$}, neboli vzdálenost mezi dvěma body je vždy menší nebo rovna součtu vzdáleností mezi těmito body a třetím bodem. 
+    Trojúhelníková nerovnost říká, že pro každé tři různé body $a, b, c$ platí \textcolor{myblue}{$d(a, b)+d(c, b)$} $\geq$ \textcolor{myred}{$d(A,B)$}, neboli vzdálenost mezi dvěma body je vždy menší nebo rovna součtu vzdáleností mezi těmito body a třetím bodem. 
 
     \begin{figure}[h]
         \centering
         \begin{tikzpicture}
             \label{obr:trojuhelnikova_nerovnost}
-            \coordinate[label=below left:$A$] (A) at (0,0);
-            \coordinate[label=below right:$B$] (B) at (6,0);
-            \coordinate[label=above:$C$] (C) at (3,2);
-            \draw[myred, line width=1.5pt] (A) -- node[below] {c} (B);
-            \draw[myblue, line width=1.5pt] (B) -- node[right=10pt] {a} (C);
-            \draw[myblue, line width=1.5pt] (C) -- node[left=10pt] {b} (A);
+            \coordinate[label=below left:$a$] (A) at (0,0);
+            \coordinate[label=below right:$b$] (B) at (6,0);
+            \coordinate[label=above:$c$] (C) at (3,2);
+            \draw[myred, line width=1.5pt] (A) -- (B);
+            \draw[myblue, line width=1.5pt] (B) -- (C);
+            \draw[myblue, line width=1.5pt] (C) -- (A);
             \fill (A) circle[radius=2pt];
             \fill (B) circle[radius=2pt];
             \fill (C) circle[radius=2pt];
