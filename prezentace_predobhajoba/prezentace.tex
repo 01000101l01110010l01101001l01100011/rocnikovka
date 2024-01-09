@@ -1,7 +1,7 @@
-\documentclass{beamer}
+\documentclass[aspectratio=169]{beamer}
 \usetheme{CambridgeUS}
 \usecolortheme{spruce}
-
+\setbeamersize{text margin left=1cm,text margin right=1cm}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[czech]{babel}
@@ -9,7 +9,7 @@
 \usepackage{amsmath}
 \usepackage{tikz}
 
-\usetikzlibrary {perspective, shapes}
+\usetikzlibrary{calc, perspective, shapes}
 \usepackage{caption}
 \usepackage{subcaption}
 
@@ -46,7 +46,10 @@
   \setlength{\textwidth}{1\textwidth}
   \setbeamercolor{block title}{fg=white,bg=vyzkum_color}%
   \begin{block}#2{#1}}{\end{block}}
-
+\newenvironment<>{random}[1]{%
+    \setlength{\textwidth}{0.75\textwidth}
+    \setbeamercolor{block title}{fg=white,bg=green1}%
+    \begin{block}#2{#1}}{\end{block}}
 
 
 \usepackage{enumitem,amssymb}
@@ -63,7 +66,7 @@
 
 \begin{document}
 
-\title[Ročníková práce]{Hledání polytopu maximální dimenze a minimálním obvodem s vrcholy v dané množině bodů.}
+\title[Ročníková práce]{Hledání polytopu maximální dimenze a minimálního obvodu s vrcholy v dané množině bodů.}
 \author{Eric Dusart}
 \date{9. ledna 2024}
 
@@ -79,17 +82,23 @@
 \section{Co je to polytop a o čem píšu}
 \subsection{Definice polytopu}
 \begin{frame}
-    \frametitle{Definice polytopu}
+    \frametitle{Co je to polytop?}
     \begin{definice}[Polytop]
-        amogus
+        \emph{Polytop} dimenze $n \in \mathbb{N}$ je uzavřená podmnožina $P \subseteq \mathbb{R}^{n}$
+        definovaná induktivně:
+        \begin{itemize}[label=\textbullet]
+            \item Polytop dimenze $1$ je úsečka.
+            \item Polytop dimenze $n$ je slepením polytopů dimenze $n-1$, jež spolu mohou
+                sdílet stěny libovolné dimenze, kde \emph{stěnou} polytopu rozumíme jeho
+                libovolnou podmnožinu jsoucí rovněž polytopem.
+        \end{itemize}
     \end{definice}
 
-    \begin{itemize}
+    \begin{itemize}[label=\textbullet]
         \item Geometrický útvar.
-        \item Zobecnění mnohoúhelník na n dimenzí.
-        \item Bod, úsečka, mnohoúhelník, mnohostěn, polychor, \dots
+        \item Zobecnění mnohoúhelníku na n dimenzí.
     \end{itemize}
-
+    \vspace{-1cm}
     \begin{figure}
         \centering
         \begin{subfigure}[b]{0.3\textwidth}
@@ -138,20 +147,29 @@
 \begin{frame}
     \frametitle{Moje práce}
     \begin{vyzkum}{Výzkumná otázka}
-        Jak najít polytop maximální dimenze a minimálním obvodem s vrcholy v dané množině bodů?
+        Jak najít polytop maximální dimenze a minimálního obvodu s vrcholy v dané množině bodů?
     \end{vyzkum}
-    \begin{description}
-        \item[Vstup:] Množina bodů $v \in V$, $n \in \mathbb{N}$ značící dimenzi bodů: $v \in \mathbb{R}^n$.
-        \item[Krok 1:] Převod na grafovou úlohu\footnote[1]{\tiny V grafu nezáleží na uspořádání bodů, ani na vzdálenostech.}.
-        \item[Krok 2:] Spočítat všechny vzdálenosti mezi body.
-        \item[Krok 3:] Pomocí algoritmu najít cyklus délky $n+1$ (polytop). 
-        \item[Cíl:] Polytop maximální dimenze s minimálním obvodem. 
-    \end{description}
+    \vspace{1em}
+    \begin{itemize}[label=\textbullet]
+        \item Matematický experiment.
+    \end{itemize}
+    \vspace{1em}
+    \begin{tabular}{ll}
+        \textbf{Vstup:} & Množina bodů $V\subseteq  \mathbb{R}^n$. \\
+        \textbf{Cíl:} & Polytop maximální dimenze a minimálního obvodu s vrcholy ve $V$. \\
+        \textbf{Krok 1:} & Spočítat všechny vzdálenosti mezi body.\\
+        \textbf{Krok 2:} & Převod na grafovou úlohu\footnote[1]{\tiny V grafu nezáleží na uspořádání bodů, ani na vzdálenostech.}.\\
+        \textbf{Krok 3:} & Pomocí algoritmu najít cyklus délky $n+1$ (polytop).
+    \end{tabular}
+
     
 \end{frame}
 \subsection{Postup}
 \begin{frame}
-    \frametitle{Můj postup v psaní práce}
+    \frametitle{Můj postup v psaní práce a proč jsem si vybral toto téma}
+    \begin{columns}
+    \begin{column}{0.5\textwidth}
+        \textbf{Plán:}
     \begin{todolist}
         \item Problém ve 2D
         \begin{todolist}
@@ -166,6 +184,17 @@
             \item Naprogramovat algoritmus.
         \end{todolist}
     \end{todolist}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \begin{random}{Proč jsem si vzbral toto téma:}
+    \begin{itemize}[label=\textbullet]
+        \item Zájem o matematiku.
+        \item Trojúhelníky ve 2D.
+        \item Problém v $n$ dimenzích.
+    \end{itemize}
+        \end{random}
+    \end{column}
+\end{columns}
 \end{frame}
 
 \section{Závěr}
@@ -185,7 +214,7 @@
                 \pgfmathsetmacro{\y}{rand*3}
                 \node[fill=graph2,inner sep=2pt, circle](x\i) at (\x, \y){};
             }
-            % \fill[red] (x3) circle (2pt);
+            %   \fill[red] (x5) circle (2pt);
             \end{pgfonlayer}
             \begin{pgfonlayer}{background layer}
                 
