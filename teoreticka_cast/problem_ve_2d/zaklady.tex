@@ -1,6 +1,17 @@
 \section{Základní pojmy}
 \label{sec:zakladni-pojmy}
 
+\begin{definition}[Polytop]
+    \emph{Polytop} dimenze $n \in \mathbb{N}$ je uzavřená podmnožina $P \subseteq \mathbb{R}^{n}$ definovaná induktivně:
+    \begin{itemize}
+        \item Polytop dimenze $1$ je úsečka.
+        \item Polytop dimenze $n$ je slepením polytopů dimenze $n-1$, jež spolu mohou
+            sdílet stěny libovolné dimenze, kde \emph{stěnou} polytopu rozumíme jeho
+            libovolnou podmnožinu jsoucí rovněž polytopem. \autocite{adamklepacDefinicePolytopu2024}
+    \end{itemize}
+    
+\end{definition}
+
 \begin{definition}[Vzdálenost]
     \label{definice:vzdalenost}
     Zobrazení $d: \mathbb{R}^2~\times~\mathbb{R}^2~\rightarrow~\mathbb{R}^+$ nám udává vzdálenost dvou bodů $u, v \in \mathbb{R}^2$ podle předpisu $d(u, v) \coloneqq \sqrt{(v_x-u_x)^2+(v_y-u_y)^2}$, kde $v_x$ a $v_y$ jsou souřadnice bodu $v$. 
