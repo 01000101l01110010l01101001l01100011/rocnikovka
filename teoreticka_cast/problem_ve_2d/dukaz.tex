@@ -1,6 +1,18 @@
 \section{Důkaz algoritmu}
 \label{dukaz_algoritmu}
 
-Abychom mohli dokázat, že tento algoritmus je korektní, musíme dokázat, že tento algoritmus skončí a že je správný, to znamená, že dělá přesně co chceme.
+Abychom mohli dokázat korektnost algoritmu, musíme dokázat, že algoritmus skončí a že je správný, to znamená, že dělá přesně co chceme. Dijkstrův algoritmus, který je součástí algoritmu, dokazovat nebudu, protože důkaz je příliš dlouhý a je dostupný v literatuře.
 
 Dokázat konečnost algoritmu není těžké. Jediným cyklem v algoritmu je procházení všech stran. Jelikož je množina hran konečná, tento cyklus skončí.  Dále používáme Dijkstrův algoritmus, který také skončí, protože náš graf je souvislý. 
+
+Dokázat, že algoritmus funguje je těžší. Povedeme důkaz sporem; náš předpoklad bude následující výrok:
+
+\begin{vyrok}[Předpoklad]
+Existuje trojúhelník $x, y, z$, který má kratší obvod, než trojúhelník $a, b, c$, který našel algoritmus, neboli:
+
+\begin{equation*}
+    \exists \{x, y, z\}\subseteq V: d(x, y) + d(y, z) + d(x, z) < d(a, b) + d(b, c) + (a, c)| \forall a, b, c \leftarrow algoritmus.
+\end{equation*}
+    % Ještě nevím, jestli tam nechám tu část po \forall, nevím jestli to takhle dává dobrý smysl.
+\end{vyrok}
+

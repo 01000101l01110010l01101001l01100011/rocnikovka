@@ -27,9 +27,9 @@ Nezapomeneme vrátit hranu $\{u, v\}$ do množiny hran $E$. Tento postup opakuje
     $min_T \leftarrow \infty$\;
     \For{$\{u, v\} \in E$}{
         $E \leftarrow E \setminus \{u, v\}$\;
-        $cesta \leftarrow dijkstra(G, u, v)$\;
-        \If{$cesta + d(u, v) < min_T$}{
-            $min_T \leftarrow cesta + d(u, v)$\;
+        $j \leftarrow dijkstra(G, u, v)$\;
+        \If{$d(u, j) + d(j, v) + d(u, v) < min_T$}{
+            $min_T \leftarrow d(u, j) + d(j, v) + d(u, v)$\;
             $V_T \leftarrow \{u, j, v\}$\;
             $E_T \leftarrow \{\{u,j\}, \{j,v\}, \{u,v\}\}$\;
             $T \leftarrow (V_T, E_T, w)$\;
@@ -38,3 +38,4 @@ Nezapomeneme vrátit hranu $\{u, v\}$ do množiny hran $E$. Tento postup opakuje
     }
     \KwReturn{$T$}\;
    \end{algorithm}
+   \clearpage
