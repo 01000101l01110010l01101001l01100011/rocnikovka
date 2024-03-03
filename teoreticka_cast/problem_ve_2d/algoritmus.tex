@@ -1,13 +1,57 @@
 \section{Algoritmus}
 \label{sec:algoritmus}
 
-Nechť $V$ je množina bodů v rovině a pro každé dva body $u, v \in V$ označme $d(u, v)$ jejich vzájemnou vzdálenost. Pomocí zobrazení $d$ definujeme ohodnocený graf $G = (V, E, w)$. Množinu hran označíme $E = \{\{u, v\} \mid u, v \in V\}$ a váhu, neboli ohodnocení, nám určuje zobrazení $w$ dané předpisem $w(\{u, v\}) \coloneqq d(u, v), \forall (u, v) \in E$. Nyní chceme najít cyklus délky tři. Náhodně vybereme jednu hranu $\{u, v\} \in E$ a odebereme ji z množiny hran $E$. Dále potřebujeme najít cestu s minimální váhou mezi body $u$ a  $v$. K tomuto použijeme Dijkstrův algoritmus. Když cesta existuje, společně s hranou $\{u, v\}$ tvoří cyklus. Není těžké si rozmyslet, že tento cyklus bude mít délku tři. Cestu tvoří dvě hrany $\{u, j\}$ a $\{j, v\}$, které společně s hranou $\{u, v\}$ tvoří podgraf ve tvaru trojúhelníku $T = (V_T, E_T, w)$, kde $V_T = \{u, j, v\}$, $E_T = \{\{u,j\}, \{j,v\}, \{u,v\}\}$ a váha hran se zachová. Pokud trojúhelník (cyklus délky tři) bude mít celkovou váhu menší než ten, který jsme doposud našli, uložíme tento trojúhelník.
-Nezapomeneme vrátit hranu $\{u, v\}$ do množiny hran $E$. Tento postup opakujeme do vyčerpání hran. Výsledkem bude trojúhelník s minimálním obvodem.
+Nechť $V$ je množina bodů v rovině a pro každé dva body $u, v \in V$ označme $d(u, v)$ jejich vzájemnou vzdálenost. Množinu hran označíme $E = \binom{V}{2}$ a váhu, neboli ohodnocení, nám určuje zobrazení $w$ dané předpisem $w(\{u, v\}) \coloneqq d(u, v)\mid \forall (u, v) \in E$. Nyní si můžeme definovat graf $G = (V, E, w)$. Tímto je příprava hotova. Následuje hledání cyklu délky 3 s minimální váhou.
+
+Náhodně vybereme jednu hranu $\{u, v\} \in E$ a odebereme ji z množiny hran $E$. Dále potřebujeme najít cestu s minimální váhou mezi body $u$ a  $v$. K tomuto použijeme Dijkstrův algoritmus. Pokud cesta existuje, společně s hranou $\{u, v\}$ tvoří cyklus. Není těžké si rozmyslet, že tento cyklus bude mít délku tři. Cestu tvoří dvě hrany $\{u, j\}$ a $\{j, v\}$, které společně s hranou $\{u, v\}$ tvoří podgraf ve tvaru trojúhelníku $T = (V_T, E_T, w)$, kde $V_T = \{u, j, v\}$, $E_T = \{\{u,j\}, \{j,v\}, \{u,v\}\}$ a váha hran se zachová. Pokud trojúhelník (cyklus délky tři) bude mít celkovou váhu menší než ten, který jsme doposud našli, uložíme jej.
+Vrátíme hranu $\{u, v\}$ do množiny hran $E$. Tento postup opakujeme dokud nevyzkoušíme všchny hrany. Výsledkem bude trojúhelník s minimálním obvodem.
+
+
+   \begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[node distance=2cm]
+        \node[draw, circle, fill, inner sep=1.5pt] (A) at (-6,3) {};
+        \node[left] at (A) {$a$};
+        \node[draw, circle, fill, inner sep=1.5pt] (B) at (-4,2.5) {};
+        \node[below] at (B.south) {$b$};
+        \node[draw, circle, fill, inner sep=1.5pt] (C) at (-5,0) {};
+        \node[below] at (C.south) {$c$};
+        \node[draw, circle, fill, inner sep=1.5pt] (D) at (3,0) {};
+        \node[below] at (D.south) {$d$};
+        \node[draw, circle, fill, inner sep=1.5pt] (E) at (6,3) {};
+        \node[below] at (E.south) {$e$};
+        \node[draw, circle, fill, inner sep=1.5pt] (G) at (0,2.5) {};
+        \node[below] at (G.south) {$g$};
+        
+        % Additional edges
+        \draw[lightgray, line width=0.5pt] (A) -- (E);
+        \draw[lightgray, line width=0.5pt] (A) -- (G);
+        \draw[lightgray, line width=0.5pt] (B) -- (C);
+        \draw[lightgray, line width=0.5pt] (B) -- (E);
+        \draw[lightgray, line width=0.5pt] (B) -- (G);
+        \draw[lightgray, line width=0.5pt] (C) -- (E);
+        \draw[lightgray, line width=0.5pt] (E) -- (G);
+        \draw[lightgray, line width=0.5pt] (A) -- (B);
+        \draw[lightgray, line width=0.5pt] (B) -- (D);
+        \draw[lightgray, line width=0.5pt] (A) -- (D);
+        \draw[lightgray, line width=0.5pt] (A) -- (C);
+        \draw[lightgray, line width=0.5pt] (D) -- (E);
+        \draw[mygreen, line width=1.5pt] (C) -- node[above] {2}(G);
+        \draw[mygreen, line width=1.5pt] (D) -- node[above] {1}(G);
+        \draw[myred, line width=1.5pt] (C) -- node[above] {1} (D); 
+
+        
+    \end{tikzpicture}
+    \caption{Příklad toho kdy algoritmus vybral hranu $\{c, d\}$, odebral ji z množiny hran a pomocí Dijkstrova algoritmu našel nejkratší cestu z bodu $c$ do bodu $d$. (Pro čitelnost nejsou zobrazeny váhy ostatních hran. Předpokládejme, že jsou vyšší, než 3.)}
+    \label{obr:algoritmus_graf}
+\end{figure}
+
+\subsection{Algoritmus v pseudokódu}
 
 \begin{algorithm}
-    \caption{Algoritmus na hledání trojúhelníku s nejkratším obvodem.}
+    \caption{Algoritmus na hledání cyklu délky 3.}
     \label{alg:algoritmus}
-   
+
     \SetKwInOut{Input}{input}
     \SetKwInOut{Output}{output}
     \SetKw{KwReturn}{return}
@@ -21,7 +65,6 @@ Nezapomeneme vrátit hranu $\{u, v\}$ do množiny hran $E$. Tento postup opakuje
         $ w(\{u, v\}) \leftarrow d(u, v)$\;
         }
     }
-    
     $ E \leftarrow{\binom{V}{2}}$\;
     $ G \leftarrow (V, E, w)$\;
     $min_T \leftarrow \infty$\;
@@ -38,4 +81,4 @@ Nezapomeneme vrátit hranu $\{u, v\}$ do množiny hran $E$. Tento postup opakuje
     }
     \KwReturn{$T$}\;
    \end{algorithm}
-   \clearpage
+

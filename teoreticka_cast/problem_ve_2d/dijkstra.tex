@@ -1,21 +1,22 @@
 \section{Adaptace Dijkstrova algoritmu}
 \label{sec:dijkstra}
 
-Dijkstrův algoritmus, pojmenovaný po Edsgeru W. Dijkstrovi, je algoritmus na hledání cesty s minimální váhou mezi dvěma body v ohodnoceném grafu. Obecně taková cesta může mít několik vrcholů, ale protože náš graf je převzatý z~roviny, tak cesta s~minimální váhou mezi vrcholy $u$ a $v$ je hrana $\{u, v\}$. Kdyby náš graf nebyl převzatý z~roviny, tak by mohla nastat situace na \myref{obrázku}{obr:troj_ner_graf}. Aby nám vznikl trojúhelník, tak hranu $\{u, v\}$ z grafu odebereme, a až teď budeme hledat cestu s miniální váhou mezi body $u$ a $v$. Taková cesta povede právě přes jeden vrchol (plyne z \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníkové nerovnosti}), který nazveme $j$, a bude se skládat právě ze dvou hran. Jedna hrana bude vést z $u$ do $j$ a druhá z $j$ do $v$. 
+Pro pochopení celého algoritmu, je třeba pochopit Dijkstrův algoritmus, který lehce modifikujeme. 
 
+Dijkstrův algoritmus, pojmenovaný po Edsgeru W. Dijkstrovi, je algoritmus na hledání cesty s minimální váhou mezi dvěma body v ohodnoceném grafu. Obecně taková cesta může mít několik vrcholů, ale protože náš graf je převzatý z~roviny, tak cesta s~minimální váhou mezi vrcholy $u$ a $v$ je hrana $\{u, v\}$. Kdyby náš graf nebyl převzatý z~roviny, mohla nastat situace na \myref{obrázku}{obr:troj_ner_graf}. My ale budeme hledat cestu mezi dvěma body mezi kterýma % kterýma? nevim jestli se to tak pise. Asi by to chtelo prespat at neni 2x mezi
+neexistuje hrana. Taková cesta povede právě přes jeden vrchol (plyne z \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníkové nerovnosti}), který nazveme $j$. Výsledná cesta se bude skládat právě ze dvou hran, a to z $\{u, j\}$ a $\{j, v\}$.
 
-
-\begin{figure}[ht]
+\begin{figure}[H]
 
     \centering
     \begin{tikzpicture}[node distance=2cm]
         \node[draw, circle, fill, inner sep=1.5pt] (A) at (0,0) {};
         \node[below] at (A.south) {$u$};
-        \node[draw, circle, fill, inner sep=1.5pt] (B) at (2,2) {};
+        \node[draw, circle, fill, inner sep=1.5pt] (B) at (2,1.5) {};
         \node[below] at (B.south) {$j$};
-        \node[draw, circle, fill, inner sep=1.5pt] (D) at (6,2) {};
+        \node[draw, circle, fill, inner sep=1.5pt] (D) at (6,1.5) {};
         \node[below] at (D.south) {$v$};
-        \node[draw, circle, fill, inner sep=1.5pt] (C) at (-2,2) {};
+        \node[draw, circle, fill, inner sep=1.5pt] (C) at (-2,1.5) {};
         \node[below] at (C.south) {$k$};
         \node[draw, circle, fill, inner sep=1.5pt] (E) at (8,0) {};
         \node[below] at (E.south) {$x$};
@@ -30,10 +31,7 @@ Dijkstrův algoritmus, pojmenovaný po Edsgeru W. Dijkstrovi, je algoritmus na h
     \label{obr:troj_ner_graf}
 \end{figure}
 
-
-
-
-\subsection{Popis algoritmu}
+\subsection{Popis Dijkstrova algoritmu}
 \label{subsec:popis-algoritmu}
 
 \begin{enumerate}
