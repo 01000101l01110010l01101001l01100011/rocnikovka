@@ -51,6 +51,11 @@
     \end{figure}
 \end{definition}
 
+\begin{definition}[Podgraf]
+    Podgraf $H = (V, E)$ je tvořen podmnožinou vrcholů a hran jiného grafu. Hrany grafu $H$ musí mít oba vrcholy v množině vrcholů $V$.
+    
+\end{definition}
+
 \begin{definition}[Cesta]
     \label{definice:cesta}
     Cestou v grafu nazveme posloupnost \textbf{různých} vrcholů $v_1, \ldots, v_n$, pokud $\forall i \in \{1,\ldots, n-1\}$ platí $\{v_i, v_{i+1}\} \in E$.  
@@ -58,7 +63,7 @@
 
 \begin{definition}[Váha cesty]
     \label{definice:vaha_cesty}
-    Pokud cestu tvoří posloupnost vrcholů $v_1, \ldots, v_n$, tak váha cesty je rovna \[ \sum_{i=1}^{n-1}w(\{v_i, v_{i+1}\}). \]
+    Pokud cestu tvoří posloupnost vrcholů $v_1, \ldots, v_n$, tak váha cesty je rovna \[ w(\{v_0,\dots ,v_n\}) = \sum_{i=1}^{n-1}w(\{v_i, v_{i+1}\}). \]
     
 \end{definition}
 
@@ -69,7 +74,7 @@
 
 \begin{definition}[Váha cyklu]
     \label{definice:vaha_cyklu}
-    Pokud cyklus tvoří posloupnost vrcholů $v_1, \ldots, v_n$, tak váha \\cesty je rovna \[ w(\{v_1, v_n\}) + \sum_{i=1}^{n-1}w(\{v_i, v_{i+1}\}). \]
+    Pokud cyklus tvoří posloupnost vrcholů $v_1, \ldots, v_n$, tak váha \\cesty je rovna \[ w(\{v_0,\dots ,v_n, v_0\}) = w(\{v_1, v_n\}) + \sum_{i=1}^{n-1}w(\{v_i, v_{i+1}\}). \]
     
 \end{definition}
 
@@ -94,13 +99,18 @@
         \caption{Trojúhelníková nerovnost}
     \end{figure}
 
-    \begin{definition}[Soused]
-        \label{definice:soused}
-        V grafu $G = (V, E, w)$ je bod $u$ soused bodu $v$, pokud $\{u, v\} \in E$.
-    \end{definition}
-    
-    \begin{definition}[Big $O$ notation]
-        \label{definice:bigonotation}
-        idk
-    \end{definition}
+\end{definition}
+\begin{definition}[Soused]
+    \label{definice:soused}
+    V grafu $G = (V, E, w)$ je bod $u$ soused bodu $v$, pokud $\{u, v\} \in E$.
+\end{definition}
+
+\begin{definition}[Big $O$ notation]
+    \label{definice:bigonotation}
+    idk
+\end{definition}
+
+\begin{definition}[Obvod trojúhelníku]
+    \label{definice:obvod_troj}
+    Definujeme si zobrazení $p: E\rightarrow \mathbb{R}^+$ podle předpisu: $p(a, b, c) \coloneqq d(a, b) + d(b, c) + d(a, c)$, které nám určuje obvod trojúhelníku $a, b, c$.
 \end{definition}
