@@ -1,17 +1,21 @@
 \section{Důkaz algoritmu}
 \label{dukaz_algoritmu}
 
-Abychom mohli dokázat korektnost algoritmu, musíme dokázat, že algoritmus skončí a že je správný, to znamená, že dělá přesně co chceme. Dijkstrův algoritmus, který je součástí algoritmu, dokazovat nebudu, protože důkaz je příliš dlouhý a je dostupný v literatuře.
+Abychom mohli dokázat korektnost algoritmu, musíme dokázat, že algoritmus skončí a že je správný, to znamená, že dělá přesně co chceme. Dijkstrův algoritmus, který je součástí algoritmu, dokazovat nebudu, protože důkaz je příliš dlouhý a je dostupný v literatuře. Proto použiju následující předpoklad:
+\begin{vyrok}[Předpoklad]
+    \label{vyrok:dijkstra}
+    Dijkstrův algoritmus je korektní.
+\end{vyrok}
 
-Dokázat konečnost algoritmu není těžké. Jediným cyklem v algoritmu je procházení všech stran. Jelikož je množina hran konečná, tento cyklus skončí.  Dále používáme Dijkstrův algoritmus, který také skončí, protože náš graf je souvislý. 
+Dokázat konečnost algoritmu není těžké. Jediným cyklem v algoritmu je procházení všech stran. Jelikož je množina hran konečná, s naším prvním předpokladem můžeme říci, že náš algoritmus skončí.
 
 Dokázat, že algoritmus funguje je těžší. Povedeme důkaz sporem; náš předpoklad bude následující výrok:
 
 \begin{vyrok}[Předpoklad]
+    \label{vyrok:trojuhelnik}
 Existuje trojúhelník $x, y, z$, který má kratší obvod, než trojúhelník $a, b, c$, který našel algoritmus, neboli:
 \begin{equation*}
     \exists \{x, y, z\}\subseteq V: p(x, y, z) < p(a, b, c)~|~\forall a, b, c \leftarrow algoritmus.
 \end{equation*}
-    % Ještě nevím, jestli tam nechám tu část po \forall, nevím jestli to takhle dává dobrý smysl.
 \end{vyrok}
-
+Jinými slovy to znamená, že náš algoritmus vybral jednu stranu trojúhelníku s minimálním obvodem špatně, a tím vznikl trojúhelník s delším obvodem. Jelikož náš algoritmus prochází všechny hrany, tak tam nemohl vybrat špatnou hranu. Tím pádem špatnou hranu musel vybrat když vybíral zbylé dvě hrany. Ty ale vybral Dijsktrův algoritmus, který, podle \myref{našeho předpokladu}{vyrok:dijkstra}, je korektní.
