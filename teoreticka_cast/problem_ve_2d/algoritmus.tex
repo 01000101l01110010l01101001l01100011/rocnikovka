@@ -1,7 +1,8 @@
 \section{Algoritmus}
 \label{sec:algoritmus}
 
-Nechť $V$ je množina bodů v rovině a pro každé dva body $u, v \in V$ označme $d(u, v)$ jejich vzájemnou vzdálenost. Množinu hran označíme $E = \binom{V}{2}$ a váhu, neboli ohodnocení, nám určuje zobrazení $w$ dané předpisem $w(\{u, v\}) \coloneqq d(u, v)\mid \forall (u, v) \in E$. Nyní si můžeme definovat graf $G = (V, E, w)$. V prvním kroce zkontrolujeme, jestli nějaké tři body neleží na přímce. To provedeme tak, že pro každé body $a, b, c \in V$ zkontrolujeme, že: $(a_x \neq b_x \neq c_x) \lor (a_y \neq b_y \neq c_y) \lor ((a_x+k \neq b_x+k \neq c_x+k)\land(a_y+k \neq b_y+k \neq c_y+k))|k\in \mathbb{R}$. %Nah takhle ne, pres podobnosti trojuhelniku, nebo neco pres a_y=ka_x+b
+Nechť $V$ je množina bodů v rovině a pro každé dva body $u, v \in V$ označme $d(u, v)$ jejich vzájemnou vzdálenost. Množinu hran označíme $E = \binom{V}{2}$ a váhu, neboli ohodnocení, nám určuje zobrazení $w$ dané předpisem $w(\{u, v\}) \coloneqq d(u, v)\mid \forall (u, v) \in E$. Nyní si můžeme definovat graf $G = (V, E, w)$. V prvním kroce zkontrolujeme, jestli nějaké tři body neleží na přímce. To provedeme tak, že 
+
 Pokud nějaké tři body leží na přímce, musíme z grafu odebrat hranu mezi dvěma vnějšími body (pokud budeme mít přímku na které jsou body $a, b, c$, které splňují, že $a_x < b_x < c_x$, tak z grafu $G$ odebereme stranu $\{a, c\}$).
 Tímto je příprava hotova. Následuje hledání cyklu délky 3 s minimální váhou.
 
