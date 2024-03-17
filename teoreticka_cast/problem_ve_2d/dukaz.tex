@@ -1,21 +1,26 @@
 \section{Důkaz algoritmu}
 \label{dukaz_algoritmu}
 
-Abychom mohli dokázat korektnost algoritmu, musíme dokázat, že algoritmus skončí a že je správný, to znamená, že dělá přesně co chceme. Dijkstrův algoritmus, který je součástí algoritmu, dokazovat nebudu, protože důkaz je příliš dlouhý a je dostupný v literatuře. Proto použiju následující předpoklad:
-\begin{vyrok}[Předpoklad]
-    \label{vyrok:dijkstra}
+Abychom mohli dokázat korektnost algoritmu, musíme dokázat, že algoritmus skončí a že je správný, to znamená, že dělá přesně co chceme. Dijkstrův algoritmus, který je součástí algoritmu, dokazovat nebudu, protože důkaz je příliš dlouhý a je dostupný v literatuře.
+\begin{tvrzeni}
+    \label{tvrzeni:dijkstra}
     Dijkstrův algoritmus je korektní.
-\end{vyrok}
+\end{tvrzeni}
+\begin{proof}
+    \label{dukaz:dijkstra}
+    Vizte zdroj...
+\end{proof}
+\begin{tvrzeni}
+    \label{tvrzeni:algoritmus}
+    Aloritmus na hledání cyklu délky 3 je korekektní.
+\end{tvrzeni}
+\begin{proof}
+    \label{dukaz:algoritmus}
+Konečnost algoritmu je zřejmá; jediným cyklem v algoritmu je procházení všech stran. Jelikož je množina hran konečná a víme, že Dijkstrův algoritmus je korektní, můžeme říci, že náš algoritmus skončí.
 
-Dokázat konečnost algoritmu není těžké. Jediným cyklem v algoritmu je procházení všech stran. Jelikož je množina hran konečná, s naším prvním předpokladem můžeme říci, že náš algoritmus skončí.
-
-Dokázat, že algoritmus funguje je těžší. Povedeme důkaz sporem; náš předpoklad bude následující výrok:
-
-\begin{vyrok}[Předpoklad]
-    \label{vyrok:trojuhelnik}
-Existuje trojúhelník $x, y, z$, který má kratší obvod, než trojúhelník $a, b, c$, který našel algoritmus, neboli:
+Správnost algoritmu dokážeme sporem. Budeme předpokládat, že existuje trojúhelník $x, y, z$, který má kratší obvod, než trojúhelník $a, b, c$, který našel algoritmus, neboli:
 \begin{equation*}
     \exists \{x, y, z\}\subseteq V: p(x, y, z) < p(a, b, c)~|~\forall a, b, c \leftarrow algoritmus.
 \end{equation*}
-\end{vyrok}
-Jinými slovy to znamená, že náš algoritmus vybral jednu stranu trojúhelníku s minimálním obvodem špatně, a tím vznikl trojúhelník s delším obvodem. Jelikož náš algoritmus prochází všechny hrany, tak tam nemohl vybrat špatnou hranu. Tím pádem špatnou hranu musel vybrat když vybíral zbylé dvě hrany. Ty ale vybral Dijsktrův algoritmus, který, podle \myref{našeho předpokladu}{vyrok:dijkstra}, je korektní.
+Znamená to, že náš algoritmus vybral jednu stranu trojúhelníku s minimálním obvodem špatně, a tím vznikl trojúhelník s delším obvodem. Jelikož náš algoritmus prochází všechny hrany, tak tam nemohl vybrat špatnou hranu. Tím pádem špatnou hranu musel vybrat když vybíral zbylé dvě hrany. Ty ale vybral Dijsktrův algoritmus, který \hyperref[dukaz:dijkstra]{je dokázán}. Tím vznikl spor a algoritmus je dokázán. 
+\end{proof}

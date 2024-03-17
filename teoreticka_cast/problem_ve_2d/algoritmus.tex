@@ -74,8 +74,8 @@ Vrátíme hranu $\{u, v\}$ do množiny hran $E$. Tento postup opakujeme dokud ne
     \For{$\{u, v\} \in E$}{
         $E \leftarrow E \setminus \{u, v\}$\;
         $j \leftarrow dijkstra(G, u, v)$\;
-        \If{$d(u, j) + d(j, v) + d(u, v) < min_T$}{
-            $min_T \leftarrow d(u, j) + d(j, v) + d(u, v)$\;
+        \If{$p(u, j, v) < min_T$}{
+            $min_T \leftarrow p(u, j, v)$\;
             $V_T \leftarrow \{u, j, v\}$\;
             $E_T \leftarrow \{\{u,j\}, \{j,v\}, \{u,v\}\}$\;
             $T \leftarrow (V_T, E_T, w)$\;

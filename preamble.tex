@@ -27,14 +27,20 @@
 
 % Lipsum %
 \usepackage{lipsum}
-
+\let\openbox\relax
 % AMS LaTeX %
 \usepackage{amsmath,mathtools}
 \usepackage{dsfont}
-\usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage[thmmarks,amsmath, amsthm]{ntheorem}
 % Definice %
+\theoremstyle{definition}
 \newtheorem{definition}{Definice}
+
+\theoremstyle{plain}
 \newtheorem{vyrok}{Výrok}
+\newtheorem{tvrzeni}{Tvrzení}
+
+
 
 % Make Titles sans-serif %
 \usepackage{sectsty}
