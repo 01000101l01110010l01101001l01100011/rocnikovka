@@ -5,8 +5,9 @@ Následující algoritmus je časově efektivnější, než zkoušení všech mo
 Nechť $V$ je množina bodů v rovině a pro každé dva body $u, v \in V$ označme $d(u, v)$ jejich vzájemnou vzdálenost. Množinu hran označíme $E = \binom{V}{2}$ a váhu, neboli ohodnocení, nám určuje zobrazení $w$ dané předpisem $w(\{u, v\}) \coloneqq d(u, v)\mid \forall (u, v) \in E$. Nyní si můžeme definovat graf $G = (V, E, w)$.
 Tímto je příprava hotova. Následuje hledání cyklu délky 3 s minimální váhou.
 
-Náhodně vybereme jednu hranu $\{u, v\} \in E$ a odebereme ji z množiny hran $E$. Dále potřebujeme najít cestu s minimální váhou mezi body $u$ a  $v$. K tomuto použijeme Dijkstrův algoritmus. Ten nám vrátí cestu délky dva. Ta se bude skládat ze dvou hran: $\{u, j\}$ a $\{j, v\}$. Je důležité zkontrolovat, že tato cesta má větší váhu, než hrana $\{u, v\}$, jinak by všechny tři body ležely na jedné přímce.
-Pokud by se tak stalo, musíme z grafu odebrat hranu mezi dvěma vnějšími body (pokud budeme mít přímku na které jsou body $u, j, v$, které splňují, že $u_x < j_x < v_x$, tak z grafu $G$ odebereme stranu $\{u, v\}$).
+Náhodně vybereme jednu hranu $\{u, v\} \in E$ a odebereme ji z množiny hran $E$. Dále potřebujeme najít cestu s minimální váhou mezi body $u$ a  $v$. K tomuto použijeme Dijkstrův algoritmus. Ten nám vrátí cestu délky dva. Ta se bude skládat ze dvou hran: $\{u, j\}$ a $\{j, v\}$. Teď musíme zkontrolovat, zda tato cesta s hranou $\{u, v\}$ opravdu tvoří trojúhelník. Může se stát, že body $u, j, v$ leží na jedné přímce. Abychom zkontrolovali, že body neleží na jedné přímce, musíme problém rozdělit na tři případy: vertikální přímky, horizontální přímky a přímky s libovolným sklonem. Že se jedná o vertikální přímku poznáme podle toho, že $u_x = j_x = v_x$. Poté z grafu odebereme hranu $\{min(\{u_y, j_y, v_y\}), max(\{u_y, j_y, v_y\})\}$. Horizontální přímku poznáme stejným způsobem; zkontrolujeme, zda $u_y = j_y = v_y$. Pokud se tak stane, odebereme hranu $\{min(\{u_x, j_x, v_x\}), max(\{u_x, j_x, v_x\})\}$. Pokud se nejedná o vertikální ani horizontální přímku, musíme zkontrolovat, zda body leží na přímce s libovolným sklonem. K tomu využijeme podobnost trojúhelníků. Definujeme si body $a \coloneqq min(\{u_x, j_x, v_x\}), c \coloneqq max(\{u_x, j_x, v_x\})$ a bod $b$ je zbývající. Pak platí $a_x < b_x < c_x$. Z podobnosti trojúhelníků pak platí $\frac{c_y - a_y}{c_x - a_x} = \frac{b_y - a_y}{b_x - a_x}$, pokud tyto tři body jsou na přímce.  
+
+
 Tyto body tvoří podgraf ve tvaru trojúhelníku $T = (V_T, E_T, w)$, kde $V_T = \{u, j, v\}$, $E_T = \{\{u,j\}, \{j,v\}, \{u,v\}\}$ a váha hran se zachová. Pokud trojúhelník (cyklus délky tři) bude mít celkovou váhu menší než ten, který jsme doposud našli, uložíme jej.
 Vrátíme hranu $\{u, v\}$ do množiny hran $E$. Tento postup opakujeme dokud nevyzkoušíme všchny hrany. Výsledkem bude trojúhelník s minimálním obvodem. Na \myref{obrázku}{obr:algoritmus_graf} můžete vidět jak algoritmus funguje.
 
@@ -37,18 +38,23 @@ Pseudokód je popis jednotlivých kroků v algoritmu s použitím základní log
     \For{$\{u, v\} \in E$}{
         $E \leftarrow E \setminus \{u, v\}$\;
         $j \leftarrow dijkstra(G, u, v)$\;
-        \If{$p(u, j, v) < min_T$}{
+        \If{$w\{u, j\} + w\{j, v\} == w\{u, v\}$}{
+            $smallest$ $= min(u_x, j_x, v_x)$\;
+            $biggest$ $= max(u_x, j_x, v_x)$\;
+            $E \leftarrow E \cup \{u, v\}$\;
+            $ E \leftarrow E \setminus \{smallest, biggest\}$\;
+            \textcolor{red}{Tohle neni dobre}
+        }
+        \ElseIf{$p(u, j, v) < min_T$}{
             $min_T \leftarrow p(u, j, v)$\;
             $V_T \leftarrow \{u, j, v\}$\;
             $E_T \leftarrow \{\{u,j\}, \{j,v\}, \{u,v\}\}$\;
             $T \leftarrow (V_T, E_T, w)$\;
+            $E \leftarrow E \cup \{u, v\}$\;
         }
-        \ElseIf{$w\{u, j\} + w\{j, v\} == w\{u, v\}$}{
-            $smallest$ $= min(u_x, j_x, v_x)$\;
-            $biggest$ $= max(u_x, j_x, v_x)$\;
-            $ G \leftarrow G \setminus \{smallest, biggest\}$\;
+        \Else{
+            $ E \leftarrow E \cup \{u, v\}$\;
         }
-        $E \leftarrow E \cup \{u, v\}$\;
     }
     \KwReturn{$T$}\;
    \end{algorithm}

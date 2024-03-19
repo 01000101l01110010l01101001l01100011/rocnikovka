@@ -19,7 +19,6 @@
 
 \begin{definition}[Vzdálenost]
     \label{definice:vzdalenost}
-    %TODO je to true to R^nxR^n???
     Zobrazení $d: \mathbb{R}^n\times \mathbb{R}^n~\rightarrow~\mathbb{R}^+$ nám určí vzdálenost dvou bodů $u, v \in \mathbb{R}^n$
     podle předpisu $d(u, v) \coloneqq \sqrt{(v_1-u_1)^2+(v_2-u_2)^2+\ldots+(v_n-u_n)^2}$.
 \end{definition}
@@ -120,4 +119,35 @@
 \begin{definition}[Obvod trojúhelníku]
     \label{definice:obvod_troj}
     Definujeme si zobrazení $p: E\rightarrow \mathbb{R}^+$ podle předpisu: $p(a, b, c) \coloneqq d(a, b) + d(b, c) + d(a, c)$, které nám určuje obvod trojúhelníku $a, b, c$.
+\end{definition}
+
+\begin{definition}[Podobnost trojúhelníků a body na jedné přímce]
+    \label{definice:podobnost_trojuhelniku}
+    Jsou dány 3 body: $a = (a_x, a_y)$, $b = (b_x, b_y)$, $c = (c_x, c_y)$. Tyto body jsou na přímce, pokud platí, že trojúhelníky $(a_x, a_y), (b_x, a_y), (b_x, b_y)$ a $(a_x, a_y), (c_x, a_y), (c_x, c_y)$ mají stejný poměr stran, neboli platí: $\frac{\textcolor{myred}{c_y-a_y}}{\textcolor{mygreen}{c_x-a_x}} = \frac{\textcolor{myorange}{b_y-a_y}}{\textcolor{myblue}{b_x-a_x}}$.
+
+    \begin{figure}[h]
+        \label{obr:podobnost_trojuhelniku}
+    \centering
+    \begin{tikzpicture}
+        \draw[->, line width=1pt] (4.5,0) -- (14,0) node[right] {$x$};
+        \draw[->, line width=1pt] (5,-0.5) -- (5,3.5) node[above] {$y$};
+        \coordinate[label=above left:$a$] (A) at (6,1);
+        \coordinate[label=above left:$b$] (B) at (9,2);
+        \coordinate[label=above left:$c$] (C) at (12,3);
+
+        \coordinate (D) at (9, 1);
+        \coordinate (E) at (12, 1);
+        \draw[line width=1.5pt] (A) -- (B);
+        \draw[line width=1.5pt] (B) -- (C);
+        \draw[myblue, line width=1.5pt] (A) to node[midway, below] {$1$} (D);
+        \draw[mygreen, line width=1.5pt] (D) to node[midway, below] {$1$} (E);
+        \draw[myred, line width=1.5pt] (C) to node[midway, right] {$6$} (E);
+        \draw[myorange, line width=1.5pt] (B) to node[midway, right] {$3$} (D);
+        \fill (A) circle[radius=2pt];
+        \fill (B) circle[radius=2pt];
+        \fill (C) circle[radius=2pt];
+
+    \end{tikzpicture}
+    \caption{Příklad podobnosti trojúhelníků}
+    \end{figure}
 \end{definition}
