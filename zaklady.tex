@@ -131,6 +131,22 @@
     \begin{tikzpicture}
         \draw[->, line width=1pt] (4.5,0) -- (14,0) node[right] {$x$};
         \draw[->, line width=1pt] (5,-0.5) -- (5,3.5) node[above] {$y$};
+
+        \fill (5, 1) circle[radius=2pt];
+        \node at (5, 1) [left] {1};
+        \fill (5, 2) circle[radius=2pt];
+        \node at (5, 2) [left] {2};
+        \fill (5, 3) circle[radius=2pt];
+        \node at (5, 3) [left] {3};
+
+        \fill (6, 0) circle[radius=2pt];
+        \node at (6, 0) [below] {6};
+        \fill (9, 0) circle[radius=2pt];
+        \node at (9, 0) [below] {9};
+        \fill (12, 0) circle[radius=2pt];
+        \node at (12, 0) [below] {12};
+        
+
         \coordinate[label=above left:$a$] (A) at (6,1);
         \coordinate[label=above left:$b$] (B) at (9,2);
         \coordinate[label=above left:$c$] (C) at (12,3);
@@ -139,10 +155,10 @@
         \coordinate (E) at (12, 1);
         \draw[line width=1.5pt] (A) -- (B);
         \draw[line width=1.5pt] (B) -- (C);
-        \draw[myblue, line width=1.5pt] (A) to node[midway, below] {$1$} (D);
-        \draw[mygreen, line width=1.5pt] (D) to node[midway, below] {$1$} (E);
-        \draw[myred, line width=1.5pt] (C) to node[midway, right] {$6$} (E);
-        \draw[myorange, line width=1.5pt] (B) to node[midway, right] {$3$} (D);
+        \draw[myblue, line width=1.5pt] (A) to node[midway, below] {$3$} (D);
+        \draw[mygreen, line width=1.5pt] (D) to node[midway, below] {$3$} (E);
+        \draw[myred, line width=1.5pt] (C) to node[midway, right] {$2$} (E);
+        \draw[myorange, line width=1.5pt] (B) to node[midway, right] {$1$} (D);
         \fill (A) circle[radius=2pt];
         \fill (B) circle[radius=2pt];
         \fill (C) circle[radius=2pt];
