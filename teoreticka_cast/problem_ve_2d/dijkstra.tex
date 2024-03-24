@@ -1,10 +1,7 @@
-\section{Adaptace Dijkstrova algoritmu}
+\section{Dijkstrův algoritmus}
 \label{sec:dijkstra}
 
-Pro pochopení celého algoritmu, je třeba pochopit Dijkstrův algoritmus, který lehce modifikujeme. 
-
-Dijkstrův algoritmus, pojmenovaný po Edsgeru W. Dijkstrovi, je algoritmus na hledání cesty s minimální váhou mezi dvěma body v ohodnoceném grafu. Obecně taková cesta může mít několik vrcholů, ale protože náš graf je převzatý z~roviny, tak cesta s~minimální váhou mezi vrcholy $u$ a $v$ je hrana $\{u, v\}$. Kdyby náš graf nebyl převzatý z~roviny, mohla nastat situace na \myref{obrázku}{obr:troj_ner_graf}. My ale budeme hledat cestu mezi dvěma body mezi kterýma % kterýma? nevim jestli se to tak pise. Asi by to chtelo prespat at neni 2x mezi
-neexistuje hrana. Taková cesta povede právě přes jeden vrchol (plyne z \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníkové nerovnosti}), který nazveme $j$. Výsledná cesta se bude skládat právě ze dvou hran, a to z $\{u, j\}$ a $\{j, v\}$.
+Dijkstrův algoritmus, pojmenovaný po Edsgeru W. Dijkstrovi, je algoritmus na hledání cesty s minimální váhou mezi dvěma body v ohodnoceném grafu, který hraje velkou roli v našem algoritmu. Obecně taková cesta může mít několik vrcholů, ale protože náš graf je převzatý z~roviny, povede právě přes jeden vrchol a bude se skládat ze dvou hran. To se dá dokázat pomocí \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníkové nerovnosti}. Kdyby náš graf nebyl převzatý z~roviny, mohla nastat situace na \myref{obrázku}{obr:troj_ner_graf}.
 
 \begin{figure}[H]
 

@@ -1,3 +1,6 @@
 \section{Algoritmus}
 
 Najít všechny cykly v grafu a pak vybrat minimální s dobrou vzdáleností? -> příšerný, ale funguje to\dots
+
+\section{Nápady s kombinatorikou}
+Množina všech cyklů délky $n$ v našem grafu je: $C=\binom{V}{n}$. Teď musíme vyřadit cykly, které nemají maximální dimenzi. Pak vybereme $min(w(c)) \mid c \in C~\forall c$ a to je cyklus minimální váhy s délkou $n$. Tento algoritmus je ale neefektivní. Zabere $\#V^n$ času, což je zkoušení všech možností.
