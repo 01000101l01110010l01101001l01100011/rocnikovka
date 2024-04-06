@@ -26,7 +26,7 @@ def create_edges(points:dict):
 def find_path_weight(points:list, edges:dict):
      return sum(edges[(points[i], points[i+1])] for i in range(len(points)-1))
 
-def find_shortest_path(G:Graph(), edges):
+def find_shortest_path(G:Graph, edges):
     shortest_path = None
     smallest_triangle = 999999
     for edge in G.edges:
@@ -40,7 +40,7 @@ def find_shortest_path(G:Graph(), edges):
     return shortest_path
 
 
-def find_shortest_path_nx(G:Graph(), edges):
+def find_shortest_path_nx(G:Graph, edges):
     shortest_path = None
     smallest_triangle = 999999
     for edge in G.edges:
@@ -54,7 +54,7 @@ def find_shortest_path_nx(G:Graph(), edges):
         G.add_edge(*edge, weight=edges[edge])
     return shortest_path
 
-G, edges = create_edges(create_points(60))
+G, edges = create_edges(create_points(20))
 atime = time.time()
 print((find_shortest_path(G, edges)))
 mytime = time.time() - atime

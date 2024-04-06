@@ -115,3 +115,64 @@
 \definecolor{myblue}{RGB}{55, 100, 170}
 \definecolor{mygreen}{RGB}{55, 120, 55}
 \definecolor{myorange}{RGB}{207, 102, 0}
+\definecolor{white}{RGB}{255, 255, 255}
+
+\definecolor{pwurple}{RGB}{126, 77, 194}
+\definecolor{gween}{RGB}{29, 129, 67}
+\definecolor{spiderman}{RGB}{201,112,62}
+\definecolor{bwlue}{RGB}{54,114,185}
+\definecolor{yeluwu}{RGB}{203, 176, 33}
+
+
+
+\usepackage{listings}
+\lstset{ %
+language=Python,
+basicstyle=\footnotesize,
+numbers=left,
+numberstyle=\footnotesize,
+stepnumber=1,
+numbersep=5pt,
+showspaces=false,
+showstringspaces=false,
+showtabs=true,
+frame=single,
+tabsize=1, 
+captionpos=b,
+breaklines=true,
+breakatwhitespace=false,
+}
+\lstdefinestyle{me}{
+stringstyle = {\color{spiderman}},
+% keywordstyle = [1]\color{gween},
+% keywordstyle = [2]{\color{pwurple}},
+% morekeywords = [1]{netwrokx, Graph},
+% morekeywords = [2]{for, while, if, return},
+emph = {[1]for, while, if, return, from, import},
+emphstyle={[1]\color{pwurple}},
+emph = {[2]networkx, Graph, G, set, float},
+emphstyle={[2]\color{gween}},
+emph = {[3]def, lambda, Q},
+emphstyle={[3]\color{bwlue}},
+emph = {[4]dijkstra_triangle, add, remove, get_edge_data, (,), [,], in, min},
+emphstyle={[4]\color{yeluwu}},
+% emph = {[5] distances, middle_point},
+% emphstyle={[5]\color{myblue}},
+}
+\lstdefinestyle{metoo}{
+stringstyle = {\color{spiderman}},
+% keywordstyle = [1]\color{gween},
+% keywordstyle = [2]{\color{pwurple}},
+% morekeywords = [1]{netwrokx, Graph},
+% morekeywords = [2]{for, while, if, return},
+emph = {[1]for, while, if, return, from, import},
+emphstyle={[1]\color{pwurple}},
+emph = {[2]networkx, Graph, G, set, float, dijkstra},
+emphstyle={[2]\color{gween}},
+emph = {[3]def, lambda, Q},
+emphstyle={[3]\color{bwlue}},
+emph = {[4]dijkstra_triangle, add, remove, get_edge_data, (,), [,], in, min, remove_edge, add_edge},
+emphstyle={[4]\color{yeluwu}},
+% emph = {[5] shortest_path, smallest_triangle, triangle, path_length},
+% emphstyle={[5]\color{myblue}},
+}

@@ -1,0 +1,24 @@
+\section{Program ve 2D}
+\label{sec:program_2D}
+
+Ve 2D je program jednodušší, než ve více dimenzích, protože hledáme pouze 3 body, které jsou u sebe nejblíž a musíme kontrolovat pouze jestli nejsou na přímce. Ve vyšších dimenzích budeme muset kontrolovat, jestli body nejsou ve stejných rovinách nebo i nadrovinách. Tento program dostane vstup množinu bodů, kde body budou v $\mathbb{R}^2$ a výstupem budou 3 body, které tvoří trojúhelník s minimálním obvodem. 
+
+V tomto programu použiju Dijkstrův algortimus, který jsem naprogramoval v \myref{sekci}{sec:dijkstra_program}. 
+
+\textcolor{red}{tohle jde udelat jeste jinak at tam neni to edges v tom algoritmu}
+\begin{lstlisting}[style=metoo]
+import dijkstra
+
+def find_shortest_path(G:Graph, edges):
+    shortest_path = None
+    smallest_triangle = float('inf')
+    for edge in G.edges:
+        G.remove_edge(*edge)
+        path_length, path = dijkstra.dijkstra_triangle(G, *edge)
+        triangle = edges[edge] + path_length
+        if triangle  < smallest_triangle:
+            shortest_path = path
+            smallest_triangle = triangle
+        G.add_edge(*edge, weight=edges[edge])
+    return shortest_path
+\end{lstlisting}

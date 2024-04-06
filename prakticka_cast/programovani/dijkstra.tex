@@ -1,0 +1,30 @@
+\section{Dijkstrův algortimus}
+\label{sec:dijkstra_program}
+
+Jelikož Dijkstrův algoritmus je součástí našeho algoritmu na řešení problému ve 2D, tak ho budu muset naprogramovat. Knihovna \href{https://networkx.org/}{networkx} má také k dispozici Dijkstrův algoritmus, ale pro náš problém je potřeba lehce modifikovaný; musí se zastavit v ten moment, kdy se vybere cílový bod za aktuální bod. 
+
+\begin{lstlisting}[style=me]
+def dijkstra_triangle(G:Graph, start, end):
+    Q = set()
+    distances = {} 
+    middle_point = {} 
+    for vertex in G:
+        distances[vertex] = float('inf')
+        middle_point[vertex] = None
+        Q.add(vertex)
+
+    distances[start] = 0
+    while Q: 
+        actual = min(Q, key=lambda vertex: distances[vertex])
+        if actual == end:
+            return distances[end], [start, middle_point[end], end]
+        Q.remove(actual)
+        neighbors = Q
+        if actual == start:
+            neighbors.remove(end)
+            calculated_distance = distances[actual] + G.get_edge_data(actual, neighbor)['weight']
+            if calculated_distance < distances[neighbor]:
+                distances[neighbor] = calculated_distance
+                middle_point[neighbor] = actual
+    return distances[end], [start, middle_point[end], end]
+\end{lstlisting}
