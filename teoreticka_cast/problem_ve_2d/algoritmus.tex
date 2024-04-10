@@ -2,13 +2,17 @@
 \label{sec:algoritmus}
 % Následující algoritmus je časově efektivnější, než zkoušení všech možností, ale pořád zabere \textcolor{red}{IDK} čas. 
 
-Nechť $V$ je množina bodů v rovině a pro každé dva body $u, v \in V$ označme $d(u, v)$ jejich vzájemnou vzdálenost. Množinu hran označíme $E = \binom{V}{2}$ a váhu, neboli ohodnocení, nám určuje zobrazení $w$ dané předpisem $w(\{u, v\}) \coloneqq d(u, v)\mid \forall (u, v) \in E$. Nyní si můžeme definovat graf $G = (V, E, w)$.
-Tímto je příprava hotova. Následuje hledání cyklu délky 3 s minimální váhou.
+Nechť $V$ je množina bodů v rovině a pro každé dva body $u, v \in V$ označme $d(u, v)$ jejich vzájemnou vzdálenost. Množinu hran označíme $E = \binom{V}{2}$ a váhu, neboli ohodnocení, nám určuje zobrazení $w$ dané předpisem $w(\{u, v\}) \coloneqq d(u, v) $pro$ \forall (u, v) \in E$. Nyní můžeme definovat graf $G = (V, E, w)$.
+Tímto je příprava hotova. Následuje hledání cyklu délky tři s minimální váhou.
 
-Náhodně vybereme jednu hranu $\{u, v\} \in E$ a odebereme ji z množiny hran $E$. Dále potřebujeme najít cestu s minimální váhou mezi body $u$ a  $v$. K tomuto použijeme \hyperref[sec:dijkstra]{Dijkstrův algoritmus}, který nám vrátí cestu délky dva. Ta se bude skládat ze dvou hran: $\{u, j\}$ a $\{j, v\}$. Teď musíme zkontrolovat, zda tato cesta s hranou $\{u, v\}$ opravdu tvoří trojúhelník, protože se může  stát, že body $u, j, v$ leží na jedné přímce. K tomu využijeme \hyperref[definice:podobnost_trojuhelniku]{podobnost trojúhelníků}. Definujeme si body $a \coloneqq min(\{u_x, j_x, v_x\})$, $c \coloneqq max(\{u_x, j_x, v_x\})$ a bod $b$ je zbývající. Pak platí $a_x < b_x < c_x$. Body se nacházejí na přímce právě tehdy, pokud rovnice $\frac{c_y - a_y}{c_x - a_x} = \frac{b_y - a_y}{b_x - a_x}$ je pravdivá.
+
+
+Náhodně vybereme jednu hranu $\{u, v\} \in E$ a odebereme ji z množiny hran $E$. V grafu bez hrany $\{u, v\}$ potřebujeme najít cestu s minimální váhou mezi body $u$ a  $v$. K tomuto použijeme \hyperref[sec:dijkstra]{Dijkstrův algoritmus}, který nám vrátí cestu délky dva. Ta se bude skládat ze dvou hran: $\{u, j\}$ a $\{j, v\}$. Teď musíme zkontrolovat, zda tato cesta s hranou $\{u, v\}$ opravdu tvoří trojúhelník, protože se může  stát, že body $u, j, v$ leží na jedné přímce. K tomu využijeme \hyperref[sec:podobnost]{podobnost trojúhelníků}, z které vyplývá, že body se nacházejí na přímce právě tehdy, pokud rovnice $(c_y - a_y)(b_x - a_x) = (b_y - a_y)(c_x - a_x)$ je pravdivá.
+%Definujeme si body $a \coloneqq min(\{u_x, j_x, v_x\})$, $c \coloneqq max(\{u_x, j_x, v_x\})$ a bod $b$ je zbývající. Pak platí $a_x < b_x < c_x$. Body se nacházejí na přímce právě tehdy, pokud rovnice $\frac{c_y - a_y}{c_x - a_x} = \frac{b_y - a_y}{b_x - a_x}$ je pravdivá.
+
 \begin{poznamka}[jiný způsob]
-Předchozí způsob funguje perfektně pro počítače, ale pro člověka je v některých případech zbytečně komplikovaný. Tyto případy nastávají, když se body nacházejí na horizontálních nebo vertikálních přímkách. To jde poznat tak, že $u_y = j_y = v_y$ nebo $u_x = j_x = v_x$
-V případě, že se body nacházejí na horizontálních přímce, musíme z grafu odebrat hranu $\{min(\{u_y, j_y, v_y\}), max(\{u_y, j_y, v_y\})\}$ a pokud jde o vertikální přímku, musíme z grafu odebrat hranu $\{min(\{u_x, j_x, v_x\}), max(\{u_x, j_x, v_x\})\}$.
+Předchozí způsob funguje perfektně pro počítače, ale pro člověka je v některých případech zbytečně komplikovaný. Tyto případy nastávají, když se body nacházejí na horizontálních nebo vertikálních přímkách. To jde poznat tak, že $u_y = j_y = v_y$ nebo $u_x = j_x = v_x$.
+V případě, že se body nacházejí na horizontálních přímce, musíme odebrat delší hranu. To uděláme tak, že si body uspořádáme (a přejmenujeme) tak, že $a_x<b_x<c_x$, nebo $a_y, b_y, c_y$ (podle toho, jestli jsou na horizontální, nebo vertikální přímce), kde $\{a, b, c\} = \{u, j, v\}$. Z grafu pak musíme odebrat hranu $\{a, c\}$.
 \end{poznamka}
 
 

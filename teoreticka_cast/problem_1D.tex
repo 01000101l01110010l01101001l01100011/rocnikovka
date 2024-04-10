@@ -1,16 +1,19 @@
 \chapter{Problém v 1D}
 \label{chap:problem_1D}
-Problém v 1D je velice jednoduchý. Vstupem bude množina bodů $V \subset \mathbb{R}$ ve které budeme hledat nejkratší úsečku. Výstupem bude úsečka $\{a, b\} \mid a, b \in V$. Následujícím algoritmem můžeme tento problém vyřešit.
+Problém v 1D je velice jednoduchý. Vstupem bude množina čísel $V \subset \mathbb{R}$ ve které budeme hledat nejkratší úsečku. Výstupem bude úsečka $\{a, b\}$, kde $ a, b \in V$. Následujícím algoritmem tento problém vyřešíme.
 
 \section{Algoritmus}
 \label{sec:algoritmus_1D}
 \begin{enumerate}
     \item Nejprve body seřadíme.
-    \item Projdeme všechny body $x_1\ldots x_n \in V$ a spočítáme vzdálenost všch po sobě jdoucích bodů: $|x_i-x_{i+1}|$, kde $i$ značí kolikátý bod procházíme. Tuto vzdálenost si uložíme, a pokud je menší, než ta doposud uložená, změníme ji. 
-    \item Po tom, co projdeme všechny body, uložená minimální vzdálenost je řešením problému. 
+    \item Projdeme všechny body $x_1\ldots x_n \in V$ a spočítáme vzdálenost všech po sobě jdoucích bodů: $d(x_i, x_{i+1})$, kde $i \in \{1,...,\#V-1\}$. Tuto vzdálenost si uložíme, a pokud je menší, než ta doposud uložená, změníme ji. 
+    \item Po tom, co projdeme všechny body, je uložená minimální vzdálenost řešením problému. 
 \end{enumerate}
+\begin{tvrzeni}
+    Algoritmus na hledání nejkratší úsečky je korektní.
+\end{tvrzeni}
 \begin{proof}
-    Zřejmý. Algoritmus skončí, protože prochází konečnou množinu bodů a je korektní, protože spočítá všechny vzdálenosti po sobě jdoucích bodů a vybere tu minimální. 
+    Algoritmus skončí, protože prochází konečnou množinu bodů a je korektní, protože spočítá všechny vzdálenosti po sobě jdoucích bodů a vybere tu minimální. 
 \end{proof}
 \begin{algorithm}
     \caption{Algoritmus na hledání úsečky s minimální délkou.}
@@ -20,15 +23,17 @@ Problém v 1D je velice jednoduchý. Vstupem bude množina bodů $V \subset \mat
     \SetKwInOut{Output}{output}
     \SetKw{KwReturn}{return}
    
-    \Input{Množina bodů $V$ v 1D.}
-    \Output{Dvojice bodů a jejich vzájemná vzdálenost.}
+    \Input{množina čísel $V \subset \mathbb{R}$.}
+    \Output{dvojice bodů a jejich vzájemná vzdálenost.}
     \BlankLine
-    \textcolor{red}{Mám tam psát sorting algoritmus nebo můžu počítat, že vstup už bude seřazený?} \;
-    $d \leftarrow (x_0, x_\infty, \infty)$ \;
-    \For{$x, i \in V$}{
-        $ distance \leftarrow |x_i-x_{i+1}|$ \;
-        \If{$distance < d$}{
-            $d \leftarrow (x_i, x_{i+1}, distance)$ \;
+    points = \textcolor{red}{Seřazené body nějakým sorting algoritmem.} \;
+    $shortest \leftarrow \infty$ \;
+    $ closest \leftarrow \emptyset $ \;
+    \For{$i\in \{1, \ldots, \#V-1\}$}{
+        \If{$d(x_i, x_{i+1}) < shortest$}{
+            $shortest \leftarrow d(x_i, x_{i+1})$ \;
+            $ closest \leftarrow (x_i, x_{i+1})$ \;
         } 
     }
+    \Return{closest, shortest}
 \end{algorithm}

@@ -1,6 +1,6 @@
-\chapter*{Základní definice}
+\chapter*{Základní definice a tvrzení}
 \label{sec:zakladni-pojmy}
-\addcontentsline{toc}{chapter}{Základní definice}
+\addcontentsline{toc}{chapter}{Základní definice a tvrzení}
 
 \begin{definition}[Polytop]
     \emph{Polytop} dimenze $n \in \mathbb{N}$ je uzavřená podmnožina $P \subseteq \mathbb{R}^{n}$ definovaná induktivně:
@@ -17,7 +17,7 @@
 
 \begin{definition}[Bod]
     \label{definice:bod}
-    Bod je uspořádaná $n$-tice $(x_1, x_2, \ldots, x_n) \in \mathbb{R}^n$. Ve $2D$ budu používat značení $a=(a_x, a_y)$
+    Bod je uspořádaná $n$-tice $(x_1, x_2, \ldots, x_n) \in \mathbb{R}^n$. Ve $2D$ budu používat značení $a=(a_x, a_y)$.
 \end{definition}
 
 \begin{definition}[Vzdálenost]
@@ -28,7 +28,7 @@
 
 \begin{definition}[Ohodnocený graf]
     \label{definice:ohodnoceny_graf}
-    $G = (V, E, w)$ je ohodnocený graf, kde $V$ je množina vrcholů, $E$ je množina dvojprvkových podmnožin $E \subseteq \binom{V}{2}$ a $w$ je libovolné zobrazení $E \rightarrow \mathds{R}^+$, které hranám přiřazuje jejich váhu.
+    $G = (V, E, w)$ je ohodnocený graf, kde $V$ je množina vrcholů, $E$ je množina dvouprvkových podmnožin $E \subseteq \binom{V}{2}$ a $w$ je libovolné zobrazení $E \rightarrow \mathds{R}^+$, které hranám přiřazuje jejich váhu.
 \end{definition}
 
 \begin{definition}[Úplný ohodnocený graf]
@@ -61,7 +61,7 @@
 \end{definition}
 
 \begin{definition}[Podgraf]
-    Podgraf $H = (V, E)$ je tvořen podmnožinou vrcholů a hran jiného grafu. Hrany grafu $H$ musí mít oba vrcholy v množině vrcholů $V$.
+    Graf $H = (V', E')$ je podgraf grafu $G = (V, E)$, pokud $V' \subseteq V$ a $E' \subseteq E \cap \binom{V'}{2}$.
     
 \end{definition}
 
@@ -72,18 +72,18 @@
 
 \begin{definition}[Váha cesty]
     \label{definice:vaha_cesty}
-    Pokud cestu tvoří posloupnost vrcholů $v_1, \ldots, v_n$, tak váha cesty je rovna \[ w(\{v_0,\dots ,v_n\}) = \sum_{i=1}^{n-1}w(\{v_i, v_{i+1}\}). \]
+    Pokud cestu tvoří posloupnost vrcholů $v_1, \ldots, v_n$, tak váha cesty je rovna \[ w(\{v_1,\dots ,v_n\}) = \sum_{i=1}^{n-1}w(\{v_i, v_{i+1}\}). \]
     
 \end{definition}
 
 \begin{definition}[Cyklus]
     \label{definice:cyklus}
-    Cyklus je posloupnost vrcholů $v_1,\ldots,v_n,v_1$, kde $v_1,\ldots,v_n$ je cesta a poslední dva vrcholy $\{v_1,v_n\} \in E$.
+    Cyklus je posloupnost vrcholů $v_1,\ldots,v_n,v_1$, kde $v_1,\ldots,v_n$ je cesta a  $\{v_1,v_n\}$ je hrana v množině hran $E$.
 \end{definition}
 
 \begin{definition}[Váha cyklu]
     \label{definice:vaha_cyklu}
-    Pokud cyklus tvoří posloupnost vrcholů $v_1, \ldots, v_n$, tak váha \\cesty je rovna \[ w(\{v_0,\dots ,v_n, v_0\}) = w(\{v_1, v_n\}) + \sum_{i=1}^{n-1}w(\{v_i, v_{i+1}\}). \]
+    Pokud cyklus tvoří posloupnost vrcholů $v_1, \ldots, v_n$, tak váha \\cyklu je rovna \[ w(\{v_0,\dots ,v_n, v_0\}) = w(\{v_1, v_n\}) + \sum_{i=1}^{n-1}w(\{v_i, v_{i+1}\}). \]
     
 \end{definition}
 
@@ -111,7 +111,7 @@
 \end{definition}
 \begin{definition}[Soused]
     \label{definice:soused}
-    V grafu $G = (V, E, w)$ je bod $u$ soused bodu $v$, pokud $\{u, v\} \in E$.
+    V grafu $G = (V, E, w)$ je vrchol $u$ soused vrcholu $v$, pokud hrana $\{u, v\} \in E$.
 \end{definition}
 
 \begin{definition}[Big $O$ notation]
@@ -121,52 +121,73 @@
 
 \begin{definition}[Obvod trojúhelníku]
     \label{definice:obvod_troj}
-    Definujeme si zobrazení $p: E\rightarrow \mathbb{R}^+$ podle předpisu: $p(a, b, c) \coloneqq d(a, b) + d(b, c) + d(a, c)$, které nám určuje obvod trojúhelníku $a, b, c$.
+    Definujeme zobrazení $p: \mathbb{R}\rightarrow \mathbb{R}^+$ podle předpisu: $p(a, b, c) \coloneqq d(a, b) + d(b, c) + d(a, c)$, které nám určuje obvod $\Delta(a,b,c)$.
 \end{definition}
 
-\begin{definition}[Podobnost trojúhelníků a body na jedné přímce]
-    \label{definice:podobnost_trojuhelniku}
-    Jsou dány 3 body: $a = (a_x, a_y)$, $b = (b_x, b_y)$, $c = (c_x, c_y)$. Tyto body jsou na přímce, pokud platí, že trojúhelníky $(a_x, a_y), (b_x, a_y), (b_x, b_y)$ a $(a_x, a_y), (c_x, a_y), (c_x, c_y)$ mají stejný poměr stran, neboli platí: $\frac{\textcolor{myred}{c_y-a_y}}{\textcolor{mygreen}{c_x-a_x}} = \frac{\textcolor{myorange}{b_y-a_y}}{\textcolor{myblue}{b_x-a_x}}$.
+% \begin{tvrzeni}[Podobnost trojúhelníků a body na jedné přímce]
+%     \label{tvrzeni:podobnost_trojuhelniku}
+%     Jsou dány 3 body v $\mathbb{R}^2$: $a = (a_x, a_y)$, $b = (b_x, b_y)$, $c = (c_x, c_y)$. Tyto body jsou na přímce, pokud platí, že trojúhelníky $\Delta((a_x, a_y), (b_x, a_y), (b_x, b_y))$~a~$\Delta((a_x, a_y), (c_x, a_y), (c_x, c_y))$ mají stejný poměr stran, proto platí rovnice: $(\textcolor{myred}{c_y-a_y})(\textcolor{myblue}{b_x-a_x}) = (\textcolor{myorange}{b_y-a_y})(\textcolor{mygreen}{c_x-}\textcolor{myblue}{a_x})$.
 
-    \begin{figure}[h]
-        \label{obr:podobnost_trojuhelniku}
-    \centering
-    \begin{tikzpicture}
-        \draw[->, line width=1pt] (4.5,0) -- (14,0) node[right] {$x$};
-        \draw[->, line width=1pt] (5,-0.5) -- (5,3.5) node[above] {$y$};
+%     \begin{figure}[h]
+%         \label{obr:podobnost_trojuhelniku}
+%     \centering
+%     \begin{tikzpicture}
+%         \draw[->, line width=1pt] (4.5,0) -- (14,0) node[right] {$x$};
+%         \draw[->, line width=1pt] (5,-0.5) -- (5,3.5) node[above] {$y$};
 
-        \fill (5, 1) circle[radius=2pt];
-        \node at (5, 1) [left] {1};
-        \fill (5, 2) circle[radius=2pt];
-        \node at (5, 2) [left] {2};
-        \fill (5, 3) circle[radius=2pt];
-        \node at (5, 3) [left] {3};
+%         \fill (5, 1) circle[radius=2pt];
+%         \node at (5, 1) [left] {1};
+%         \fill (5, 2) circle[radius=2pt];
+%         \node at (5, 2) [left] {2};
+%         \fill (5, 3) circle[radius=2pt];
+%         \node at (5, 3) [left] {3};
 
-        \fill (6, 0) circle[radius=2pt];
-        \node at (6, 0) [below] {6};
-        \fill (9, 0) circle[radius=2pt];
-        \node at (9, 0) [below] {9};
-        \fill (12, 0) circle[radius=2pt];
-        \node at (12, 0) [below] {12};
+%         \fill (6, 0) circle[radius=2pt];
+%         \node at (6, 0) [below] {6};
+%         \fill (9, 0) circle[radius=2pt];
+%         \node at (9, 0) [below] {9};
+%         \fill (12, 0) circle[radius=2pt];
+%         \node at (12, 0) [below] {12};
         
 
-        \coordinate[label=above left:$a$] (A) at (6,1);
-        \coordinate[label=above left:$b$] (B) at (9,2);
-        \coordinate[label=above left:$c$] (C) at (12,3);
+%         \coordinate[label=above left:$a$] (A) at (6,1);
+%         \coordinate[label=above left:$b$] (B) at (9,2);
+%         \coordinate[label=above left:$c$] (C) at (12,3);
 
-        \coordinate (D) at (9, 1);
-        \coordinate (E) at (12, 1);
-        \draw[line width=1.5pt] (A) -- (B);
-        \draw[line width=1.5pt] (B) -- (C);
-        \draw[myblue, line width=1.5pt] (A) to node[midway, below] {$3$} (D);
-        \draw[mygreen, line width=1.5pt] (D) to node[midway, below] {$3$} (E);
-        \draw[myred, line width=1.5pt] (C) to node[midway, right] {$2$} (E);
-        \draw[myorange, line width=1.5pt] (B) to node[midway, right] {$1$} (D);
-        \fill (A) circle[radius=2pt];
-        \fill (B) circle[radius=2pt];
-        \fill (C) circle[radius=2pt];
+%         \coordinate (D) at (9, 1);
+%         \coordinate (E) at (12, 1);
+%         \draw[line width=1.5pt] (A) -- (B);
+%         \draw[line width=1.5pt] (B) -- (C);
+%         \draw[myblue, line width=1.5pt] (A) to node[midway, below] {$3$} (D);
+%         \draw[mygreen, line width=1.5pt] (D) to node[midway, below] {$3$} (E);
+%         \draw[myred, line width=1.5pt] (C) to node[midway, right] {$2$} (E);
+%         \draw[myorange, line width=1.5pt] (B) to node[midway, right] {$1$} (D);
+%         \fill (A) circle[radius=2pt];
+%         \fill (B) circle[radius=2pt];
+%         \fill (C) circle[radius=2pt];
 
-    \end{tikzpicture}
-    \caption{Příklad podobnosti trojúhelníků}
-    \end{figure}
-\end{definition}
+%     \end{tikzpicture}
+%     \caption{Příklad podobnosti trojúhelníků}
+%     \end{figure}
+% \end{tvrzeni}
+
+% \begin{proof}
+%     Předpokládejme, že existuje funkce $\mathfrak{f}: y = mx+k$, která protíná všechny tři body. Po dosazení bodů do rovnice nám vznikne soustava rovnic o třech neznámých. 
+%     \begin{align*}
+%         a_y &= ma_x+k \\
+%         b_y &= mb_x+k \\
+%         c_y &= mc_x+k \\
+%     \end{align*}
+%     Poté odečteme třetí od první a první od druhé. Tím dostaneme:
+%     \begin{align*}
+%         a_y-c_y &= ma_x+k - mc_x -k \\
+%         b_y-a_y &= mb_x+k -ma_x -k \\
+%     \end{align*}
+%     Vytknutím $m$ dostaneme:
+%     \begin{align*}
+%         a_y-c_y &= m(a_x-c_x) \\
+%         b_y-a_y &= m(b_x-a_x) \\
+%     \end{align*}
+%     A tím pádem $m_1 = (a_y-c_y)/(a_x-c_x)$ a $ m_2=(b_y-a_y)/(b_x-a_x)$. My ale víme, že $m_1$ a $m_2$ jsou stejná čísla, protože funkce $\mathfrak{f}$ protíná všechny tři body. Proto můžeme sestavit rovnici $(a_y-c_y)/(a_x-c_x) = (b_y-a_y)/(b_x-a_x)$. Nakonec můžeme rovnici upravit do tvaru $(a_y-c_y)(b_x-a_x) = (b_y-a_y)(a_x-c_x)$. Tímto je \myref{tvrzení}{tvrzeni:podobnost_trojuhelniku} dokázáno.
+    
+% \end{proof}
