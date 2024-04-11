@@ -1,7 +1,7 @@
 \section{Dijkstrův algoritmus}
 \label{sec:dijkstra}
 
-Dijkstrův algoritmus, pojmenovaný po Edsgeru W. Dijkstrovi, je algoritmus na hledání cesty s minimální váhou mezi dvěma body v ohodnoceném grafu, který hraje velkou roli v našem algoritmu. Obecně taková cesta může mít několik vrcholů, ale protože náš graf je převzatý z~roviny, povede právě přes jeden vrchol a bude se skládat ze dvou hran. To se dá dokázat pomocí \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníkové nerovnosti}. Kdyby náš graf nebyl převzatý z~roviny, mohla nastat situace na \myref{obrázku}{obr:troj_ner_graf}.
+Dijkstrův algoritmus, pojmenovaný po Edsgeru W. Dijkstrovi, je algoritmus na hledání cesty s minimální váhou mezi dvěma body v ohodnoceném grafu, který hraje velkou roli v našem algoritmu. Obecně taková cesta může mít několik vrcholů, ale protože náš graf je převzatý z~roviny, povede právě přes jeden vrchol a bude se skládat ze dvou hran. To vyplývá z \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníkové nerovnosti}. Kdyby náš graf nebyl převzatý z~roviny, mohla nastat situace na \myref{obrázku}{obr:troj_ner_graf}.
 
 \begin{figure}[H]
 
@@ -34,8 +34,8 @@ Dijkstrův algoritmus, pojmenovaný po Edsgeru W. Dijkstrovi, je algoritmus na h
 \begin{enumerate}
     \item Vytvoříme množinu všech nenavštívených bodů a vybereme startovní a cílový bod. Označíme všechny body nenavštívenými. 
     \item Každému bodu přiřadíme vzdálenost od počátečního bodu; prozatím na $\infty$. Vzdálenost počátečního bodu od sebe samého nastavíme na $0$. 
-    \item Nejdříve projdeme všechny sousedy počátečního bodu. Každému sousedu spočítáme vzdálenost od počátečního bodu (v tomto případě váha hrany vedoucí z~počátečního bodu do souseda) a připíšeme ji sousedovi, bude-li menší než $\infty$. Až zkontrolujeme všechny jeho sousedy, odebereme počáteční bod z množiny nenavštívených bodů.
-    \item Potom se přesuneme na nenavštívený bod s minimální vzdáleností od počátečního bodu. 
+    % \item Nejdříve projdeme všechny sousedy počátečního bodu. Každému sousedu spočítáme vzdálenost od počátečního bodu (v tomto případě váha hrany vedoucí z~počátečního bodu do souseda) a připíšeme ji sousedovi, bude-li menší než $\infty$. Až zkontrolujeme všechny jeho sousedy, odebereme počáteční bod z množiny nenavštívených bodů.
+    \item Přesuneme na nenavštívený bod s minimální vzdáleností od počátečního bodu (poprvé to bude počáteční bod). 
     Tento bod označíme jako aktuální a začneme kontrolovat jeho sousedy. 
     Je-li součet vzdálenosti od počátečního bodu do aktuálního s váhou hrany vedoucí k sousedu menší než vzdálenost, kterou má u sebe soused uloženou, změníme ji.
     Je třeba myslet na to, že když přepíšeme vzdálenost souseda od startovního bodu, souseda neoznačujeme za navštíveného. Počáteční bod odebereme z množiny nenavštívených bodů, až zkontrolujeme všechny jeho sousedy.
