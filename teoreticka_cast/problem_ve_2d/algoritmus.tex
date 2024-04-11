@@ -7,7 +7,9 @@ Tímto je příprava hotova. Následuje hledání cyklu délky tři s minimáln�
 
 
 
-Náhodně vybereme jednu hranu $\{u, v\} \in E$ a odebereme ji z množiny hran $E$. V grafu bez hrany $\{u, v\}$ potřebujeme najít cestu s minimální váhou mezi body $u$ a  $v$. K tomuto použijeme \hyperref[sec:dijkstra]{Dijkstrův algoritmus}, který nám vrátí cestu délky dva. Ta se bude skládat ze dvou hran: $\{u, j\}$ a $\{j, v\}$. Teď musíme zkontrolovat, zda tato cesta s hranou $\{u, v\}$ opravdu tvoří trojúhelník, protože se může  stát, že body $u, j, v$ leží na jedné přímce. K tomu využijeme \hyperref[sec:podobnost]{podobnost trojúhelníků}, z které vyplývá, že body se nacházejí na přímce právě tehdy, pokud rovnice $(c_y - a_y)(b_x - a_x) = (b_y - a_y)(c_x - a_x)$ je pravdivá.
+Náhodně vybereme jednu hranu $\{u, v\} \in E$ a odebereme ji z množiny hran $E$. V grafu bez hrany $\{u, v\}$ potřebujeme najít cestu s minimální váhou mezi body $u$ a  $v$. K tomuto použijeme \hyperref[sec:dijkstra]{Dijkstrův algoritmus}, který nám vrátí cestu délky dva. Ta se bude skládat ze dvou hran: $\{u, j\}$ a $\{j, v\}$.
+
+Teď musíme zkontrolovat, zda tato cesta s hranou $\{u, v\}$ opravdu tvoří trojúhelník, protože se může  stát, že body $u, j, v$ leží na jedné přímce. K tomu využijeme \hyperref[sec:podobnost]{podobnost trojúhelníků}, z které vyplývá, že body se nacházejí na přímce právě tehdy, pokud rovnice $(c_y - a_y)(b_x - a_x) = (b_y - a_y)(c_x - a_x)$ je pravdivá. 
 %Definujeme si body $a \coloneqq min(\{u_x, j_x, v_x\})$, $c \coloneqq max(\{u_x, j_x, v_x\})$ a bod $b$ je zbývající. Pak platí $a_x < b_x < c_x$. Body se nacházejí na přímce právě tehdy, pokud rovnice $\frac{c_y - a_y}{c_x - a_x} = \frac{b_y - a_y}{b_x - a_x}$ je pravdivá.
 
 \begin{poznamka}[jiný způsob]
@@ -16,26 +18,22 @@ V případě, že se body nacházejí na horizontálních přímce, musíme odeb
 \end{poznamka}
 
 
-Pokud tyto body tvoří trojúhelník, pak tvoří podgraf $T = (V_T, E_T, w)$, kde množina bodů $V_T = \{u, j, v\}$, množina hran $E_T = \{\{u,j\}, \{j,v\}, \{u,v\}\}$ a váha hran se zachová. Pokud tento podgraf bude mít celkovou váhu menší než ten, který jsme doposud našli, uložíme jej a vrátíme hranu $\{u, v\}$ do množiny hran $E$. Tento postup opakujeme dokud nevyzkoušíme všchny hrany. Výsledkem bude trojúhelník s minimálním obvodem. Na \myref{obrázku}{obr:algoritmus_graf} můžete vidět jak algoritmus funguje.
+Pokud tyto body tvoří trojúhelník, pak tvoří cyklus délky tři. Pokud tento cyklus bude mít váhu menší než ten, který jsme doposud našli, uložíme jej a vrátíme hranu $\{u, v\}$ do množiny hran $E$. Tento postup opakujeme dokud nevyzkoušíme všechny hrany. Výsledkem bude trojúhelník s minimálním obvodem. Na \myref{obrázku}{obr:algoritmus_graf} můžete vidět, jak algoritmus funguje.
 
 \subsection{Algoritmus v pseudokódu}
-Pseudokód je popis jednotlivých kroků v algoritmu s použitím základní logiky programovacích jazyků. Následuje náš algoritmus napsaný v pseudokódu.
-
-
 \begin{algorithm}[H]
-    \caption{Algoritmus na hledání cyklu délky 3.}
+    \caption{Algoritmus na hledání cyklu délky tři.}
     \label{alg:algoritmus}
 
     \SetKwInOut{Input}{input}
     \SetKwInOut{Output}{output}
     \SetKw{KwReturn}{return}
    
-    \Input{Množina bodů $V$ v rovině, kde každý bod je reprezentován jako dvojice souřadnic $(v_x, v_y)$}
-    \Output{Trojúhelník $T = (V_T, E_T, w)$}
+    \Input{množina bodů $V$ v rovině, kde každý bod je reprezentován jako dvojice souřadnic $(v_x, v_y)$}
+    \Output{trojúhelník $T = (V_T, E_T, w)$}
     \BlankLine
     \For{$u \in V$}{
         \For{$v \in V$}{
-        $d(u, v) \leftarrow \sqrt{(v_x-u_x)^2+(v_y-u_y)^2}$\;
         $ w(\{u, v\}) \leftarrow d(u, v)$\;
         }
     }

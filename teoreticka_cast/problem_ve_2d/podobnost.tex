@@ -54,18 +54,17 @@ V \myref{sekci}{sec:algoritmus} Vám představím algoritmus na hledání trojú
     \begin{align*}
         a_y &= ma_x+k \\
         b_y &= mb_x+k \\
-        c_y &= mc_x+k \\
+        c_y &= mc_x+k 
     \end{align*}
     Poté odečteme třetí od první a první od druhé. Tím dostaneme:
     \begin{align*}
         a_y-c_y &= ma_x+k - mc_x -k \\
-        b_y-a_y &= mb_x+k -ma_x -k \\
+        b_y-a_y &= mb_x+k -ma_x -k 
     \end{align*}
     Vytknutím $m$ dostaneme:
     \begin{align*}
         a_y-c_y &= m(a_x-c_x) \\
-        b_y-a_y &= m(b_x-a_x) \\
+        b_y-a_y &= m(b_x-a_x) 
     \end{align*}
     A tím pádem $m_1 = (a_y-c_y)/(a_x-c_x)$ a $ m_2=(b_y-a_y)/(b_x-a_x)$. My ale víme, že $m_1$ a $m_2$ jsou stejná čísla, protože funkce $\mathfrak{f}$ protíná všechny tři body. Proto můžeme sestavit rovnici $(a_y-c_y)/(a_x-c_x) = (b_y-a_y)/(b_x-a_x)$. Nakonec můžeme rovnici upravit do tvaru $(a_y-c_y)(b_x-a_x) = (b_y-a_y)(a_x-c_x)$. Tímto je \myref{tvrzení}{tvrzeni:podobnost_trojuhelniku} dokázáno.
-    
 \end{proof}
