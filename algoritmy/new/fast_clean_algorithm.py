@@ -1,6 +1,7 @@
 # Zatim nic
 from networkx.algorithms.shortest_paths.weighted import dijkstra_path
 from networkx import Graph
+import networkx as nx
 from random import random
 from math import sqrt
 import dijkstra
@@ -54,13 +55,48 @@ def find_shortest_path_nx(G:Graph, edges):
         G.add_edge(*edge, weight=edges[edge])
     return shortest_path
 
-G, edges = create_edges(create_points(20))
+G, edges = create_edges(create_points(500))
+# atime = time.time()
+# print((find_shortest_path(G, edges)))
+# mytime = time.time() - atime
+# print("My time:", mytime)
+# atime = time.time()
+# print((find_shortest_path_nx(G, edges)))
+# nxtime = time.time() - atime
+# print("Nx time:", nxtime)
+# print("My is faster by:", (nxtime - mytime), "seconds", "or by", (nxtime - mytime)/nxtime*100, "%" )
+
+
+# DIjkstra testing
+# print(list(G.nodes))
+# print(list(G.edges), [list(G.get_edge_data[x]) for x in G.edges])
+# for edge in G.edges:
+#     print(edge, G.get_edge_data(edge[0], edge[1]))
+
+edging = (50, 180)
+G.remove_edge(edging[0], edging[1])
+
 atime = time.time()
-print((find_shortest_path(G, edges)))
-mytime = time.time() - atime
-print("My time:", mytime)
+print("NX:",nx.dijkstra_path_length( G, edging[0], edging[1]), nx.dijkstra_path(G, edging[0], edging[1]))
+nxtime = time.time()-atime
+print("NX TIME:", nxtime)
+
 atime = time.time()
-print((find_shortest_path_nx(G, edges)))
-nxtime = time.time() - atime
-print("Nx time:", nxtime)
-print("My is faster by:", (nxtime - mytime), "seconds", "or by", (nxtime - mytime)/nxtime*100, "%" )
+print("FIRST:",dijkstra.dijkstraa( G,edging[0], edging[1]))
+firsttime = time.time()-atime
+print("FIRST TIME:", firsttime)
+
+atime = time.time()
+print("SECOND:",dijkstra.dijkstra_triangle_second( G,edging[0], edging[1]))
+secondtime = time.time()-atime
+print("SECOND TIME:", secondtime)
+
+if nxtime < secondtime:
+    print("nx")
+else:
+    print("second is winner")
+    
+    print("It is faster by:", (nxtime/secondtime)*100, "%")
+
+0.06
+0.0003

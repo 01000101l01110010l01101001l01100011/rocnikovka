@@ -22,6 +22,7 @@ def dijkstra_triangle(G:Graph, start, end):
         neighbors = Q
         if actual == start:
             neighbors.remove(end)
+        for neighbor in neighbors:
             calculated_distance = distances[actual] + G.get_edge_data(actual, neighbor)['weight']
             if calculated_distance < distances[neighbor]:
                 distances[neighbor] = calculated_distance

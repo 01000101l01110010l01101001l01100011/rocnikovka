@@ -1,0 +1,38 @@
+\section{Algoritmus}
+\label{sec:algoritmus_1D}
+\begin{enumerate}
+    \item Nejprve body seřadíme.
+    \item Projdeme všechny body $x_1\ldots x_n \in V$ a spočítáme vzdálenost všech po sobě jdoucích bodů: $d(x_i, x_{i+1})$, kde $i \in \{1,...,\#V-1\}$. Tuto vzdálenost si uložíme, a pokud je menší, než ta doposud uložená, změníme ji.
+    \item Po tom, co projdeme všechny body, je uložená minimální vzdálenost řešením problému.
+\end{enumerate}
+\begin{tvrzeni}
+    Algoritmus na hledání nejkratší úsečky je korektní.
+\end{tvrzeni}
+\begin{proof}
+    Algoritmus skončí, protože prochází konečnou množinu bodů a je korektní, protože spočítá všechny vzdálenosti po sobě jdoucích bodů a vybere tu minimální.
+\end{proof}
+\begin{poznamka}
+    Pseudokód je popis jednotlivých kroků v algoritmu s použitím základní logiky programovacích jazyků. Následuje náš algoritmus napsaný v pseudokódu.
+\end{poznamka}
+\begin{algorithm}
+    \caption{Algoritmus na hledání úsečky s minimální délkou.}
+    \label{alg:algoritmus_1D}
+
+    \SetKwInOut{Input}{input}
+    \SetKwInOut{Output}{output}
+    \SetKw{KwReturn}{return}
+
+    \Input{množina čísel $V \subset \mathbb{R}$.}
+    \Output{dvojice bodů a jejich vzájemná vzdálenost.}
+    \BlankLine
+    points = \textcolor{red}{Seřazené body nějakým sorting algoritmem. set.pop() vytahuje nejmenší item?} \;
+    $shortest \leftarrow \infty$ \;
+    $ closest \leftarrow \emptyset $ \;
+    \For{$i\in \{1, \ldots, \#V-1\}$}{
+        \If{$d(x_i, x_{i+1}) < shortest$}{
+            $shortest \leftarrow d(x_i, x_{i+1})$ \;
+            $ closest \leftarrow (x_i, x_{i+1})$ \;
+        }
+    }
+    \Return{closest, shortest}
+\end{algorithm}

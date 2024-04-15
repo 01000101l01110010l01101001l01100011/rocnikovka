@@ -1,0 +1,23 @@
+\section{Quicksort}
+\label{sec:quicksort}
+
+Quicksort je algoritmus, který dokáže rychle seřadit seznam čísel. Patří mezi nejrychlejší algoritmy řazení založené na porovnávání prvků. Objevil jej britský počítačový vědec Charles Antony Richard Hoare v roce 1961.
+
+\begin{center}
+  \begin{tikzpicture}
+    \centering
+    % Define the dimensions of the table
+    \def\cols{10}
+    \def\cellsize{1}
+    \def\colooor{white}
+    \def\pivotcolor{mygreen!70}
+    % Draw the table
+    \foreach \clocklor [count=\col] in {\colooor, \colooor, \colooor, \colooor, \colooor, \pivotcolor, \colooor, \colooor, \colooor, \colooor} {
+        \draw[fill=\clocklor] (\col*\cellsize, -\cellsize) rectangle ++(\cellsize, -\cellsize);
+            }
+    % Label the cells
+      \foreach \text [count=\col] in {8, 2, 4, 6, 3, 7, 5, 1, 9, 0}{
+        \node at (\col*\cellsize + 0.5*\cellsize, -\cellsize - 0.5*\cellsize) {\text};
+      }
+  \end{tikzpicture}
+\end{center}
