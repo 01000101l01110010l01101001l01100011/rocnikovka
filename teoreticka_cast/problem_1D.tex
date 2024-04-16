@@ -1,6 +1,6 @@
 \chapter{Problém v 1D}
 \label{chap:problem_1D}
-Problém v 1D je velice jednoduchý. Vstupem bude množina čísel $V \subset \mathbb{R}$ ve které budeme hledat nejkratší úsečku. Výstupem bude úsečka $\{a, b\}$, kde $ a, b \in V$. Pro nalezení nejkratší úsečky musíme z množinu čísel seřadit. To uděláme pomocí algoritmu \hyperref[sec:quicksort]{quicksort}.
+Problém v 1D je velice jednoduchý. Vstupem bude množina čísel $V \subset \mathbb{R}$ a výstupem bude nejkratší úsečka $\{a, b\}$, kde $ a, b \in V$. Nejprve množinu čísel seřadíme pomocí algoritmu \href{https://doi.org/10.1093/comjnl/5.1.10}{quicksort} (vizte \autocite{10.1093/comjnl/5.1.10}) a poté zkotrolujeme vzdálenost každých dvou po sobě jdoucích čísel a zapamatujeme si tu minimální, která je řešením tohoto problému.  
 
-\input{teoreticka_cast/problem_1d/quicksort}
+
 \input{teoreticka_cast/problem_1d/algoritmus_1d}
