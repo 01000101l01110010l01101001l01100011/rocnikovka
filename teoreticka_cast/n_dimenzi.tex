@@ -1,7 +1,14 @@
 \chapter{Zobecnění na n dimenzí}
 \label{chap:n_dimenzi}
 
-Problém v $n$ dimenzích bude trochu komplikovanější a časově náročnější, ale převod na grafovou úlohu nám ho velice usnadní. Opět budeme hledat cykly, ale tentokrát délky $n+1$. Práci nám ale velice ztíží kontrolování, jestli daný cyklus je polytop dimenze $n$. Například ve 3D může nastat situace, kdy algoritmus najde cyklus délky čtyři, ale bude se jednat o čtyřúhelník ležící v jedné rovině. 
+Problém v $n$ dimenzích bude komplikovanější a časově náročnější. Problém si znovu převedeme na grafovou úlohu, kde $v \in V = \{(a_1, a_n)\}$ a $E = \binom{V}{2}$ nám tvoří ohodnocený graf $G = (V, E, w)$. V tomto grafu budeme hledat cyklus délky $n+1$ s minimální váhou. To uděláme tak, že v grafu nalezneme všechny cykly délky $n+1$ a budeme si je pamatovat seřazené podle jejich váhy. Pak vybereme cyklus s minimální váhou a ověříme, zda body opravdu tvoří polytop maximální dimenze (ve 2D jsme ověřovali, jestli body neleží na přímce). Polytop maximální dimenze se vyznačuje tím, že jeho body neleží ve stejné nadrovině. 
+
+
+% Jinými slovy, potřebujeme aby všechny body tvořící cyklus byly:
+% \begin{itemize}
+%     \item ve stejné nejvyšší nadrovině
+% \end{itemize}
+% potřebujeme, aby všechny body ležely ve stejné nejvyšší nadrovině, neboli aby všechny body neležely ve stejné nadrovině menší, než maximální.
 
 
 
