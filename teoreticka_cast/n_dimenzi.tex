@@ -1,31 +1,24 @@
 \chapter{Zobecnění na n dimenzí}
 \label{chap:n_dimenzi}
-\section{Gaussova eliminační metoda}
+% \section{Gaussova eliminační metoda} budu pocitat determinant
 
 \section{Lineární kombinace, lineárně závislé a nezávislé body}
+% Definovat afinní závislost, geometricky znamená, že body leží v jedné nadrovině
+% Definovat afinní kombinaci i s lineární kombinací
+
+% Ocitovat, že body jsou afinně závislé právě tehdy, když jsou rozdily bodu linearne zavisle
+% Jak poznat
+% Determinant je objem rovnoběžnostěnu? nějak ale kvalitně napsat a ocitovat to. 
+
 
 \section{Řešení problému v nD}
-Problém v $n$ dimenzích bude komplikovanější a časově náročnější. Problém si znovu převedeme na grafovou úlohu, kde $V = \{v_1,\ldots, v_n\}$ a $E = \binom{V}{2}$ nám tvoří ohodnocený graf $G = (V, E, w)$. Cílem je získat cyklus délky $n+1$ s minimální váhou. Toho docílíme tím, že v grafu nalezneme všechny cykly délky $n+1$ a budeme si je pamatovat seřazené podle jejich váhy. Pak vybereme cyklus s minimální váhou a ověříme, že body opravdu tvoří polytop maximální dimenze (ve 2D jsme ověřovali, jestli body neleží na přímce). Polytop maximální dimenze se vyznačuje tím, že jeho body neleží ve stejné nadrovině (nadrovina je prostor dimenze $n-1$). Abychom mohli poznat dimenzi prostoru, který body vymezují, musíme z nich vytvořit vektory.
-\begin{varovani}
-  \label{varovani:varovani_index}
-  Značení $x^1$ znamená první bod, $x_1$ znamená první souřadnice bodu $x$. Tím pádem $x^k_n$ znamená $n$-tá souřadnice $k$-tého bodu. Nespleťte si vektory a čísla. $(x^k-x^1)$ je vektor z rozdílu bodů $x^k$ a $x^1$. $(x^k_n - x^1_n)$ je rozdíl $n$-té souřadnice bodu $x^k$ a $x^1$. 
-\end{varovani}
+Problém v $n$ dimenzích bude komplikovanější a časově náročnější. Problém si znovu převedeme na grafovou úlohu, kde $V = \{v_1,\ldots, v_n\}$ a $E = \binom{V}{2}$ nám tvoří ohodnocený graf $G = (V, E, w)$. Cílem je získat cyklus délky $n+1$ s minimální váhou. Toho docílíme tím, že v grafu nalezneme všechny cykly délky $n+1$ a budeme si je pamatovat seřazené podle jejich váhy. Pak vybereme cyklus s minimální váhou a ověříme, že body opravdu tvoří polytop maximální dimenze (ve 2D jsme ověřovali, jestli body neleží na přímce). Polytop maximální dimenze se vyznačuje tím, že jeho body neleží ve stejné nadrovině (nadrovina je podprostor dimenze $n-1$). 
+\begin{poznamka} 
+  \label{poznamka:varovani_index}
+  Značení $x^k_n$ znamená $n$-tá souřadnice $k$-tého bodu, například $x^3_2$ je druhá souřadnice třetího bodu. Nespleťte si vektory a čísla. $(x^k-x^1)$ je vektor z rozdílu bodů $x^k$ a $x^1$. $(x^k_n - x^1_n)$ je rozdíl $n$-té souřadnice bodu $x^k$ a $x^1$. 
+\end{poznamka}
 
-Pro body $x^1, \ldots, x^k \in \mathbb{R}^n$, kde  $k, n \in \mathbb{N}$ (Pozor! $k$ v tomto případě značí počet bodů a $n$ značí mocninu, která značí dimenzi. Vizte \myref{varování}{varovani:varovani_index}.) vytvoříme vektory odečtením všech bodů od jednoho bodu. Zvolme například první bod $x^1$. Tím nám vzniknou vektory $x^2-x^1, x^3-x^1, \dots, x^k-x^1$. Tyto vektory leží ve stejné nadrovině právě tehdy, pokud jsou lineárně závislé. To znamená, že pro všechny vektory existuje lineární kombinace ostatních vektorů. % S tou poslední větou si nejsem jistý...
-Utvořme obecnou lineární kombinaci vektorů a předpokládejme, že se rovnají nulovému vektoru:
-\begin{equation*}
-  (x^2-x^1)a + (x^3-x^1)b + \dots + (x^k-x^1)q = (0, 0, 0)
-\end{equation*}
-Tuto rovnici můžeme vyjádřit jako soustavu rovnic:
-\begin{align*}
-  (x^2_1 - x^1_1)a + (x^3_1 - x^1_1)b + \dots + (x^k_1 - x^1_1)q &= 0 \\
-  (x^2_2 - x^1_2)a + (x^3_2 - x^1_2)b + \dots + (x^k_2 - x^1_2)q &= 0 \\
-  \vdots \\
-  (x^2_n - x^1_n)a + (x^3_n - x^1_n)b + \dots + (x^k_n - x^1_n)q &=0 
-\end{align*}
-
-Tuto soustavu rovnic si přepíšeme do matice $A$.
-
+Pro body $x^1, \ldots, x^k \in \mathbb{R}^n$, kde  $k, n \in \mathbb{N}$ (Číslo $k$ v tomto případě značí počet bodů a $n$ značí mocninu, která značí dimenzi. Vizte \myref{varování}{poznamka:varovani_index}.) vytvoříme vektory odečtením všech bodů od jednoho bodu. Zvolme například první bod $x^1$. Tím nám vzniknou vektory $x^2-x^1, x^3-x^1, \dots, x^k-x^1$. Tyto vektory leží ve stejné nadrovině právě tehdy, pokud jsou lineárně závislé. To znamená, že pro všechny vektory existuje lineární kombinace ostatních vektorů. 
 \begingroup
 \renewcommand*{\arraystretch}{1.25}
 \begin{equation*}
@@ -45,7 +38,6 @@ Tuto soustavu rovnic si přepíšeme do matice $A$.
   \end{pmatrix}
 \end{equation*}
 \endgroup
-% Použití Gaussovy eliminační metody
-Tuto matici vyřešíme pomocí Gaussovy eliminační metody
+
 
 \input{teoreticka_cast/n_dimenzi/algoritmus_nd}
