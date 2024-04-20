@@ -1,9 +1,9 @@
-\chapter*{Základní definice a tvrzení}
+\chapter*{Základní definice}
 \label{sec:zakladni-pojmy}
-\addcontentsline{toc}{chapter}{Základní definice a tvrzení}
+\addcontentsline{toc}{chapter}{Základní definice}
 
 \begin{definition}[Polytop]
-    \emph{Polytop} dimenze $n \in \mathbb{N}$ je uzavřená podmnožina $P \subseteq \mathbb{R}^{n}$ definovaná induktivně:
+    \emph{Polytop} dimenze $n \in \mathbb{N}$ je uzavřená podmnožina $P \subseteq \R^{n}$ definovaná induktivně:
     \begin{itemize}
         \item Polytop dimenze $1$ je úsečka.
         \item Polytop dimenze $n$ je slepením polytopů dimenze $n-1$, jež spolu mohou
@@ -17,18 +17,18 @@
 
 \begin{definition}[Bod]
     \label{definice:bod}
-    Bod je uspořádaná $n$-tice $(x_1, x_2, \ldots, x_n) \in \mathbb{R}^n$. Ve $2D$ budu používat značení $a=(a_x, a_y)$.
+    Bod je uspořádaná $n$-tice $(\xx{1}, \xx{2}, \ldots, \xx{n}) \in \R^n$. Ve $2D$ budu používat značení $a=(a_x, a_y)$.
 \end{definition}
 
 \begin{definition}[Vzdálenost]
     \label{definice:vzdalenost}
-    Zobrazení $d: \mathbb{R}^n\times \mathbb{R}^n~\rightarrow~\mathbb{R}^+$ nám určí vzdálenost dvou bodů $u, v \in \mathbb{R}^n$
-    podle předpisu $d(u, v) \coloneqq \sqrt{(v_1-u_1)^2+(v_2-u_2)^2+\ldots+(v_n-u_n)^2}$.
+    Zobrazení $d: \R^n\times \R^n~\rightarrow~\R^+$ nám určí vzdálenost dvou bodů $u, v \in \R^n$
+    podle předpisu $d(u, v) \coloneqq \sqrt{(\vvv{1}-\uu{1})^2+(\vvv{2}-\uu{2})^2+\ldots+(\vvv{n}-\uu{n})^2}$.
 \end{definition}
 
 \begin{definition}[Ohodnocený graf]
     \label{definice:ohodnoceny_graf}
-    $G = (V, E, w)$ je ohodnocený graf, kde $V$ je množina vrcholů, $E$ je množina dvouprvkových podmnožin $E \subseteq \binom{V}{2}$ a $w$ je libovolné zobrazení $E \rightarrow \mathds{R}^+$, které hranám přiřazuje jejich váhu.
+    $G = (V, E, w)$ je ohodnocený graf, kde $V$ je množina vrcholů, $E$ je množina dvouprvkových podmnožin $E \subseteq \binom{V}{2}$ a $w$ je libovolné zobrazení $E \rightarrow \R^+$, které hranám přiřazuje jejich váhu.
 \end{definition}
 
 \begin{definition}[Úplný ohodnocený graf]
@@ -121,5 +121,5 @@
 
 \begin{definition}[Obvod trojúhelníku]
     \label{definice:obvod_troj}
-    Definujeme zobrazení $p: \mathbb{R}\rightarrow \mathbb{R}^+$ podle předpisu: $p(a, b, c) \coloneqq d(a, b) + d(b, c) + d(a, c)$, které nám určuje obvod $\Delta(a,b,c)$.
+    Definujeme zobrazení $p: \R\rightarrow \R^+$ podle předpisu: $p(a, b, c) \coloneqq d(a, b) + d(b, c) + d(a, c)$, které nám určuje obvod $\Delta(a,b,c)$.
 \end{definition}

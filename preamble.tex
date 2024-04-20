@@ -32,6 +32,7 @@
 \let\openbox\relax
 
 
+
 % AMS LaTeX %
 \usepackage{amsmath,mathtools}
 \usepackage{dsfont}
@@ -105,8 +106,26 @@
 \setlength{\parindent}{1.25cm}
 \setlength{\parskip}{0pt}
 
+\usepackage{tensor}
 % Extra custom commands %
 \newcommand{\myref}[2]{\hyperref[#2]{#1~\ref*{#2}}}
+\newcommand{\R}{\mathbb{R}}
+
+\newcommand{\x}[2]{\tensor[_#1]{x}{_#2}}
+\newcommand{\xx}[1]{\tensor[_#1]{x}{}}
+
+\newcommand{\uu}[1]{\tensor[_#1]{u}{}}
+\newcommand{\vvv}[1]{\tensor[_#1]{v}{}}
+% Pokud budu měnit umístění, tak nezapomenout, že v definici bodu je jeden, který se tímto nezmění.
+
+
+% \NewDocumentCommand{\x}{ m g }{
+%     \IfNoValueTF{#2}
+%         {\tensor[_{#1}]{x}{}}
+%         {\tensor[_{#2}]{x}{_{#1}}}
+% }
+
+
 
 % Algorithms %
 \usepackage[ruled,vlined,linesnumbered,czech]{algorithm2e}
