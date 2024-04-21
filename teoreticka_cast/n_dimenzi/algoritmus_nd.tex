@@ -1,3 +1,31 @@
 \section{Algoritmus}
 
-amogus
+\begin{algorithm}[H]
+    \caption{Algoritmus na hledání polytopu maximální dimenze s minimálním obvodem.}
+    \label{alg:algoritmus_nd}
+
+    \SetKwInOut{Input}{input}
+    \SetKwInOut{Output}{output}
+    \SetKw{KwReturn}{return}
+   
+    \Input{množina bodů $V \subset \R^n$.}
+    \Output{polytop maximální dimenze s minimálním obvodem.}
+    \BlankLine
+    $C \leftarrow \binom{V}{n+1}$\;
+    $min_c \leftarrow \emptyset$\;
+    \For{$c\in C$}{
+      \If{$min_C > w(c)$}{
+        $x_1, \dots x_{n+1} \leftarrow c$\;
+        $A \leftarrow \begin{pmatrix}
+          \x{1}{2} - \x{1}{1} & \x{2}{2} - \x{2}{1} & \cdots & \x{n}{2} - \x{n}{1} \\
+          \x{1}{3} - \x{1}{1} & \x{2}{3} - \x{2}{1} & \cdots & \x{n}{3} - \x{n}{1} \\
+          \vdots        & \vdots        & \ddots & \vdots        \\
+          \x{1}{n_+_1} - \x{1}{1} & \x{2}{n_+_1} - \x{2}{1} & \cdots & \x{n}{n_+_1} - \x{n}{1} \\
+        \end{pmatrix}$\;
+        \If{$det(A) != 0$}{
+          $min_c \leftarrow c$\;
+        }
+      }
+    }
+    \KwReturn{$min_c$, $w(min_c)$}\;
+   \end{algorithm}

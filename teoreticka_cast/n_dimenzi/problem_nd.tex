@@ -1,7 +1,7 @@
 \section{Řešení problému v \texorpdfstring{$n$D}{nD}}
 \label{sec:reseni_1D}
 Problém v $n$ dimenzích bude komplikovanější a časově náročnější. Úlohu znovu převedeme na grafovou úlohu, kde $V = \{x_1,\ldots, x_k\} \in \R^n$ a $E = \binom{V}{2}$ nám tvoří ohodnocený graf $G = (V, E, w)$. Cílem je získat cyklus délky $n+1$ s minimální váhou.
-
+% TODO nemusime to prevaded, kdyz pocitam s VC(n+1)
 Toho docílíme tak, že v grafu nalezneme všechny cykly délky $n+1$ a budeme si je pamatovat seřazené podle jejich váhy. Pak vybereme cyklus s minimální váhou a ověříme, že jeho vrcholy opravdu tvoří polytop maximální dimenze (jako ve 2D, kde jsme ověřovali, jestli body neleží na přímce).
 
 Polytop maximální dimenze se vyznačuje tím, že jeho body neleží ve stejné \hyperref[definice:nadrovina]{nadrovině}. Z \myref{definice}{definice:afinni-zavislost} víme, že pokud rozdíly bodů jsou lineárně závislé, tak body v jedné nadrovině leží. Z toho vyplývá, že chceme, aby body nebyly afinně závislé, neboli aby tvořily polytop maximální dimenze.  
@@ -11,7 +11,7 @@ Polytop maximální dimenze se vyznačuje tím, že jeho body neleží ve stejn�
   Značení $\x{n}{k}$ znamená $n$-tá souřadnice $k$-tého bodu, například $\x{2}{3}$ je dru\-há souřadnice třetího bodu, tudíž $\x{n}{k} - \x{n}{1}$ je rozdíl $n$-té souřadnice bodu $x_k$ a $x_1$. 
 \end{poznamka}
 
-Abychom zjistili, zda jsou body afinně závislé, musíme spočítat jejich rozdíly a zjistit, jestli jsou lineárně závislé. Od bodů $x_2, \ldots, x_k \in \R^n$, kde  $k, n \in \mathbb{N}$ (Číslo $k$ v tomto případě značí počet bodů a $n$ je mocnina značící dimenzi. Vizte \myref{poznámku}{poznamka:varovani_index}.) odečteme první bod $x_1$. Tím nám vzniknou rozdíly $x_2-x_1, x_3-x_1, \dots, x_k-x_1$, které umístíme do matice $A$. 
+Abychom zjistili, zda jsou body afinně závislé, musíme spočítat jejich rozdíly a zjistit, jestli jsou lineárně závislé. Od bodů $x_2, \ldots, x_{n+1} \in \R^n$, kde  $n \in \mathbb{N}$ odečteme první bod $x_1$. Tím nám vzniknou rozdíly $x_2-x_1, x_3-x_1, \dots, x_{n+1}-x_1$, které umístíme do matice $A$. 
 
 % \x{vlevo}{vpravo} vlevo = souradnice, vpravo = kolikaty vektor
 
@@ -32,7 +32,7 @@ Abychom zjistili, zda jsou body afinně závislé, musíme spočítat jejich roz
     \x{1}{2} - \x{1}{1} & \x{2}{2} - \x{2}{1} & \cdots & \x{n}{2} - \x{n}{1} \\
     \x{1}{3} - \x{1}{1} & \x{2}{3} - \x{2}{1} & \cdots & \x{n}{3} - \x{n}{1} \\
     \vdots        & \vdots        & \ddots & \vdots        \\
-    \x{1}{k} - \x{1}{1} & \x{2}{k} - \x{2}{1} & \cdots & \x{n}{k} - \x{n}{1} \\
+    \x{1}{n_+_1} - \x{1}{1} & \x{2}{n_+_1} - \x{2}{1} & \cdots & \x{n}{n_+_1} - \x{n}{1} \\
   \end{pmatrix}
 \end{equation*}
 \endgroup

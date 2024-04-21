@@ -38,9 +38,11 @@ if characters <= minimum:
     print(f'zbývá ti už jen {minimum-characters} znaků to zvládneš!')
 
 elif characters <= maximum:
+    print(f'Jsi v {int((characters/minimum)*100)} % minima')
     print(f'Jsi v pohodě. Ale bacha můžeš napsat už jen {maximum-characters} znaků')
 
 elif characters > maximum:
+    print(f'Jsi v {int((characters/minimum)*100)} % minima')
     print(f'fůůůj šprte. máš {int((characters/maximum)*100)} % maxima trochu to klidni')
 
 

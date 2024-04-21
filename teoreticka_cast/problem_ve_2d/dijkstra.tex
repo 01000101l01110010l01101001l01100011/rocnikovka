@@ -1,43 +1,70 @@
-\section{Dijkstrův algoritmus}
+\section{Adaptace Dijkstrova algoritmu}
 \label{sec:dijkstra}
 
-Dijkstrův algoritmus, pojmenovaný po Edsgeru W. Dijkstrovi, je algoritmus na hledání cesty s minimální váhou mezi dvěma body v ohodnoceném grafu, který hraje velkou roli v našem algoritmu. Obecně taková cesta může mít několik vrcholů, ale protože náš graf je převzatý z~roviny, povede právě přes jeden vrchol a bude se skládat ze dvou hran. To vyplývá z \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníkové nerovnosti}. Kdyby náš graf nebyl převzatý z~roviny, mohla nastat situace na \myref{obrázku}{obr:troj_ner_graf}.
+Velmi důležitou části algoritmu je Dijkstrův Algoritmus, který v ohodnoceném grafu dokáže najít cestu s minimální váhou mezi dvěma body v čase $ \mathcal{O}(\#V^2)$. \autocite{benlFormalCorrectnessProofs1999} Obecně taková cesta může mít několik vrcholů, ale protože náš graf je převzatý z~roviny, povede právě přes jeden vrchol a bude se skládat ze dvou hran. To vyplývá z \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníkové nerovnosti}. Kdyby náš graf nebyl převzatý z~roviny, mohla nastat situace na \myref{obrázku}{obr:troj_ner_graf}. Dijkstrův algoritmus ale lehce upravíme, aby byl rychlejší. Jelikož Dijkstrův algoritmus neví, že náš graf je převzatý z roviny (to znamená, že v grafu platí \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníková nerovnost}), tak ho budeme muset ukončit dřív, aby nehledal cestu s minimální váhou přes více vrcholů. Tímto časovou náročnost zredukujeme na $ \mathcal{O}(\#V)$.
 
 \begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[node distance=2cm]
+    \node[draw, circle, fill, inner sep=1.5pt] (A) at (0,0) {};
+    \node[below] at (A.south) {$u$};
+    \node[draw, circle, fill, inner sep=1.5pt] (B) at (2,1.5) {};
+    \node[below] at (B.south) {$j$};
+    \node[draw, circle, fill, inner sep=1.5pt] (D) at (6,1.5) {};
+    \node[below] at (D.south) {$v$};
+    \node[draw, circle, fill, inner sep=1.5pt] (C) at (-2,1.5) {};
+    \node[below] at (C.south) {$k$};
+    \node[draw, circle, fill, inner sep=1.5pt] (E) at (8,0) {};
+    \node[below] at (E.south) {$x$};
 
-    \centering
-    \begin{tikzpicture}[node distance=2cm]
-        \node[draw, circle, fill, inner sep=1.5pt] (A) at (0,0) {};
-        \node[below] at (A.south) {$u$};
-        \node[draw, circle, fill, inner sep=1.5pt] (B) at (2,1.5) {};
-        \node[below] at (B.south) {$j$};
-        \node[draw, circle, fill, inner sep=1.5pt] (D) at (6,1.5) {};
-        \node[below] at (D.south) {$v$};
-        \node[draw, circle, fill, inner sep=1.5pt] (C) at (-2,1.5) {};
-        \node[below] at (C.south) {$k$};
-        \node[draw, circle, fill, inner sep=1.5pt] (E) at (8,0) {};
-        \node[below] at (E.south) {$x$};
-        
-        \draw[myblue, line width=1.5pt] (A) -- node[above] {2} (B);
-        \draw[myblue, line width=1.5pt] (B) -- node[above] {3} (D);
-        \draw[myred, line width=1.5pt] (A) -- node[below] {7} (D);
-        \draw[mygreen, line width=1.5pt] (A) -- node[below] {3} (C);
-        \draw[mygreen, line width=1.5pt] (D) -- node[above] {7} (E);
-    \end{tikzpicture}
-    \caption{V obecném grafu nemusí platit \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníková nerovnost}.}
-    \label{obr:troj_ner_graf}
+    \draw[myblue, line width=1.5pt] (A) -- node[above] {2} (B);
+    \draw[myblue, line width=1.5pt] (B) -- node[above] {3} (D);
+    \draw[myred, line width=1.5pt] (A) -- node[below] {7} (D);
+    \draw[mygreen, line width=1.5pt] (A) -- node[below] {3} (C);
+    \draw[mygreen, line width=1.5pt] (D) -- node[above] {7} (E);
+  \end{tikzpicture}
+  \caption{V obecném grafu nemusí platit \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníková nerovnost}.}
+  \label{obr:troj_ner_graf}
 \end{figure}
+% TODO idk, jestli tuhle část chci, zapomněl jsem jak to optimalizovat. :(
+Pokud ale Dijkstrův algoritmus proběhne celý, spočítá minimální vzdálenost z bodu $a$ do všech ostatních bodů. Toho by šlo využít v celém algoritmu, kde budu hledat trojúhelník s minimálním obvodem. Představte si případ: Dijkstrův algoritmus je spuštěn z bodu $a$ a najde nejkratší vzdálenosti
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \node[draw, circle, fill, inner sep=1.5pt] (A) at (0,0) {};
+    \node[below] at (A.south) {$a$};
+    \node[draw, circle, fill, inner sep=1.5pt] (B) at (6,0) {};
+    \node[below] at (B.south) {$b$};
+    \node[draw, circle, fill, inner sep=1.5pt] (C) at (3,1.5) {};
+    \node[below] at (C.south) {$c$};
+    \node[draw, circle, fill, inner sep=1.5pt] (D) at (2,-1) {};
+    \node[below] at (D.south) {$d$};
+    \node[draw, circle, fill, inner sep=1.5pt] (E) at (4,-1) {};
+    \node[below] at (E.south) {$e$};
+
+    \draw[myblue, line width=1.5pt] (A) -- node[above] {5} (B);
+    \draw[myblue, line width=1.5pt] (A) -- node[above] {3} (C);
+    \draw[myblue, line width=1.5pt] (A) -- node[below] {2} (D);
+    \draw[myblue, line width=1.5pt] (B) -- node[above] {3} (C);
+    \draw[myblue, line width=1.5pt] (B) -- node[below] {2} (E);
+    \draw[myblue, line width=1.5pt] (D) -- node[below] {1,5} (E);
+  \end{tikzpicture}
+  \caption{Příklad, kdy by šly využít informace z Dijkstrova algoritmu pro urychlení algoritmu na hledání cyklu délky tři s minimální váhou.}
+\end{figure}
+
+
+
 
 \subsection{Popis Dijkstrova algoritmu}
 \label{subsec:popis-algoritmu}
-
 \begin{enumerate}
-    \item Vytvoříme množinu všech nenavštívených bodů a vybereme startovní a cílový bod. Označíme všechny body nenavštívenými. 
-    \item Každému bodu přiřadíme vzdálenost od počátečního bodu; prozatím na $\infty$. Vzdálenost počátečního bodu od sebe samého nastavíme na $0$. 
-    % \item Nejdříve projdeme všechny sousedy počátečního bodu. Každému sousedu spočítáme vzdálenost od počátečního bodu (v tomto případě váha hrany vedoucí z~počátečního bodu do souseda) a připíšeme ji sousedovi, bude-li menší než $\infty$. Až zkontrolujeme všechny jeho sousedy, odebereme počáteční bod z množiny nenavštívených bodů.
-    \item Přesuneme na nenavštívený bod s minimální vzdáleností od počátečního bodu (poprvé to bude počáteční bod). 
-    Tento bod označíme jako aktuální a začneme kontrolovat jeho sousedy. 
-    Je-li součet vzdálenosti od počátečního bodu do aktuálního s váhou hrany vedoucí k sousedu menší než vzdálenost, kterou má u sebe soused uloženou, změníme ji.
-    Je třeba myslet na to, že když přepíšeme vzdálenost souseda od startovního bodu, souseda neoznačujeme za navštíveného. Počáteční bod odebereme z množiny nenavštívených bodů, až zkontrolujeme všechny jeho sousedy.
-    \item Čtvrtý bod opakujeme, dokud nevybereme za aktuální bod ten cílový. V tomto okamžiku jsme našli nejkratší cestu.
+  \item Vytvoříme množinu všech nenavštívených bodů a vybereme startovní a cílový bod. Označíme všechny body nenavštívenými.
+  \item Každému bodu přiřadíme vzdálenost od počátečního bodu; prozatím na $\infty$. Vzdálenost počátečního bodu od sebe samého nastavíme na $0$.
+        % \item Nejdříve projdeme všechny sousedy počátečního bodu. Každému sousedu spočítáme vzdálenost od počátečního bodu (v tomto případě váha hrany vedoucí z~počátečního bodu do souseda) a připíšeme ji sousedovi, bude-li menší než $\infty$. Až zkontrolujeme všechny jeho sousedy, odebereme počáteční bod z množiny nenavštívených bodů.
+  \item Přesuneme na nenavštívený bod s minimální vzdáleností od počátečního bodu (poprvé to bude počáteční bod).
+        Tento bod označíme jako aktuální a začneme kontrolovat jeho sousedy.
+        Je-li součet vzdálenosti od počátečního bodu do aktuálního s váhou hrany vedoucí k sousedu menší než vzdálenost, kterou má u sebe soused uloženou, změníme ji.
+        Je třeba myslet na to, že když přepíšeme vzdálenost souseda od startovního bodu, souseda neoznačujeme za navštíveného. Počáteční bod odebereme z množiny nenavštívených bodů, až zkontrolujeme všechny jeho sousedy.
+  \item Čtvrtý bod opakujeme, dokud nevybereme za aktuální bod ten cílový. V tomto okamžiku jsme našli nejkratší cestu.
 \end{enumerate}
