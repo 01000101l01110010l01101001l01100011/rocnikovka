@@ -3,68 +3,68 @@
 V \myref{sekci}{sec:algoritmus} Vám představím algoritmus na hledání trojúhelníku s minimálním obvodem. Velmi důležitou částí tohoto algoritmu je kontrolování, jestli body tvoří trojúhelník, to znamená, jestli body neleží na přímce. K tomuto máme následující tvrzení.
 
 \begin{tvrzeni}[Podobnost trojúhelníků a body na jedné přímce]
-    \label{tvrzeni:podobnost_trojuhelniku}
-    Jsou dány 3 body v $\R^2$: $a = (a_x, a_y)$, $b = (b_x, b_y)$, $c = (c_x, c_y)$. Tyto body jsou na přímce, pokud platí, že trojúhelníky $\Delta((a_x, a_y), (b_x, a_y), (b_x, b_y))$~a~$\Delta((a_x, a_y), (c_x, a_y), (c_x, c_y))$ mají stejný poměr stran, proto platí rovnice: $(\textcolor{myred}{c_y}-\textcolor{myred}{a_y})(\textcolor{myblue}{b_x}-\textcolor{myblue}{a_x}) = (\textcolor{myorange}{b_y}-\textcolor{myorange}{a_y})(\textcolor{mygreen}{c_x}-\textcolor{myblue}{a_x})$.
+  \label{tvrzeni:podobnost_trojuhelniku}
+  Jsou dány 3 body ležící v $\R^2$: $a = (a_x, a_y)$, $b = (b_x, b_y)$, $c = (c_x, c_y)$. Tyto body jsou na přímce, pokud platí, že trojúhelníky $\Delta((a_x, a_y), (b_x, a_y), (b_x, b_y))$~a~$\Delta((a_x, a_y), (c_x, a_y), (c_x, c_y))$ mají stejný poměr stran, proto platí rovnice: $(\textcolor{myred}{c_y}-\textcolor{myred}{a_y})(\textcolor{myblue}{b_x}-\textcolor{myblue}{a_x}) = (\textcolor{myorange}{b_y}-\textcolor{myorange}{a_y})(\textcolor{mygreen}{c_x}-\textcolor{myblue}{a_x})$.
 
-    \begin{figure}[h]
-        \label{obr:podobnost_trojuhelniku}
+  \begin{figure}[h]
+    \label{obr:podobnost_trojuhelniku}
     \centering
     \begin{tikzpicture}
-        \draw[->, line width=1pt] (4.5,0) -- (14,0) node[right] {$x$};
-        \draw[->, line width=1pt] (5,-0.5) -- (5,3.5) node[above] {$y$};
+      \draw[->, line width=1pt] (4.5,0) -- (14,0) node[right] {$x$};
+      \draw[->, line width=1pt] (5,-0.5) -- (5,3.5) node[above] {$y$};
 
-        \fill (5, 1) circle[radius=2pt];
-        \node at (5, 1) [left] {1};
-        \fill (5, 2) circle[radius=2pt];
-        \node at (5, 2) [left] {2};
-        \fill (5, 3) circle[radius=2pt];
-        \node at (5, 3) [left] {3};
+      \fill (5, 1) circle[radius=2pt];
+      \node at (5, 1) [left] {1};
+      \fill (5, 2) circle[radius=2pt];
+      \node at (5, 2) [left] {2};
+      \fill (5, 3) circle[radius=2pt];
+      \node at (5, 3) [left] {3};
 
-        \fill (6, 0) circle[radius=2pt];
-        \node at (6, 0) [below] {6};
-        \fill (9, 0) circle[radius=2pt];
-        \node at (9, 0) [below] {9};
-        \fill (12, 0) circle[radius=2pt];
-        \node at (12, 0) [below] {12};
-        
+      \fill (6, 0) circle[radius=2pt];
+      \node at (6, 0) [below] {6};
+      \fill (9, 0) circle[radius=2pt];
+      \node at (9, 0) [below] {9};
+      \fill (12, 0) circle[radius=2pt];
+      \node at (12, 0) [below] {12};
 
-        \coordinate[label=above left:$a$] (A) at (6,1);
-        \coordinate[label=above left:$b$] (B) at (9,2);
-        \coordinate[label=above left:$c$] (C) at (12,3);
 
-        \coordinate (D) at (9, 1);
-        \coordinate (E) at (12, 1);
-        \draw[line width=1.5pt] (A) -- (B);
-        \draw[line width=1.5pt] (B) -- (C);
-        \draw[myblue, line width=1.5pt] (A) to node[midway, below] {$3$} (D);
-        \draw[mygreen, line width=1.5pt] (D) to node[midway, below] {$3$} (E);
-        \draw[myred, line width=1.5pt] (C) to node[midway, right] {$2$} (E);
-        \draw[myorange, line width=1.5pt] (B) to node[midway, right] {$1$} (D);
-        \fill (A) circle[radius=2pt];
-        \fill (B) circle[radius=2pt];
-        \fill (C) circle[radius=2pt];
+      \coordinate[label=above left:$a$] (A) at (6,1);
+      \coordinate[label=above left:$b$] (B) at (9,2);
+      \coordinate[label=above left:$c$] (C) at (12,3);
+
+      \coordinate (D) at (9, 1);
+      \coordinate (E) at (12, 1);
+      \draw[line width=1.5pt] (A) -- (B);
+      \draw[line width=1.5pt] (B) -- (C);
+      \draw[myblue, line width=1.5pt] (A) to node[midway, below] {$3$} (D);
+      \draw[mygreen, line width=1.5pt] (D) to node[midway, below] {$3$} (E);
+      \draw[myred, line width=1.5pt] (C) to node[midway, right] {$2$} (E);
+      \draw[myorange, line width=1.5pt] (B) to node[midway, right] {$1$} (D);
+      \fill (A) circle[radius=2pt];
+      \fill (B) circle[radius=2pt];
+      \fill (C) circle[radius=2pt];
 
     \end{tikzpicture}
     \caption{Příklad podobnosti trojúhelníků}
-    \end{figure}
+  \end{figure}
 \end{tvrzeni}
 
 \begin{proof}
-    Předpokládejme, že existuje lineární funkce $\mathfrak{f}: y = mx+k$, na které leží všechny tři body. Po dosazení bodů do rovnice nám vznikne soustava rovnic o třech neznámých. 
-    \begin{align*}
-        a_y &= ma_x+k \\
-        b_y &= mb_x+k \\
-        c_y &= mc_x+k 
-    \end{align*}
-    Poté odečteme třetí rovnici od první a první od druhé. Tím dostaneme:
-    \begin{align*}
-        a_y-c_y &= ma_x+k - mc_x -k \\
-        b_y-a_y &= mb_x+k -ma_x -k 
-    \end{align*}
-    Vytknutím $m$ dostaneme:
-    \begin{align*}
-        a_y-c_y &= m(a_x-c_x) \\
-        b_y-a_y &= m(b_x-a_x) 
-    \end{align*}
-    A tím pádem $m_1 = (a_y-c_y)/(a_x-c_x)$ a $ m_2=(b_y-a_y)/(b_x-a_x)$. My ale víme, že $m_1$ a $m_2$ jsou stejná čísla, protože funkce $\mathfrak{f}$ protíná všechny tři body. Proto můžeme sestavit rovnici $(a_y-c_y)/(a_x-c_x) = (b_y-a_y)/(b_x-a_x)$. Nakonec můžeme rovnici upravit do tvaru $(a_y-c_y)(b_x-a_x) = (b_y-a_y)(a_x-c_x)$. Tímto je \myref{tvrzení}{tvrzeni:podobnost_trojuhelniku} dokázáno.
+  Předpokládejme, že existuje lineární funkce $\mathfrak{f}: y = mx+k$, na které leží všechny tři body. Po dosazení bodů do rovnice nám vznikne soustava rovnic o třech neznámých.
+  \begin{align*}
+    a_y & = ma_x+k \\
+    b_y & = mb_x+k \\
+    c_y & = mc_x+k
+  \end{align*}
+  Poté odečteme třetí rovnici od první a první od druhé. Tím dostaneme:
+  \begin{align*}
+    a_y-c_y & = ma_x+k - mc_x -k \\
+    b_y-a_y & = mb_x+k -ma_x -k
+  \end{align*}
+  Vytknutím $m$ dostaneme:
+  \begin{align*}
+    a_y-c_y & = m(a_x-c_x) \\
+    b_y-a_y & = m(b_x-a_x)
+  \end{align*}
+  A tím pádem $m_1 = (a_y-c_y)/(a_x-c_x)$ a $ m_2=(b_y-a_y)/(b_x-a_x)$. My ale víme, že $m_1$ a $m_2$ jsou stejná čísla, protože funkce $\mathfrak{f}$ protíná všechny tři body. Proto můžeme sestavit rovnici $(a_y-c_y)/(a_x-c_x) = (b_y-a_y)/(b_x-a_x)$. Nakonec můžeme rovnici upravit do tvaru $(a_y-c_y)(b_x-a_x) = (b_y-a_y)(a_x-c_x)$. Tímto je \myref{tvrzení}{tvrzeni:podobnost_trojuhelniku} dokázáno.
 \end{proof}

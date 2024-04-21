@@ -1,0 +1,35 @@
+\section{Pomocné definice}
+\label{sec:pomocne-definice}
+Tyto definice nám umožní vyřešit problém zobecněný na $n$ dimenzí.
+
+\begin{definition}[Nadrovina]
+  \label{definice:nadrovina}
+  Nadrovina je podprostor $\R^n$ dimenze $n-1$.
+\end{definition}
+
+\begin{definition}[Lineární kombinace]
+  \label{definice:linearni-kombinace}
+  Bod $a_1x_1+\dots+a_kx_k$, kde $a_1, \dots, a_k \in \R$ je lineární kombinací bodů $x_1, \dots, x_k \in \R^n$. \autocite[67]{jindrichbecvarLinearniAlgebra2005}
+\end{definition}
+
+\begin{definition}[Lineární závislost]
+  \label{definice:linearni-zavislost}
+  Množina bodů $x_1, \dots, x_n \in \mathbb{R}$ se nazývá lineárně závislá, jestliže lze nějaký bod z této množiny vyjádřit jako lineární kombinaci ostatních bodů této množiny. \autocite[78]{jindrichbecvarLinearniAlgebra2005}
+\end{definition}
+
+\begin{definition}[Afinní závislost]
+  \label{definice:afinni-zavislost}
+  Body $x_1, \ldots, x_k \in \R^n$ jsou afinně závislé právě tehdy, když jejich rozdíly $x_2-x_1, x_3-x_1, \dots, x_k-x_1$ jsou lineárně závislé. Geometricky to znamená, že body leží v jedné nadrovině. \autocite[4]{matousekConvexity2003}
+\end{definition}
+
+\begin{definition}[Determinant matice]
+  \label{definice:determinant}
+  Determinant je zobrazení značené $det$, které posílá čtvercové matice na reálné číslo. Determinant jde interpretovat geometricky; lze chápat jako objem obecného $n$-rozměrného rovnoběžnostěnu. Důležitá vlastnost determinantu je, že řádky nebo sloupce matice $A$ jsou lineárně závislé právě tehdy, když $det(A)=0$. \autocites[224]{danmargalitInteractiveLinearAlgebra2019}[4]{matousekConvexity2003}
+  Pro hlubší pochopení determinantů vizte \autocite[164]{jindrichbecvarLinearniAlgebra2005} nebo \autocite[187]{danmargalitInteractiveLinearAlgebra2019}.
+\end{definition}
+
+% \begin{definition}[Objem obecného $n$-rozměrného rovnoběžnostěnu]
+%   \label{definice:objem-rovnobeznostenu}
+%   Označme $\mathcal{R}_n$ ja\-ko $n$-dimenzionální rovnoběžnostěn, který je určen pomocí bodů $x^1, \ldots, x^k \in \R^n$. 
+%   Uvědomte si, že pokud jsou vektory $v_1, \dots, v_n$ lineárně závislé, rovnoběžnostěn leží v podprostoru dimenze $n-k$, kde $k \in [1, n-1]$.
+% \end{definition}
