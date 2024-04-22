@@ -1,8 +1,7 @@
 \section{Řešení problému v \texorpdfstring{$n$D}{nD}}
 \label{sec:reseni_1D}
-Problém v $n$ dimenzích bude komplikovanější a časově náročnější. Úlohu znovu převedeme na grafovou úlohu, kde $V = \{x_1,\ldots, x_k\} \in \R^n$ a $E = \binom{V}{2}$ nám tvoří ohodnocený graf $G = (V, E, w)$. Cílem je získat cyklus délky $n+1$ s minimální váhou.
-% TODO nemusime to prevaded, kdyz pocitam s VC(n+1)
-Toho docílíme tak, že v grafu nalezneme všechny cykly délky $n+1$ a budeme si je pamatovat seřazené podle jejich váhy. Pak vybereme cyklus s minimální váhou a ověříme, že jeho vrcholy opravdu tvoří polytop maximální dimenze (jako ve 2D, kde jsme ověřovali, jestli body neleží na přímce).
+
+Problém v $n$ dimenzích bude komplikovanější a časově náročnější. Z množiny bodů $V = \{x_1,\ldots, x_k\} \in \R^n$ vytvoříme množinu všech cyklů délky $n+1$: $C = \binom{V}{n+1}$. Cykly $\{c_1, \dots, c_i\} \in C$, kde $i=\#C$, očíslujeme podle jejich váhy ($c_1$ má minimální váhu). Poté vybereme cyklus s minimální váhou a ověříme, že jeho vrcholy opravdu tvoří polytop maximální dimenze (jako ve 2D, kde jsme ověřovali, jestli body neleží na přímce).
 
 Polytop maximální dimenze se vyznačuje tím, že jeho body neleží ve stejné \hyperref[definice:nadrovina]{nadrovině}. Z \myref{definice}{definice:afinni-zavislost} víme, že pokud rozdíly bodů jsou lineárně závislé, tak body v jedné nadrovině leží. Z toho vyplývá, že chceme, aby body nebyly afinně závislé, neboli aby tvořily polytop maximální dimenze.  
 
