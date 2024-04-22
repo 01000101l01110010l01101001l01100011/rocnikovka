@@ -1,4 +1,6 @@
 \section{Algoritmus}
+V této sekci Vám představím algoritmus, který řeší problém v $n$ dimenzích. Součástí algoritmu není algoritmus na počítání determinantu matice, protože existují různé algoritmy, a protože v \myref{sekci}{sec:program_nD}, kde jsem algoritmus naprogramoval, používám knihovnu \href{https://numpy.org/doc/stable/index.html}{NumPy}, která je optimalizovaná na matematické výpočty. 
+
 
 \begin{algorithm}[H]
     \caption{Algoritmus na hledání polytopu maximální dimenze s minimálním obvodem.}
@@ -7,13 +9,14 @@
     \SetKwInOut{Input}{input}
     \SetKwInOut{Output}{output}
     \SetKw{KwReturn}{return}
-   
-    \Input{množina bodů $V \subset \R^n$.}
-    \Output{polytop maximální dimenze s minimálním obvodem.}
+
+    \Input{$V = \{x_1,\ldots, x_k\} \in \R$.}
+    \Output{body, které tvoří polytop maximální dimenze s minimálním obvodem.}
     \BlankLine
     $C \leftarrow \binom{V}{n+1}$\;
+    $C \leftarrow C.sort()$\; % TODO tohle nějak lépe..
     $min_c \leftarrow \emptyset$\;
-    \For{$c\in C$}{
+    \For{$c\in C$}{ %Od cyklu, který má minimální obvod. 
       \If{$min_C > w(c)$}{
         $x_1, \dots x_{n+1} \leftarrow c$\;
         $A \leftarrow \begin{pmatrix}

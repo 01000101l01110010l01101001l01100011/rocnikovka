@@ -35,6 +35,8 @@ Abychom zjistili, zda jsou body afinně závislé, musíme spočítat jejich roz
   \end{pmatrix}
 \end{equation*}
 \endgroup
-Teď, když máme matici, můžeme vypočítat $det(A)$. Podle \myref{definice}{definice:determinant}, pokud vyjde determinant $0$, znamená to, že pak rozdíly bodů jsou lineárně závislé. Z \myref{definice}{definice:afinni-zavislost} ale víme, že pokud tyto rozdíly jsou lineárně závislé, pak body jsou afinně závislé, což znamená, že leží ve stejné nadrovině.  
+Teď, když máme matici, vypočítáme $det(A)$. Podle \myref{definice}{definice:determinant}, pokud vyjde determinant $0$, znamená to, že pak rozdíly bodů jsou lineárně závislé. Z \myref{definice}{definice:afinni-zavislost} ale víme, že pokud tyto rozdíly jsou lineárně závislé, pak body jsou afinně závislé, což znamená, že leží ve stejné nadrovině.  
 
-Ještě napíšu geometrické odvození..
+Nakonec zbývá spočítat obvod tohoto $n$-dimenzionálního polytopu. Tento polytop si označíme jako $\mathcal{P}_n = \{x_1, \dots, x_{n+1}\}$. Teď je otázkou kolik hran opravdu tvoří obvod. (Například: ve $3$D tělesová úhlopříčka krychle netvoří obvod.) Je jich přesně $\binom{n+1}{2}$. Toto číslo pochází ze vzorce $\binom{n+1}{m+1}$ \autocite[120]{coxeter1973regular},
+který znamená počet $m$-dimenzionálních podpolytopů (dále $\mathcal{P}^{\prime}_m$) v $n$-rozměrném polytopu ($\mathcal{P}_n$) za předpokladu, že $\mathcal{P}_n$ má minimální počet bodů. To je $n+1$. 
+Když víme že vnějších hran máme $\binom{n+1}{2}$, musíme zjistit které hrany z celkové množiny hran to jsou. Jsou to všechny, protože náš polytop má přesně $n+1$ vrcholů, proto můžeme místo $n+1$ dosadit množinu bodů polytopu ($P = \{x_1, \dots, x_{n+1}\}$) a tím dostaneme $\binom{P}{2}$, což jsou všechny dvouprvkové podmnožiny z P, neboli všechny úsečky polytopu.
