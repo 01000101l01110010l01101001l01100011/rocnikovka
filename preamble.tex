@@ -59,9 +59,23 @@
 \usepackage{graphicx}
 \usepackage{tikz}
 \usetikzlibrary{%
- positioning, graphs, graphs.standard, shapes.geometric,quotes
+ positioning, graphs, graphs.standard, shapes.geometric,quotes, calc, perspective, shapes
 }
+\usepackage{mdframed}
+\mdfdefinestyle{MyFrame}{%
+    linecolor=black,
+    outerlinewidth=2pt,
+    %roundcorner=20pt,
+    innertopmargin=4pt,
+    innerbottommargin=4pt,
+    innerrightmargin=4pt,
+    innerleftmargin=4pt,
+        leftmargin = 4pt,
+        rightmargin = 4pt
+    %backgroundcolor=gray!50!white}
+        }
 
+        
 % Tables %
 \usepackage{booktabs}
 \usepackage{multirow}

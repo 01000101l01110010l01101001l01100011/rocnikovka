@@ -11,6 +11,14 @@ Abychom mohli dokázat korektnost algoritmu, musíme dokázat, že algoritmus sk
     Vizte \autocite[113]{benlFormalCorrectnessProofs1999}.
 \end{proof}
 \begin{tvrzeni}
+    \label{tvrzeni:dijkstra_adaptace}
+    Adaptace Dijkstrova algoritmu je korektní.
+\end{tvrzeni}
+\begin{proof}
+    \label{dukaz:dijkstra_adaptace}
+    Algoritmus je konečný, protože prochází konečnou množinu vrcholů a je správný, protože ze všech cest z $a$ do $b$ vybere tu s minimální váhou. 
+\end{proof}
+\begin{tvrzeni}
     \label{tvrzeni:algoritmus}
     Algoritmus na hledání cyklu délky tři je korektní.
 \end{tvrzeni}

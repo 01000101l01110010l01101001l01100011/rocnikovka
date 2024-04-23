@@ -7,9 +7,9 @@ Tímto je příprava hotova. Následuje hledání cyklu délky tři s minimáln�
 
 
 
-Náhodně vybereme jednu hranu $\{u, v\} \in E$ a odebereme ji z množiny hran $E$. V grafu bez hrany $\{u, v\}$ potřebujeme najít cestu s minimální váhou mezi body $u$ a  $v$. K tomuto použijeme \hyperref[sec:dijkstra]{Dijkstrův algoritmus}, který nám vrátí cestu délky dva. Cesta povede právě přes jeden vrchol, protože z \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníkové nerovnosti} je jasné, že pokud by cesta vedla přes více vrcholů, byla by delší. Ta se bude skládat ze dvou hran: $\{u, j\}$ a $\{j, v\}$.
+Náhodně vybereme jednu hranu $\{u, v\} \in E$ a odebereme ji z množiny hran $E$. V grafu bez hrany $\{u, v\}$ potřebujeme najít cestu s minimální váhou mezi body $u$ a  $v$. K tomuto použijeme \hyperref[subsec:dijkstra_adaptace]{adaptaci Dijkstrova algoritmu}, která nám vrátí cestu délky dva. Cesta povede právě přes jeden vrchol, protože z \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníkové nerovnosti} je jasné, že pokud by cesta vedla přes více vrcholů, byla by delší. Bude skládat ze dvou hran: $\{u, j\}$ a $\{j, v\}$.
 
-Teď musíme zkontrolovat, zda tato cesta s hranou $\{u, v\}$ opravdu tvoří trojúhelník, protože se může  stát, že body $u, j, v$ leží na jedné přímce. K tomu využijeme \hyperref[sec:podobnost]{podobnost trojúhelníků}, z které vyplývá, že body se nacházejí na přímce právě tehdy, pokud rovnice $(c_y - a_y)(b_x - a_x) = (b_y - a_y)(c_x - a_x)$ je pravdivá. 
+Teď musíme zkontrolovat, zda tato cesta s hranou $\{u, v\}$ opravdu tvoří trojúhelník, protože se může  stát, že body $u, j, v$ leží na jedné přímce. K tomu využijeme \hyperref[sec:podobnost]{podobnost trojúhelníků}, z které vyplývá, že body se nacházejí na přímce právě tehdy, pokud rovnice $(v_y - u_y)(j_x - u_x) = (j_y - u_y)(v_x - u_x)$ je pravdivá. 
 %Definujeme si body $a \coloneqq min(\{u_x, j_x, v_x\})$, $c \coloneqq max(\{u_x, j_x, v_x\})$ a bod $b$ je zbývající. Pak platí $a_x < b_x < c_x$. Body se nacházejí na přímce právě tehdy, pokud rovnice $\frac{c_y - a_y}{c_x - a_x} = \frac{b_y - a_y}{b_x - a_x}$ je pravdivá.
 
 \begin{poznamka}[jiný způsob]
@@ -18,7 +18,8 @@ V případě, že se body nacházejí na horizontálních přímce, musíme odeb
 \end{poznamka}
 
 
-Pokud tyto body tvoří trojúhelník, pak tvoří cyklus délky tři. Pokud tento cyklus bude mít váhu menší než ten, který jsme doposud našli, uložíme jej a vrátíme hranu $\{u, v\}$ do množiny hran $E$. Tento postup opakujeme dokud nevyzkoušíme všechny hrany. Výsledkem bude trojúhelník s minimálním obvodem. Na \myref{obrázku}{obr:algoritmus_graf} můžete vidět, jak algoritmus funguje.
+Pokud tyto body tvoří trojúhelník, pak tvoří cyklus délky tři. Pokud tento cyklus bude mít váhu menší než ten, který jsme doposud našli, uložíme jej a vrátíme hranu $\{u, v\}$ do množiny hran $E$. Tento postup opakujeme dokud nevyzkoušíme všechny hrany. Výsledkem bude trojúhelník s minimálním obvodem.
+% Na \myref{obrázku}{obr:algoritmus_graf} můžete vidět, jak algoritmus funguje.
 
 \subsection{Algoritmus v pseudokódu}
 \begin{algorithm}[H]
@@ -28,10 +29,24 @@ Pokud tyto body tvoří trojúhelník, pak tvoří cyklus délky tři. Pokud ten
     \SetKwInOut{Input}{input}
     \SetKwInOut{Output}{output}
     \SetKw{KwReturn}{return}
+    \SetKwFunction{path}{$path$}
+    \SetKwProg{Fn}{Function}{:}{}
    
     \Input{množina bodů $V$ v rovině, kde každý bod je reprezentován jako dvojice souřadnic $(v_x, v_y)$.}
     \Output{cyklus délky tři a jeho váha.}
     \BlankLine
+    \Fn{\path{$start, end$}}{
+        $min\_{path} \leftarrow \emptyset, \emptyset$\;
+        \For{$x \in V$}{
+            $path \leftarrow w(start, x, end)$\;
+            \If{$min\_{path}[0] > path$}{
+                $min\_{path} \leftarrow path, (start, x, end)$\;
+            }
+        }
+        \KwReturn{$min\_{path}$}\;
+    }
+    \BlankLine
+
     \For{$u \in V$}{
         \For{$v \in V$}{
         $ w(\{u, v\}) \leftarrow d(u, v)$\;
@@ -42,7 +57,7 @@ Pokud tyto body tvoří trojúhelník, pak tvoří cyklus délky tři. Pokud ten
     $min_{\Delta} \leftarrow \emptyset$\;
     \For{$\{u, v\} \in E$}{
         $E \leftarrow E \setminus \{u, v\}$\;
-        $\{u,j,v\} \leftarrow dijkstra(G,u,v)$\;
+        $\{u,j,v\} \leftarrow path(V,u,v)$\;
         % $a = min(u_x, j_x, v_x)$\;
         % $c = max(u_x, j_x, v_x)$\;
         % $b = \{u, j, v\} \setminus \{a, c\}$\;
@@ -65,40 +80,40 @@ Pokud tyto body tvoří trojúhelník, pak tvoří cyklus délky tři. Pokud ten
     }
     \KwReturn{$min_\Delta, p(min_\Delta)$}\;
    \end{algorithm}
-   \begin{figure}[H]
-    \centering
-    \begin{tikzpicture}[node distance=2cm]
-        \node[draw, circle, fill, inner sep=1.5pt] (A) at (-6,1.4) {};
-        \node[left] at (A) {$a$};
-        \node[draw, circle, fill, inner sep=1.5pt] (B) at (5,1.5) {};
-        \node[below] at (B.south) {$b$};
-        \node[draw, circle, fill, inner sep=1.5pt] (C) at (-5,0) {};
-        \node[below] at (C.south) {$c$};
-        \node[draw, circle, fill, inner sep=1.5pt] (D) at (3,0) {};
-        \node[below] at (D.south) {$d$};
-        \node[draw, circle, fill, inner sep=1.5pt] (E) at (4,0.25) {};
-        \node[below] at (E.south) {$e$};
-        \node[draw, circle, fill, inner sep=1.5pt] (G) at (0,1.5) {};
-        \node[below] at (G.south) {$g$};
+%    \begin{figure}[H]
+%     \centering
+%     \begin{tikzpicture}[node distance=2cm]
+%         \node[draw, circle, fill, inner sep=1.5pt] (A) at (-6,1.4) {};
+%         \node[left] at (A) {$a$};
+%         \node[draw, circle, fill, inner sep=1.5pt] (B) at (5,1.5) {};
+%         \node[below] at (B.south) {$b$};
+%         \node[draw, circle, fill, inner sep=1.5pt] (C) at (-5,0) {};
+%         \node[below] at (C.south) {$c$};
+%         \node[draw, circle, fill, inner sep=1.5pt] (D) at (3,0) {};
+%         \node[below] at (D.south) {$d$};
+%         \node[draw, circle, fill, inner sep=1.5pt] (E) at (4,0.25) {};
+%         \node[below] at (E.south) {$e$};
+%         \node[draw, circle, fill, inner sep=1.5pt] (G) at (0,1.5) {};
+%         \node[below] at (G.south) {$g$};
         
-        % Additional edges
-        \draw[lightgray, line width=0.5pt] (A) -- (E);
-        \draw[lightgray, line width=0.5pt] (A) -- (G);
-        \draw[lightgray, line width=0.5pt] (B) -- (C);
-        \draw[lightgray, line width=0.5pt] (B) -- (E);
-        \draw[lightgray, line width=0.5pt] (B) -- (G);
-        \draw[lightgray, line width=0.5pt] (C) -- (E);
-        \draw[lightgray, line width=0.5pt] (E) -- (G);
-        \draw[lightgray, line width=0.5pt] (A) -- (B);
-        \draw[lightgray, line width=0.5pt] (B) -- (D);
-        \draw[lightgray, line width=0.5pt] (A) -- (D);
-        \draw[lightgray, line width=0.5pt] (A) -- (C);
-        \draw[lightgray, line width=0.5pt] (D) -- (E);
-        \draw[mygreen, line width=1.5pt] (C) -- node[above] {2}(G);
-        \draw[mygreen, line width=1.5pt] (D) -- node[above] {1}(G);
-        \draw[myred, line width=1.5pt] (C) -- node[above] {1} (D); 
-        \node[draw, circle, fill, inner sep=1.5pt] (G) at (0,1.5) {};
-    \end{tikzpicture}
-    \caption{Příklad případu, kdy algoritmus vybral hranu $\{c, d\}$, odebral ji z množiny hran, a pomocí Dijkstrova algoritmu našel nejkratší cestu z bodu $c$ do bodu $d$. (Pro čitelnost nejsou zobrazeny váhy ostatních hran. Předpokládejme, že jsou vyšší než 3.)}
-    \label{obr:algoritmus_graf}
-\end{figure}
+%         % Additional edges
+%         \draw[lightgray, line width=0.5pt] (A) -- (E);
+%         \draw[lightgray, line width=0.5pt] (A) -- (G);
+%         \draw[lightgray, line width=0.5pt] (B) -- (C);
+%         \draw[lightgray, line width=0.5pt] (B) -- (E);
+%         \draw[lightgray, line width=0.5pt] (B) -- (G);
+%         \draw[lightgray, line width=0.5pt] (C) -- (E);
+%         \draw[lightgray, line width=0.5pt] (E) -- (G);
+%         \draw[lightgray, line width=0.5pt] (A) -- (B);
+%         \draw[lightgray, line width=0.5pt] (B) -- (D);
+%         \draw[lightgray, line width=0.5pt] (A) -- (D);
+%         \draw[lightgray, line width=0.5pt] (A) -- (C);
+%         \draw[lightgray, line width=0.5pt] (D) -- (E);
+%         \draw[mygreen, line width=1.5pt] (C) -- node[above] {2}(G);
+%         \draw[mygreen, line width=1.5pt] (D) -- node[above] {1}(G);
+%         \draw[myred, line width=1.5pt] (C) -- node[above] {1} (D); 
+%         \node[draw, circle, fill, inner sep=1.5pt] (G) at (0,1.5) {};
+%     \end{tikzpicture}
+%     \caption{Příklad případu, kdy algoritmus vybral hranu $\{c, d\}$, odebral ji z množiny hran, a pomocí Dijkstrova algoritmu našel nejkratší cestu z bodu $c$ do bodu $d$.}
+%     \label{obr:algoritmus_graf}
+%     \end{figure}
