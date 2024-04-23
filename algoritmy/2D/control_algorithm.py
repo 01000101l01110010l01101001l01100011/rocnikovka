@@ -1,15 +1,15 @@
 import networkx as nx
 import random, math, time
 
-def control(n):
-    ti = time.time()
-    points = {}
-    number_of_points = n
-    for i in range(number_of_points):
-        x, y = random.random()*10, random.random()*10
-        while (x, y) in points.values():
-            x, y = random.random()*10, random.random()*10
-        points[i] = (x, y)
+def control(points):
+    # ti = time.time()
+    # points = {}
+    # number_of_points = n
+    # for i in range(number_of_points):
+    #     x, y = random.random()*10, random.random()*10
+    #     while (x, y) in points.values():
+    #         x, y = random.random()*10, random.random()*10
+    #     points[i] = (x, y)
 
     #Generate edges
     edges = {}
@@ -55,4 +55,4 @@ def control(n):
                     mininininninninmal = distance
                     smalllllllest.append([poo1, poo2, poo3])
 
-    return time.time() - ti
+    return smalllllllest, mininininninninmal

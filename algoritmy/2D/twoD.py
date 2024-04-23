@@ -1,16 +1,8 @@
-\section{Program ve 2D}
-\label{sec:program_2D}
-
-Ve 2D je program trochu těžší, protože hledáme 3 body, které tvoří trojúhelník s minimálním obvodem a musíme kontrolovat pouze jestli nejsou na přímce. Tento program dostane jako vstup množinu bodů, kde body budou v $\R^2$ a výstupem budou 3 body, které tvoří trojúhelník s minimálním obvodem. 
-
-% V tomto programu použiji Dijkstrův algoritmus, který jsem naprogramoval v \myref{sekci}{sec:dijkstra_program}. 
-
-\begin{lstlisting}[style=metoo]
 from random import random
 from math import sqrt, dist
 from networkx import Graph, neighbors
 
-  def create_points(n):
+def create_points(n):
   points = {}
   set_points = set()
   for i in range(n):
@@ -20,6 +12,7 @@ from networkx import Graph, neighbors
     points[i] = (x, y)
     set_points.add((x, y))
   return points, set_points
+
 
 def find_path(G:Graph, start, end):
   min_path = None, None, None, float("inf")
@@ -60,4 +53,3 @@ def algorithm(V:set):
     G.add_weighted_edges_from([(u, v, dist(u, v))])
 
   return min_triangle, min_triangle_weight
-\end{lstlisting}
