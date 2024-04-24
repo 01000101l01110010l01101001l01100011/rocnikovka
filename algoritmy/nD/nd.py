@@ -3,6 +3,7 @@ import numpy as np
 
 n = 5
 points = np.array()
+points = np.array([], dtype=float)
 
 for i in range(n**3):
     point = ()
