@@ -40,7 +40,7 @@ def algorithm(V:set):
     elif weight + edge_weight < min_triangle_weight:  # Pokud je váha cesty plus váha hrany menší než váha nejmenšího trojúhelníku.
       min_triangle = (u, j, v)  # Aktualizuje nejmenší trojúhelník.
       min_triangle_weight = weight + edge_weight  # Aktualizuje váhu nejmenšího trojúhelníku.
-    G.add_weighted_edges_from([(u, v, dist(u, v))])  # Přidá hranu u, v zpatky do grafu s její váhou.
+    G.add_weighted_edges_from([(u, v, dist(u, v))])  # Přidá hranu u, v zpátky do grafu s její váhou.
 
   return min_triangle, min_triangle_weight  # Vrátí trojúhelník a jeho obvod.
 \end{lstlisting}

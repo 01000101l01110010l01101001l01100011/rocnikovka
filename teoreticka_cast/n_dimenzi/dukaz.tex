@@ -1,0 +1,11 @@
+\section{Důkaz algoritmu v \texorpdfstring{$n$D}{nD}}
+\label{dukaz_algoritmu_nd}
+Dokázat korektnost \myref{algoritmu}{alg:algoritmus_nd} nebude těžké, protože algoritmus zkouší všechny možnosti a pak vybere polytop s minimálním obvodem.
+\begin{tvrzeni}
+  \label{tvrzeni:algoritmus_nd}
+  \myref{Algoritmus}{alg:algoritmus_nd} je korektní.
+\end{tvrzeni}
+\begin{proof}
+\label{dukaz:algoritmus_nd}
+Algoritmus skončí, protože prochází konečnou množinu $C$. Algoritmus je správ\-ný, protože ze seřazených polytopů podle jejich obvodu vybere ten s minimálním obvodem a zkontroluje, jestli neleží v jedné nadrovině. Pokud leží, odebere tento polytop ze seznamu seřazených polytopů a vybere nový polytop s minimálním obvodem.
+\end{proof}
