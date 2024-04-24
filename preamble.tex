@@ -61,19 +61,7 @@
 \usetikzlibrary{%
  positioning, graphs, graphs.standard, shapes.geometric,quotes, calc, perspective, shapes, arrows.meta
 }
-% \usepackage{mdframed}
-% \mdfdefinestyle{MyFrame}{%
-%     linecolor=black,
-%     outerlinewidth=2pt,
-%     %roundcorner=20pt,
-%     innertopmargin=4pt,
-%     innerbottommargin=4pt,
-%     innerrightmargin=4pt,
-%     innerleftmargin=4pt,
-%         leftmargin = 4pt,
-%         rightmargin = 4pt
-%     %backgroundcolor=gray!50!white}
-%         }
+
 
         
 % Tables %
@@ -156,7 +144,7 @@
 \definecolor{spiderman}{RGB}{201,112,62}
 \definecolor{bwlue}{RGB}{54,114,185}
 \definecolor{yeluwu}{RGB}{203, 176, 33}
-
+\definecolor{commentgreen}{RGB}{0, 75, 25}
 
 
 \usepackage{listings}
@@ -172,7 +160,7 @@ showstringspaces=false,
 showtabs=true,
 frame=single,
 tabsize=1, 
-captionpos=b,
+% captionpos=b,
 breaklines=true,
 breakatwhitespace=false,
 }
@@ -199,21 +187,38 @@ stringstyle = {\color{spiderman}},
 % keywordstyle = [2]{\color{pwurple}},
 % morekeywords = [1]{netwrokx, Graph},
 % morekeywords = [2]{for, while, if, return},
-emph = {[1]for, while, if, return, from, import},
+emph = {[1]for, while, if, from, import, elif, else},
 emphstyle={[1]\color{pwurple}},
-emph = {[2]networkx, Graph, G, set, float, dijkstra},
+emph = {[2]networkx, Graph, G, set, float, dijkstra, math},
 emphstyle={[2]\color{gween}},
-emph = {[3]def, lambda, Q},
+emph = {[3]def, lambda, Q, None},
 emphstyle={[3]\color{bwlue}},
-emph = {[4]dijkstra_triangle, add, remove, get_edge_data, (,), [,], in, min, remove_edge, add_edge},
+emph = {[4]dijkstra_triangle, add, remove, get_edge_data, (,), [,], in, min, remove_edge, add_edge, list, sort, range, add_weighted_edges_from, dist, find_path, algorithm, abs, len, pop, append},
 emphstyle={[4]\color{yeluwu}},
 % emph = {[5] shortest_path, smallest_triangle, triangle, path_length},
 % emphstyle={[5]\color{myblue}},
-morecomment=[f][\color{red}][0]{\#},
+morecomment=[f][\color{myred}][0]{\#},
+commentstyle=\color{commentgreen},
 texcl=true,
 rulecolor=\color{black},
-% frame=none,% 
+% showspaces=true,
+% frame=none,
 }
+
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfdefinestyle{MyFrame}{%
+    linecolor=black,
+    outerlinewidth=1pt,
+    % roundcorner=20pt,
+    innertopmargin=0pt,
+    innerbottommargin=-7pt,
+    innerrightmargin=2pt,
+    innerleftmargin=2pt,
+    leftmargin = 0pt,
+    rightmargin = 0pt
+    %backgroundcolor=gray!50!white}
+        }
+
 \usepackage{pgfplots}
 
 \pgfplotsset{width=12cm,compat=1.18}

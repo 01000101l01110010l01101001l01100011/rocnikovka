@@ -1,21 +1,27 @@
-import random
 import numpy as np
+from itertools import combinations
 
-n = 5
-points = np.array()
-points = np.array([], dtype=float)
+def generate_random_points(num_points, dimension):
+    points = np.random.rand(num_points, dimension)
+    return points
 
-for i in range(n**3):
-    point = ()
-    list = []
-    for k in range(n+1):
-        list.append(random.random()*random.randint(0, 100))
-    point = tuple(list)
-    points.add(point)
-# print(points)
+def generate_subsets(points, subset_length):
+    subsets = list(combinations(points, subset_length))
+    return subsets
 
-def perimeter(V:set):
-    for i in V:
-        for k in V:
-            for u in range(n):
-                a = 9 #mogus
+# Parameters
+num_points = 50  # Number of random points
+dimension = 5   # Dimension of the space
+
+# Generate random points
+points = generate_random_points(num_points, dimension)
+
+# Generate subsets of length n+1
+subsets = generate_subsets(points, dimension+1)
+
+# Display the generated subsets
+print("Random Points:")
+print(points)
+print("\nSubsets of length n+1:")
+for subset in subsets:
+    print(subset)

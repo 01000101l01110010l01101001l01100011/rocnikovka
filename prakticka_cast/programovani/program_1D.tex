@@ -1,18 +1,21 @@
 \section{Program v 1D}
 \label{sec:program_1D}
 Naprogramovat \myref{algoritmus}{alg:algoritmus_1D}, který řeší problém v dimenzi 1, je velmi jednoduchý. Využijeme funkci Pythonu sort(), která dokáže seřadit prvky v seznamu. Vstupem bude množina bodů a výstupem budou 2 body, které tvoří nejkratší úsečku
+
+\begin{mdframed}[style=MyFrame]
 \begin{lstlisting}[style=metoo]
 def algorithm(V):
-  points = list(V)
-  points.sort()
-  shortest = float('inf')
-  points = None
-  for i in range(len(points-1)):
-    if abs(points[i] - points[i+1]) < shortest:
-      shortest = points[i] - points[i+1]
-      points = points[i], points[i+1]
+  points = list(V) # Seznam čísel.
+  points.sort() # Seřazení seznamu čísel.
+  shortest = float('inf') # Proměnná pro úsečku s minimální délkou.
+  points = None # Proměnná pro body.
+  for i in range(len(points-1)): # Cyklus procházení bodů.
+    if abs(points[i] - points[i+1]) < shortest: # Pokud je úsečka menší.
+      shortest = points[i] - points[i+1] # Aktualizujeme délku nejkratší úsečky.
+      points = points[i], points[i+1] # Aktualizujeme nejkratší úsečku.
   return points
 \end{lstlisting}
+\end{mdframed}
 
 \begin{center}
   
