@@ -47,7 +47,3 @@ def algorithmtwo(V:np.array):
     G.add_weighted_edges_from([(u, v, dist(u, v))])  # Přidá hranu u, v zpatky do grafu s její váhou
 
   return min_triangle, min_triangle_weight  # Vrací nejmenší trojúhelník a jeho váhu
-
-a = np.random.rand(20, 2)
-print(a)
-algorithmtwo(a)

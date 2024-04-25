@@ -1,47 +1,34 @@
-from twoD import algorithmtwo, create_points
+from twoD import algorithmtwo
 import numpy as np
-from math import sqrt
+from itertools import combinations
+from scipy.spatial.distance import euclidean
 
+def calculate_perimeter(triangle):
+    perimeter = sum(euclidean(triangle[i], triangle[(i + 1) % 3]) for i in range(3))
+    return perimeter
 
-# print(points, set_p)
+def controls(points):
+    smallest_perimeter = float('inf')
+    smallest_triangle = None
 
-def con(set_p):
-  minimal = 99999
-  smallest = None
-  for i in set_p:
-    for k in set_p:
-      for j in set_p:
-        if i != k and k!=j and i!=j:
-          if (i[1]-k[1])*(j[0]-k[0]) == (j[1]-k[1])*(i[0]-k[0]):
-            if sqrt((k[0] - j[0]) ** 2 + (k[1] - j[1]) ** 2) > sqrt((k[0] - i[0]) ** 2 + (k[1] - i[1]) ** 2):
-              set_p.remove((k, j))
-            elif sqrt((j[0] - i[0]) ** 2 + (j[1] - i[1]) ** 2) > sqrt((k[0] - i[0]) ** 2 + (k[1] - i[1]) ** 2):
-              set_p.remove(i, j)
-            else:
-              continue
-          if sqrt((i[0] - j[0]) ** 2 + (i[1] - j[1]) ** 2) + sqrt((k[0] - j[0]) ** 2 + (k[1] - j[1]) ** 2) + sqrt((k[0] - i[0]) ** 2 + (k[1] - i[1]) ** 2) < minimal:
-            minimal = sqrt((i[0] - j[0]) ** 2 + (i[1] - j[1]) ** 2) + sqrt((k[0] - j[0]) ** 2 + (k[1] - j[1]) ** 2) + sqrt((k[0] - i[0]) ** 2 + (k[1] - i[1]) ** 2)
-            smallest = (i, j, k)
-  return smallest, minimal
+    for triangle_points in combinations(points, 3):
+        perimeter = calculate_perimeter(triangle_points)
+        if perimeter < smallest_perimeter:
+            smallest_perimeter = perimeter
+            smallest_triangle = triangle_points
+
+    return smallest_triangle, smallest_perimeter
 
 
 while True:
-  points, set_p = create_points(50)
-  set_b = set_p.copy()
-  set_d = np.array([])
-  for i in range(len(set_p)):
-    item = set_p.pop()
-    print(item)
-    set_d = np.append(set_d, tuple(item))
-  print(set_p, "\n", "ARRAY:", set_d)
-  points, distance = algorithmtwo(set_d)
-  print(points, distance)
-  smallest, minimal = con(set_b)
-  if int(distance*1000) == int(minimal*1000):
+  points = np.random.rand(5, 2)
+  minimal, shortest = controls(points)
+  min, weight = algorithmtwo(points)
+
+  if int(shortest*100000) == int(weight*100000):
     print("OK")
   else:
     print("Error")
-    print(points, distance)
-    print(smallest, minimal)
+    print(points,"\n", minimal,"\n", shortest, "\n", min, "\n", weight)
     break
 
