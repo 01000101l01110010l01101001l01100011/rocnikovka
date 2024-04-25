@@ -2,23 +2,23 @@
 \label{sec:algoritmus}
 % Následující algoritmus je časově efektivnější, než zkoušení všech možností, ale pořád zabere \textcolor{red}{IDK} čas. 
 
-Nechť $V$ je množina bodů v rovině a pro každé dva body $u, v \in V$ označme $d(u, v)$ jejich vzájemnou vzdálenost. Množinu hran označíme $E = \binom{V}{2}$ a váhu, neboli ohodnocení, nám určuje zobrazení $w$ dané předpisem $w(\{u, v\}) \coloneqq d(u, v)$ pro $\forall (u, v) \in E$. Nyní můžeme definovat graf $G = (V, E, w)$.
+Nechť $V$ je množina bodů v rovině a pro každé dva body $u, v \in V$ označme $d(u, v)$ jejich vzájemnou vzdálenost. Množinu hran označíme $E = \binom{V}{2}$ a váhu, neboli ohodnocení, nám určuje zobrazení $w$ dané předpisem $w(\{u, v\}) \coloneqq d(u, v)$ $\forall (u, v) \in E$. Nyní můžeme definovat graf $G = (V, E, w)$.
 Tímto je příprava hotova. Následuje hledání cyklu délky tři s minimální váhou.
 
 
 
-Náhodně vybereme jednu hranu $\{u, v\} \in E$ a odebereme ji z množiny hran $E$. V grafu bez hrany $\{u, v\}$ potřebujeme najít cestu s minimální váhou mezi body $u$ a  $v$. K tomuto použijeme \hyperref[subsec:dijkstra_adaptace]{adaptaci Dijkstrova algoritmu}, která nám vrátí cestu délky dva. Cesta povede právě přes jeden vrchol, protože z \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníkové nerovnosti} je jasné, že pokud by cesta vedla přes více vrcholů, byla by delší. Bude skládat ze dvou hran: $\{u, j\}$ a $\{j, v\}$.
+Náhodně vybereme jednu hranu $\{u, v\} \in E$ a odebereme ji z množiny hran $E$. V~grafu bez hrany $\{u, v\}$ potřebujeme najít cestu s minimální váhou mezi body $u$ a  $v$. K~tomuto použijeme \hyperref[subsec:dijkstra_adaptace]{adaptaci Dijkstrova algoritmu}, která nám vrátí cestu délky dva. Cesta povede právě přes jeden vrchol, protože z \hyperref[tvrzeni:trojuhelnikova_nerovnost]{trojúhelníkové nerovnosti} je jasné, že pokud by cesta vedla přes více vrcholů, byla by delší. Bude skládat ze dvou hran: $\{u, j\}$ a $\{j, v\}$.
 
 Teď musíme zkontrolovat, zda tato cesta s hranou $\{u, v\}$ opravdu tvoří trojúhelník, protože se může  stát, že body $u, j, v$ leží na jedné přímce. K tomu využijeme \hyperref[sec:podobnost]{podobnost trojúhelníků}, z které vyplývá, že body se nacházejí na přímce právě tehdy, pokud rovnice $(v_y - u_y)(j_x - u_x) = (j_y - u_y)(v_x - u_x)$ je pravdivá. 
 %Definujeme si body $a \coloneqq min(\{u_x, j_x, v_x\})$, $c \coloneqq max(\{u_x, j_x, v_x\})$ a bod $b$ je zbývající. Pak platí $a_x < b_x < c_x$. Body se nacházejí na přímce právě tehdy, pokud rovnice $\frac{c_y - a_y}{c_x - a_x} = \frac{b_y - a_y}{b_x - a_x}$ je pravdivá.
 
 \begin{poznamka}[jiný způsob]
 Předchozí způsob funguje perfektně pro počítače, ale pro člověka je v některých případech zbytečně komplikovaný. Tyto případy nastávají, když se body nacházejí na horizontálních nebo vertikálních přímkách. To jde poznat tak, že $u_y = j_y = v_y$ nebo $u_x = j_x = v_x$.
-V případě, že se body nacházejí na horizontálních přímce, musíme odebrat delší hranu. To uděláme tak, že si body uspořádáme (a přejmenujeme) tak, že $a_x<b_x<c_x$, nebo $a_y, b_y, c_y$ (podle toho, jestli jsou na horizontální, nebo vertikální přímce), kde $\{a, b, c\} = \{u, j, v\}$. Z grafu pak musíme odebrat hranu $\{a, c\}$.
+V případě, že se body nacházejí na horizontální přímce, musíme odebrat delší hranu. To uděláme tak, že si body uspořádáme (a přejmenujeme) tak, že $a_x<b_x<c_x$, nebo $a_y, b_y, c_y$ (podle toho, jestli jsou na horizontální nebo vertikální přímce), kde $\{a, b, c\} = \{u, j, v\}$. Z grafu pak musíme odebrat hranu $\{a, c\}$.
 \end{poznamka}
 
 
-Pokud tyto body tvoří trojúhelník, pak tvoří cyklus délky tři. Pokud tento cyklus bude mít váhu menší než ten, který jsme doposud našli, uložíme jej a vrátíme hranu $\{u, v\}$ do množiny hran $E$. Tento postup opakujeme dokud nevyzkoušíme všechny hrany. Výsledkem bude trojúhelník s minimálním obvodem.
+Pokud tyto body tvoří trojúhelník, pak tvoří cyklus délky tři. Bude-li tento cyklus bude mít váhu menší než ten, který jsme doposud našli, uložíme jej a vrátíme hranu $\{u, v\}$ do množiny hran $E$. Tento postup opakujeme, dokud nevyzkoušíme všechny hrany. Výsledkem bude trojúhelník s minimálním obvodem.
 % Na \myref{obrázku}{obr:algoritmus_graf} můžete vidět, jak algoritmus funguje.
 
 \subsection{Algoritmus v pseudokódu}
@@ -36,7 +36,7 @@ Pokud tyto body tvoří trojúhelník, pak tvoří cyklus délky tři. Pokud ten
     \Output{cyklus délky tři a jeho váha.}
     \BlankLine
     \Fn{\path{$start, end$}}{
-        $min\_{path} \leftarrow \emptyset, \emptyset$\;
+        $min\_{path} \leftarrow \emptyset$\;
         \For{$x \in V$}{
             $path \leftarrow w(start, x, end)$\;
             \If{$min\_{path}[0] > path$}{
@@ -57,7 +57,7 @@ Pokud tyto body tvoří trojúhelník, pak tvoří cyklus délky tři. Pokud ten
     $min_{\Delta} \leftarrow \emptyset$\;
     \For{$\{u, v\} \in E$}{
         $E \leftarrow E \setminus \{u, v\}$\;
-        $\{u,j,v\} \leftarrow path(V,u,v)$\;
+        $\{u,j,v\} \leftarrow path(G,u,v)$\;
         % $a = min(u_x, j_x, v_x)$\;
         % $c = max(u_x, j_x, v_x)$\;
         % $b = \{u, j, v\} \setminus \{a, c\}$\;

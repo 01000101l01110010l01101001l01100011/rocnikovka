@@ -1,9 +1,9 @@
 \section{Algoritmus}
 \label{sec:algoritmus_1D}
 \begin{enumerate}
-    \item Nejprve body seřadíme pomocí algoritmu quicksort.
-    \item Projdeme všechny body $x_1\ldots x_n \in V$ a spočítáme vzdálenost všech po sobě jdoucích bodů: $d(x_i, x_{i+1})$, kde $i \in \{1,...,\#V-1\}$. Tuto vzdálenost si uložíme, a pokud je menší, než ta doposud uložená, změníme ji.
-    \item Po tom, co projdeme všechny body, je uložená minimální vzdálenost řešením problému.
+    \item Nejprve body seřadíme pomocí algoritmu Quicksort.
+    \item Projdeme všechny body $x_1\ldots x_n \in V$ a spočítáme všechny vzdálenosti mezi po sobě jdoucími body: $d(x_i, x_{i+1})$, kde $i \in \{1,...,\#V-1\}$. Tuto vzdálenost uložíme, pokud je menší, než ta doposud uložená.
+    \item Po tom, kdy projdeme všechny body, je uložená minimální vzdálenost řešením problému.
 \end{enumerate}
 \begin{tvrzeni}
     Algoritmus na hledání nejkratší úsečky je korektní.
@@ -27,7 +27,7 @@
 % \end{figure}
 % \end{center}
 \begin{poznamka}
-    Pseudokód je popis jednotlivých kroků v algoritmu s použitím základní logiky programovacích jazyků. Následuje náš algoritmus napsaný v pseudokódu.
+    Pseudokód je popis jednotlivých kroků v algoritmu s použitím základní logiky programovacích jazyků. Následuje algoritmus výše popsaný v pseudokódu.
 \end{poznamka}
 
 \begin{algorithm}[H]

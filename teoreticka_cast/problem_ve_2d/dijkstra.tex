@@ -1,7 +1,7 @@
 \section{Adaptace Dijkstrova algoritmu}
 \label{sec:dijkstra}
 
-Velmi důležitou části algoritmu je Dijkstrův Algoritmus, který v ohodnoceném grafu dokáže najít cestu s minimální váhou mezi dvěma body v čase $ \mathcal{O}(\#V^2)$. \autocite{benlFormalCorrectnessProofs1999} Obecně taková cesta může mít několik vrcholů, ale protože náš graf je převzatý z~roviny, povede právě přes jeden vrchol a bude se skládat ze dvou hran. To vyplývá z \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníkové nerovnosti}. Kdyby náš graf nebyl převzatý z~roviny, mohla nastat situace na \myref{obrázku}{obr:troj_ner_graf}. Dijkstrův algoritmus ale lehce upravíme, aby byl rychlejší. Jelikož Dijkstrův algoritmus neví, že náš graf je převzatý z roviny (to znamená, že v grafu platí \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníková nerovnost}), tak ho ukončíme dřív, aby nehledal cestu s minimální váhou přes více vrcholů. Tímto časovou náročnost zredukujeme na $ \mathcal{O}(\#V)$.
+Velmi důležitou části algoritmu je Dijkstrův Algoritmus, který v ohodnoceném grafu dokáže najít cestu s minimální váhou mezi dvěma body v čase $ \mathcal{O}(\#V^2)$. \autocite{benlFormalCorrectnessProofs1999} Obecně taková cesta může mít několik vrcholů, ale protože náš graf je převzatý z~roviny, povede právě přes jeden vrchol a bude se skládat ze dvou hran. To vyplývá z \hyperref[tvrzeni:trojuhelnikova_nerovnost]{trojúhelníkové nerovnosti}. Kdyby náš graf nebyl převzatý z~roviny, mohla nastat situace na \myref{obrázku}{obr:troj_ner_graf}. Dijkstrův algoritmus ale lehce upravíme, aby byl rychlejší. Jelikož Dijkstrův algoritmus neví, že náš graf je převzatý z roviny (to znamená, že v grafu platí \hyperref[tvrzeni:trojuhelnikova_nerovnost]{trojúhelníková nerovnost}), tak ho ukončíme dřív, aby nehledal cestu s minimální váhou přes více vrcholů. Tímto časovou náročnost zredukujeme na $ \mathcal{O}(\#V)$.
 
 \begin{figure}[H]
   \centering
@@ -23,7 +23,7 @@ Velmi důležitou části algoritmu je Dijkstrův Algoritmus, který v ohodnocen
     \draw[mygreen, line width=1.5pt] (A) -- node[below] {3} (C);
     \draw[mygreen, line width=1.5pt] (D) -- node[above] {7} (E);
   \end{tikzpicture}
-  \caption{V obecném grafu nemusí platit \hyperref[definice:trojuhelnikova_nerovnost]{trojúhelníková nerovnost}.}
+  \caption{V obecném grafu nemusí platit \hyperref[tvrzeni:trojuhelnikova_nerovnost]{trojúhelníková nerovnost}.}
   \label{obr:troj_ner_graf}
 \end{figure}
 
@@ -36,7 +36,7 @@ Velmi důležitou části algoritmu je Dijkstrův Algoritmus, který v ohodnocen
   \begin{tikzpicture}[scale=0.1]
     \graph { subgraph K_n [n=5, clockwise, radius=0.1\textwidth, nodes={font=\small}] };
   \end{tikzpicture}
-  \caption{Graf $K_5$ na kterém si můžete představit jak by tento algoritmus fungoval.}
+  \caption{Graf $K_5$, na kterém si můžete představit, jak by tento algoritmus fungoval.}
 \end{figure}
 
 \subsection{Popis Dijkstrova algoritmu}
@@ -47,7 +47,7 @@ Dijkstrův algoritmus počítá také nejkratší vzdálenosti z bodu $a$ do vš
   \item Vytvoříme množinu všech nenavštívených bodů a vybereme startovní a cílový bod. Označíme všechny body nenavštívenými.
   \item Každému bodu přiřadíme vzdálenost od počátečního bodu; prozatím na $\infty$. Vzdálenost počátečního bodu od sebe samého nastavíme na $0$.
         % \item Nejdříve projdeme všechny sousedy počátečního bodu. Každému sousedu spočítáme vzdálenost od počátečního bodu (v tomto případě váha hrany vedoucí z~počátečního bodu do souseda) a připíšeme ji sousedovi, bude-li menší než $\infty$. Až zkontrolujeme všechny jeho sousedy, odebereme počáteční bod z množiny nenavštívených bodů.
-  \item Přesuneme na nenavštívený bod s minimální vzdáleností od počátečního bodu (poprvé to bude počáteční bod).
+  \item Přesuneme se na nenavštívený bod s minimální vzdáleností od počátečního bodu (poprvé to bude počáteční bod).
         Tento bod označíme jako aktuální a začneme kontrolovat jeho sousedy.
         Je-li součet vzdálenosti od počátečního bodu do aktuálního s váhou hrany vedoucí k sousedu menší než vzdálenost, kterou má u sebe soused uloženou, změníme ji.
         Je třeba myslet na to, že když přepíšeme vzdálenost souseda od startovního bodu, souseda neoznačujeme za navštíveného. Počáteční bod odebereme z množiny nenavštívených bodů, až zkontrolujeme všechny jeho sousedy.

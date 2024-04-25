@@ -2,10 +2,12 @@
 % Úvod není číslovaný, třeba ho do obsahu přidat manuálně.
 \addcontentsline{toc}{chapter}{Úvod}
 
-Polytop maximální dimenze s minimálním obvodem. To je problém, který budu v této práci zkoumat. Hlavní otázkou je jak takový polytop najít v množině bodů, která je v prostoru jakékoliv dimenze. Dimenzi budu mít v celé práci označenou písmenem $n \in \mathbb{N}$.
+Hledání polytopu maximální dimenze s minimálním obvodem. To je problém, který budu v této práci zkoumat. Hlavní otázkou je, jak takový polytop najít v množině bodů, která je v prostoru jakékoliv dimenze. Dimenzi budu mít v celé práci označenou písmenem $n \in \mathbb{N}$.
 
-Zadání problému není zas tak složité. Najít polytop maximální dimenze s minimálním obvodem. Může to znít složitě, ale je to pouze hledání nějakého počtu bodů, které jsou u sebe nejblíž a tvoří objekt, který má maximální dimenzi. Například ve 3D, polytop maximální dimenze s minimálním obvodem je čtyřstěn (zvaný také jako trojboký jehlan). 
+Zadání problému není zas tak složité. Najít polytop maximální dimenze s minimálním obvodem. Může to znít složitě, ale je to pouze hledání nějakého počtu bodů, které jsou u sebe \uv{v jistém smyslu} nejblíž a tvoří objekt, který má maximální dimenzi. Například ve 3D, polytop maximální dimenze s minimálním obvodem je čtyřstěn (zvaný také trojboký jehlan). 
 
-Tyto polytopy budu hledat různými algoritmy, které by v průměru měly být lepší, než zkoušení všech možností. Algoritmy by měly vyřešit všechny případy (například, když body leží v jedné nadrovině), měly by skončit v rozumném čase a musí být korektní. Problém si rozdělím na 1D, 2D a $n$D. V 1D je problém velmi jednoduchý, jde pouze o množinu čísel ve které najdeme nejkratší úsečku. Ve 2D budeme hledat trojúhelník s minimálním obvodem. Budeme muset ale zkontrolovat, že body opravdu tvoří trojúhelník, protože by se mohlo stát, že body leží na přímce. V $n$D budu hledat polytopy maximální dimenze s minimálním obvodem a budu kontrolovat, jestli body, které tvoří polytop, neleží v nějakém podprostoru. 
+Tyto polytopy budu hledat různými algoritmy, které by v průměru měly být lepší, než zkoušení všech možností. Algoritmy by měly vyřešit všechny případy (například, když body leží v jedné nadrovině), měly by skončit v rozumném čase v závislosti na počtu bodů a musí být korektní. Problém si rozdělím na 1D, 2D a $n$D. V 1D je problém velmi jednoduchý, jde pouze o množinu čísel, ve které najdeme nejkratší úsečku. Ve 2D budeme hledat trojúhelník s minimálním obvodem. Budeme muset ale zkontrolovat, že body opravdu tvoří trojúhelník, protože by se mohlo stát, že leží na přímce. V $n$D budu hledat polytopy maximální dimenze s minimálním obvodem a budu kontrolovat, jestli body, které tvoří polytop, neleží v nadrovině. 
 
-V praktické části tyto algoritmy naprogramuji v programovacím jazyce Python, který má výhodu, že není těžký na pochopení a je ideální na počítání různých věcí v matematice. 
+Algoritmy, na které přijdu, dokážu, že jsou korektní. To znamená, že skončí a jsou správné (dělají to, co chceme).
+
+V praktické části tyto algoritmy naprogramuji v programovacím jazyce Python, který má výhodu, že není těžký na pochopení a je ideální na počítání různých věcí v~matematice. 

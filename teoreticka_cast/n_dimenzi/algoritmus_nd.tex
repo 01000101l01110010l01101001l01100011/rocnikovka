@@ -1,7 +1,7 @@
 \section{Algoritmus v \texorpdfstring{$n$D}{nD}}
-V této sekci Vám představím algoritmus, který řeší problém v $n$ dimenzích. Součástí algoritmu není algoritmus na počítání determinantu matice, protože existují různé algoritmy, a protože v \myref{sekci}{sec:program_nD}, kde jsem algoritmus naprogramoval, používám knihovnu \href{https://numpy.org/doc/stable/index.html}{NumPy}, která je optimalizovaná na matematické výpočty. 
+V této sekci vám představím algoritmus, který řeší problém v $n$ dimenzích. Součástí algoritmu není algoritmus na počítání determinantu matice, protože existují různé algoritmy na jeho výpočet. V \myref{sekci}{sec:program_nD}, kde jsem algoritmus naprogramoval, používám knihovnu \href{https://numpy.org/doc/stable/index.html}{NumPy}, která je optimalizovaná na matematické výpočty. 
 
-Algoritmus dostane množinu bodů $V$. Dimenzi $n$ algoritmus zjistí podle počtu souřadnic jednoho bodu. Komentář v algoritmu označím jako // komentář.
+Algoritmus dostane množinu bodů $V$. Dimenzi $n$ algoritmus zjistí podle počtu souřadnic jednoho bodu. Komentář v algoritmu označím symbolem //.
 
 \begin{algorithm}[H]
     \caption{Algoritmus na hledání polytopu maximální dimenze s minimálním obvodem.}
@@ -14,7 +14,7 @@ Algoritmus dostane množinu bodů $V$. Dimenzi $n$ algoritmus zjistí podle poč
     \SetKwProg{Fn}{Function}{:}{}
 
     \Input{$V = \{x_1,\ldots, x_k\} \in \R$.}
-    \Output{body, které tvoří polytop maximální dimenze s minimálním obvodem.}
+    \Output{body tvořící polytop maximální dimenze s minimálním obvodem.}
     \BlankLine
     \Fn{\p{$\mathcal{P}$}}{
         $perimeter \leftarrow \sum_{i=1}^{n} \sum_{j=i+1}^{n+1}d(x_i, x_{j})$\;
@@ -24,27 +24,26 @@ Algoritmus dostane množinu bodů $V$. Dimenzi $n$ algoritmus zjistí podle poč
 
     $n \leftarrow \#x \in V$ \;
     $S \leftarrow \binom{V}{n+1}$\;
-    $C \leftarrow []$\; 
+    $C \leftarrow \emptyset$\; 
     \For{$\mathcal{P} \in S$}{
-      $C.append(\mathcal{P}, \rho(\mathcal{P}))$ \;
+      $C \leftarrow C \cup  (\mathcal{P}, \rho(\mathcal{P}))$ \;
     }
-    $C.sort()$  // Od nejmenšího po největší podle $\rho(\mathcal{P})$ \;
     $min_\mathcal{P} \leftarrow \emptyset$\;
-    \While{$C$}{ %Od cyklu, který má minimální obvod. 
-    $\mathcal{P}, \rho(\mathcal{P}) \leftarrow C[0]$ \;
-        $x_1, \dots x_{n+1} \leftarrow \mathcal{P}$\;
+    \While{$C != \emptyset$}{ %Od cyklu, který má minimální obvod. 
+    $\mathcal{P}, \rho(\mathcal{P}) \leftarrow min(C)$ \;
+        $x_1, \dots, x_{n+1} \leftarrow \mathcal{P}$\;
         $A \leftarrow \begin{pmatrix}
           \x{1}{2} - \x{1}{1} & \x{2}{2} - \x{2}{1} & \cdots & \x{n}{2} - \x{n}{1} \\
           \x{1}{3} - \x{1}{1} & \x{2}{3} - \x{2}{1} & \cdots & \x{n}{3} - \x{n}{1} \\
           \vdots        & \vdots        & \ddots & \vdots        \\
           \x{1}{n_+_1} - \x{1}{1} & \x{2}{n_+_1} - \x{2}{1} & \cdots & \x{n}{n_+_1} - \x{n}{1} \\
         \end{pmatrix}$\;
-        \If{$det(A)~\neq 0$}{
+        \If{$det(A) \neq 0$}{
           $min_\mathcal{P} \leftarrow \mathcal{P}$\;
           \KwReturn{$min_{\mathcal{P}}, \rho(\mathcal{P})$}\;
         }
         \Else{
-          $C.remove(C[0])$\;
+          $C.remove(min(C))$\;
         }
     }
     \KwReturn{$\emptyset$}\;

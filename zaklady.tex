@@ -1,6 +1,6 @@
-\chapter*{Základní definice}
+\chapter*{Základní definice a tvrzení}
 \label{sec:zakladni-pojmy}
-\addcontentsline{toc}{chapter}{Základní definice}
+\addcontentsline{toc}{chapter}{Základní definice a tvrzení}
 
 \begin{definition}[Polytop]
   \emph{Polytop} dimenze $n \in \mathbb{N}$ je uzavřená podmnožina $P \subseteq \R^{n}$ definovaná induktivně:
@@ -83,7 +83,7 @@
 
 \begin{definition}[Váha cyklu]
   \label{definice:vaha_cyklu}
-  Pokud cyklus tvoří posloupnost vrcholů $v_1, \ldots, v_n$, tak váha \\cyklu je rovna \[ w(v_1,\dots ,v_n, v_1) = d(v_1, v_n) + \sum_{i=1}^{n-1}w(v_i, v_{i+1}). \]
+  Pokud cyklus tvoří posloupnost vrcholů $v_1, \ldots, v_n$, tak váha \\cyklu je rovna $w(v_1,\dots ,v_n, v_1) = d(v_1, v_n) + w(v_1, v_n)$.
 \end{definition}
 
 \begin{definition}[Soused]
@@ -91,8 +91,8 @@
   V grafu $G = (V, E, w)$ je vrchol $u$ soused vrcholu $v$, pokud hrana $\{u, v\} \in E$.
 \end{definition}
 
-\begin{definition}[Trojúhelníková nerovnost]
-  \label{definice:trojuhelnikova_nerovnost}
+\begin{tvrzeni}[Trojúhelníková nerovnost]
+  \label{tvrzeni:trojuhelnikova_nerovnost}
   Trojúhelníková nerovnost říká, že pro kaž\-dé tři různé body $a, b, c$ platí \textcolor{myblue}{$d(a, b)+d(c, b)$} $\geq$ \textcolor{myred}{$d(a,b)$}, neboli vzdálenost mezi dvěma body je vždy menší nebo rovna součtu vzdáleností mezi těmito body a třetím bodem.
 
   \begin{figure}[h]
@@ -111,16 +111,16 @@
     \end{tikzpicture}
     \caption{Trojúhelníková nerovnost}
   \end{figure}
-\end{definition}
+\end{tvrzeni}
 
 \begin{definition}[Obvod trojúhelníku]
   \label{definice:obvod_troj}
   Definujeme zobrazení $p: \R\rightarrow \R^+$ podle předpisu: $p(a, b, c) \coloneqq d(a, b) + d(b, c) + d(a, c)$, které nám určuje obvod $\Delta(a,b,c)$.
 \end{definition}
 
-\begin{definition}[Big $\mathcal{O}$ notation]
+\begin{definition}[Landauova notace]
   \label{definice:bigonotation}
-  Vizte například \autocite{Bae2019}. Krátce řečeno: notace $\mathcal{O}(\dots)$ představuje počet kroků, kolik algoritmus musí udělat v nejhorším případě. O algoritmu můžeme říct, že má časovou složitost například $\mathcal{O}(n^2)$.
+  Vizte například \autocite{Bae2019}. Velmi krátce řečeno: notace $\mathcal{O}(\dots)$ představuje počet kroků, které algoritmus musí udělat až na násobení konstantou nebo přičtení konstanty. O algoritmu můžeme říct, že má časovou složitost například $\mathcal{O}(n^2)$, kde $n$ je délka vstupu.
 
   \begin{figure}[H]
     \centering
@@ -153,6 +153,6 @@
       \end{axis}
       \coordinate[label=below:\phantom{a}] (A) at (5, -0.25);
     \end{tikzpicture}
-    \caption{Grafy různých funkcí} \label{obr:big_o}
+    \caption{Grafy funkcí, které jsou častými případy časové náročnosti algoritmů.} \label{obr:big_o}
   \end{figure}
 \end{definition}

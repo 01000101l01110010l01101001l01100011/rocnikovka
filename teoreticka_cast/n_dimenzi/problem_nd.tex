@@ -1,25 +1,25 @@
 \section{Řešení problému v \texorpdfstring{$n$D}{nD}}
 \label{sec:reseni_1D}
 
-Problém v $n$ dimenzích bude komplikovanější a časově náročnější. Z množiny bodů $V = \{x_1,\ldots, x_k\} \in \R^n$ vytvoříme množinu všech $n+1$-prvkových podmnožin: $C = \binom{V}{n+1}$. Vybereme podmnožinu $\mathcal{P} = \{x_1, \dots, x_{n+1}\} \in C$, která tvoří polytop s minimálním obvodem. Obvod polytopu spočítáme následovně:
+Problém v $n$ dimenzích bude komplikovanější a časově náročnější. Z množiny bodů $V = \{x_1,\ldots, x_k\} \in \R^n$ vytvoříme množinu všech $(n+1)$-prvkových podmnožin: $C = \binom{V}{n+1}$. Vybereme podmnožinu $\mathcal{P} = \{x_1, \dots, x_{n+1}\} \in C$, jejíž body tvoří polytop s minimálním obvodem. Obvod polytopu spočítáme následovně:
 
-Hlavní otázkou je kolik hran opravdu tvoří obvod. (Například: ve $3$D tělesová úhlopříčka krychle netvoří obvod.) Je jich přesně $\binom{n+1}{2}$. Toto číslo pochází ze vzorce $\binom{n+1}{m+1}$ \autocite[120]{coxeter1973regular},
-který znamená počet $m$-dimenzionál\-ních podpolytopů (dále $\mathcal{P}^{\prime}_m$) v $n$-rozměrném polytopu ($\mathcal{P}_n$) za předpokladu, že $\mathcal{P}_n$ má minimální počet vrcholů. To je $n+1$. 
-Když víme že počet vnějších hran v polytopu je $\binom{n+1}{2}$, musíme zjistit které hrany z celkové množiny hran to jsou. Jsou to všechny, protože náš polytop má přesně $n+1$ vrcholů. Proto můžeme místo $n+1$ v $\binom{n+1}{2}$ dosadit množinu vrcholů polytopu ($\mathcal{P} = \{x_1, \dots, x_{n+1}\}$) a tím dostaneme $\binom{\mathcal{P}}{2}$, což jsou všechny dvouprvkové podmnožiny z $\mathcal{P}$, neboli všechny hrany polytopu. Obvod tedy spočítáme následovně:
+Hlavní otázkou je, kolik hran opravdu tvoří obvod. (Například ve $3$D tělesová úhlopříčka krychle netvoří obvod.) Je jich přesně $\binom{n+1}{2}$. Toto číslo pochází ze vzorce $\binom{n+1}{m+1}$ \autocite[120]{coxeter1973regular},
+který udává počet $m$-dimenzionál\-ních podpolytopů v $n$-rozměrném polytopu ($\mathcal{P}_n$) za předpokladu, že $\mathcal{P}_n$ má minimální počet vrcholů. To je $n+1$. 
+Když víme, že počet vnějších hran v polytopu je $\binom{n+1}{2}$, musíme zjistit, které hrany z celkové množiny hran to jsou. Jsou to všechny, protože náš polytop má přesně $n+1$ vrcholů. Proto můžeme místo $n+1$ v $\binom{n+1}{2}$ dosadit množinu vrcholů polytopu ($\mathcal{P} = \{x_1, \dots, x_{n+1}\}$) a tím dostaneme $\binom{\mathcal{P}}{2}$, což jsou všechny dvouprvkové podmnožiny z $\mathcal{P}$, neboli všechny hrany polytopu. Obvod tedy spočítáme následovně:
 \begin{equation*}
   \rho(\mathcal{P}) = \sum_{i=1}^{n} \sum_{j=i+1}^{n+1}d(x_i, x_{j}).
 \end{equation*}
 
 Teď, když jsme vybrali polytop s minimálním obvodem, musíme ověřit, že jeho vrcholy opravdu tvoří polytop maximální dimenze (jako ve 2D, kde jsme ověřovali, jestli body neleží na přímce).
 
-Polytop maximální dimenze se vyznačuje tím, že jeho body neleží ve stejné \hyperref[definice:nadrovina]{nadrovině}. Z \myref{definice}{definice:afinni-zavislost} víme, že pokud rozdíly bodů jsou lineárně závislé, tak body v jedné nadrovině leží. Z toho vyplývá, že chceme, aby body nebyly afinně závislé, neboli aby tvořily polytop maximální dimenze.  
+Polytop maximální dimenze se vyznačuje tím, že jeho body neleží ve stejné \hyperref[definice:nadrovina]{nadrovině}. Z \myref{definice}{definice:afinni-zavislost} víme, že pokud rozdíly bodů od jednoho fixního jsou lineárně závislé, tak body v jedné nadrovině leží. Z toho vyplývá, že chceme, aby body nebyly afinně závislé, neboli tvořily polytop maximální dimenze.  
 
 \begin{poznamka} 
   \label{poznamka:varovani_index}
-  Značení $\x{n}{k}$ znamená $n$-tá souřadnice $k$-tého bodu, například $\x{2}{3}$ je dru\-há souřadnice třetího bodu, tudíž $\x{n}{k} - \x{n}{1}$ je rozdíl $n$-té souřadnice bodu $x_k$ a $x_1$. 
+  Značení $\x{n}{k}$ znamená $n$-tá souřadnice $k$-tého bodu, například $\x{2}{3}$ je dru\-há souřadnice třetího bodu, tudíž $\x{n}{k} - \x{n}{1}$ je rozdíl $n$-tých souřadnice bodu $x_k$ a $x_1$. 
 \end{poznamka}
 
-Abychom zjistili, zda jsou body afinně závislé, musíme spočítat jejich rozdíly a zjistit, jestli jsou lineárně závislé. Od bodů $x_2, \ldots, x_{n+1} \in \R^n$ odečteme první bod $x_1$. Tím nám vzniknou rozdíly $x_2-x_1, x_3-x_1, \dots, x_{n+1}-x_1$, které umístíme do matice $A$. 
+Abychom zjistili, zda jsou body afinně závislé, musíme spočítat rozdíly bodů od jednoho fixního a zjistit, jestli jsou lineárně závislé. Od bodů $x_2, \ldots, x_{n+1} \in \R^n$ odečteme první bod $x_1$. Tím nám vzniknou rozdíly $x_2-x_1, x_3-x_1, \dots, x_{n+1}-x_1$, které umístíme do matice $A$. 
 
 % \x{vlevo}{vpravo} vlevo = souradnice, vpravo = kolikaty vektor
 
@@ -44,6 +44,6 @@ Abychom zjistili, zda jsou body afinně závislé, musíme spočítat jejich roz
   \end{pmatrix}
 \end{equation*}
 \endgroup
-Teď, když máme matici, vypočítáme $det(A)$. Podle \myref{definice}{definice:determinant}, pokud vyjde determinant $0$, znamená to, že pak rozdíly bodů jsou lineárně závislé. Z \myref{definice}{definice:afinni-zavislost} ale víme, že pokud tyto rozdíly jsou lineárně závislé, pak body jsou afinně závislé, což znamená, že leží ve stejné nadrovině. Pokud body leží ve stejné nadrovině, musíme tento polytop odebrat z množiny všech polytopů a zopakovat celý tenhle postup pro nový polytop s minimálním obvodem. 
+Teď, když máme matici, vypočítáme $det(A)$. Podle \myref{tvrzení}{tvrzeni:determinant}, pokud vyjde determinant $0$, znamená to, že pak rozdíly bodů jsou lineárně závislé. Z \myref{definice}{definice:afinni-zavislost} ale víme, že pokud tyto rozdíly jsou lineárně závislé, pak body jsou afinně závislé, což znamená, že leží ve stejné nadrovině. Jestliže body leží ve stejné nadrovině, musíme tento polytop odebrat z~množiny všech polytopů a zopakovat celý tenhle postup pro nový polytop s minimálním obvodem. 
 
 Tímto jsme vyřešili problém v $n$ dimenzích, kde $n \in \mathbb{N}, n > 2$.
