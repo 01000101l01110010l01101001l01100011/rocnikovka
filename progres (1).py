@@ -40,6 +40,7 @@ if characters <= minimum:
 elif characters <= maximum:
     print(f'Jsi v {int((characters/minimum)*100)} % minima')
     print(f'Jsi v pohodě. Ale bacha můžeš napsat už jen {maximum-characters} znaků')
+    print("Počet charakterů:", characters)
 
 elif characters > maximum:
     print(f'Jsi v {int((characters/minimum)*100)} % minima')

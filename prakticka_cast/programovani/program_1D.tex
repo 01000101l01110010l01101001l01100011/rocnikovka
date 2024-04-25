@@ -4,22 +4,19 @@ Naprogramovat \myref{algoritmus}{alg:algoritmus_1D}, který řeší problém v d
 
 \begin{mdframed}[style=MyFrame]
 \begin{lstlisting}[style=metoo]
-def algorithm(V):
-  points = list(V) # Seznam čísel.
-  points.sort() # Seřazení seznamu čísel.
+def algorithm(points:np.array):
+  points = np.sort(points) # Seřazení seznamu čísel
   shortest = float('inf') # Proměnná pro úsečku s minimální délkou.
-  points = None # Proměnná pro body.
   for i in range(len(points-1)): # Cyklus procházení bodů.
     if abs(points[i] - points[i+1]) < shortest: # Pokud je úsečka menší.
       shortest = points[i] - points[i+1] # Aktualizujeme délku nejkratší úsečky.
-      points = points[i], points[i+1] # Aktualizujeme nejkratší úsečku.
-  return points
+      closest_points = points[i], points[i+1] # Aktualizujeme nejkratší úsečku.
+  return closest_points
 \end{lstlisting}
 \end{mdframed}
-
 \begin{center}
-  
-
+\begin{figure}[H]
+  \centering
   \begin{tikzpicture}
     \centering
     % Define the dimensions of the table
@@ -56,8 +53,6 @@ def algorithm(V):
 
 
   \end{tikzpicture}
-
-  % \begin{tikzpicture}
-
-  % \end{tikzpicture}
+  \caption{Příklad, kdy algoritmus seřadil čísla a vybral nejkratší úsečku.} \label{obrazek:algoritmus_2D}
+  \end{figure}
 \end{center}

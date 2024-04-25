@@ -21,7 +21,7 @@ def find_path(G:Graph, start, end):
       min_path = start, x, end, path  # Aktualizuje nejkratší cestu
   return min_path  # Vrací nejkratší cestu
 
-def algorithm(V:set):
+def algorithmtwo(V:set):
   G = Graph()  # Prázdný graf
   edges = []  # Prázdný seznam hran
   while V:  # Dokud je množina V neprázdná
