@@ -8,7 +8,7 @@ def generate_random_points(num_points, dimension):
     return points
 
 def generate_subsets(points, subset_length):
-    subsets = list(combinations(points, subset_length))
+    subsets = combinations(points, subset_length)
     return subsets
 
 def algorithmnd(points):
