@@ -17,21 +17,18 @@ def find_path(G:Graph, start, end):
 
 def algorithm(V:set):
   G = Graph()  # Prázdný graf.
-  edges = []  # Prázdný seznam hran.
-  while V:  # Dokud je množina V neprázdná.
-    x = V.pop()  # Odebere prvek z množiny V.
-    for v in V:  # Prochází zbývající prvky množiny V.
-      if x!=v:  # Pokud se prvky liší.
-        edges.append((x, v, dist(x, v)))# Přidá hranu s její váhou do seznamu hran.
-  G.add_weighted_edges_from(edges)  # Přidá hrany do grafu G s příslušnými váhami.
+  subsets = list(combinations(V, 2)) # Všchny dvouprvkové podmnožiny V.
+  for edge in subsets: # Pro hranu v subsets.
+    G.add_weighted_edges_from([((edge[0][0], edge[0][1]), (edge[1][0], edge[1][1]), dist(edge[0], edge[1]))])  # Přidá hranu edge do grafu G s její váhou.
+
   min_triangle = None  # Proměnná pro trojúhelník s minimální váhou.
   min_triangle_weight = float("inf")  # Proměnná pro minimální váhu trojúhelníku.
   for edge in edges:  # Prochází hrany v seznamu hran.
-    edge_weight = G.get_edge_data(edge[0], edge[1])["weight"] # Váha hrany edge.
+    edge_weight = G.get_edge_data(edge[0], edge[1])["weight"]        #~Váha~hrany~edge.
     G.remove_edge(edge[0], edge[1])  # Odebere hranu z grafu.
     u, j, v, weight= find_path(G, edge[0], edge[1])  # Najde nejkratší cestu mezi body edge[0] a edge[1].
     if (v[1]-u[1])*(j[0]-u[0]) == (j[1]-u[1])*(v[0]-u[0]):  # Pokud body u, j, v leží na jedné přímce.
-      if dist(u, j) > dist(u, v) or dist(j, v) > dist(u, v):  # Pokud je vzdálenost mezi body u a j větší než vzdálenost mezi body u a v.
+      if dist(u, j) > dist(u, v):  # Pokud je vzdálenost mezi body u a j větší než vzdálenost mezi body u a v.
         G.remove_edge(u, j)  # Odebere hranu mezi body u a j.
       elif dist(j, v) > dist(u, v):  # Pokud je vzdálenost mezi body j a v větší než vzdálenost mezi body u a v.
         G.remove_edge(v, j)  # Odebere hranu mezi body v a j.
@@ -41,6 +38,7 @@ def algorithm(V:set):
       min_triangle = (u, j, v)  # Aktualizuje nejmenší trojúhelník.
       min_triangle_weight = weight + edge_weight  # Aktualizuje váhu nejmenšího trojúhelníku.
     G.add_weighted_edges_from([(u, v, dist(u, v))])  # Přidá hranu u, v zpátky do grafu s její váhou.
+
   return min_triangle, min_triangle_weight  # Vrátí trojúhelník a jeho obvod.
 \end{lstlisting}
 \end{mdframed}

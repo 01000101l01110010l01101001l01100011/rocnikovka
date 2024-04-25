@@ -1,6 +1,5 @@
-from control_algorithm import control
-from twoD import algorithm, create_points
-
+from twoD import algorithmtwo, create_points
+import numpy as np
 from math import sqrt
 
 
@@ -29,8 +28,14 @@ def con(set_p):
 while True:
   points, set_p = create_points(50)
   set_b = set_p.copy()
-
-  points, distance = algorithm(set_p)
+  set_d = np.array([])
+  for i in range(len(set_p)):
+    item = set_p.pop()
+    print(item)
+    set_d = np.append(set_d, tuple(item))
+  print(set_p, "\n", "ARRAY:", set_d)
+  points, distance = algorithmtwo(set_d)
+  print(points, distance)
   smallest, minimal = con(set_b)
   if int(distance*1000) == int(minimal*1000):
     print("OK")

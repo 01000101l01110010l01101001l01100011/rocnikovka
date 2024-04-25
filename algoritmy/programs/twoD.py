@@ -1,7 +1,8 @@
 from random import random  # Importuje funkci random pro generování náhodných čísel
 from math import dist  # Importuje funkce dist z modulu math pro výpočty
 from networkx import Graph, neighbors  # Importuje třídu Graph a funkci neighbors z modulu networkx pro práci s grafy
-
+from itertools import combinations
+import numpy as np
 def create_points(n):
   points = {}  # Inicializuje prázdný slovník pro ukládání bodů
   set_points = set()  # Inicializuje prázdnou množinu pro ukládání unikátních bodů
@@ -21,19 +22,15 @@ def find_path(G:Graph, start, end):
       min_path = start, x, end, path  # Aktualizuje nejkratší cestu
   return min_path  # Vrací nejkratší cestu
 
-def algorithmtwo(V:set):
+def algorithmtwo(V:np.array):
   G = Graph()  # Prázdný graf
-  edges = []  # Prázdný seznam hran
-  while V:  # Dokud je množina V neprázdná
-    x = V.pop()  # Odebere prvek z množiny V
-    for v in V:  # Prochází zbývající prvky množiny V
-      if x!=v:  # Pokud se prvky liší
-        edges.append((x, v, dist(x, v)))  # Přidá hranu mezi nimi s váhou d(x, v)
-  G.add_weighted_edges_from(edges)  # Přidá hrany do grafu G s příslušnými vahami
+  subsets = list(combinations(V, 2)) # Všchny dvouprvkové podmnožiny V
+  for edge in subsets: # Pro hranu v subsets.
+    G.add_weighted_edges_from([((edge[0][0], edge[0][1]), (edge[1][0], edge[1][1]), dist(edge[0], edge[1]))])  # Přidá hranu edge do grafu G s její váhou.
 
   min_triangle = None  # Proměnná pro nejmenší trojúhelník
   min_triangle_weight = float("inf")  # Proměnná pro váhu nejmenšího trojúhelníku s nekonečnou hodnotou
-  for edge in edges:  # Prochází hrany v seznamu hran
+  for edge in G.edges():  # Prochází hrany v seznamu hran
     edge_weight = G.get_edge_data(edge[0], edge[1])["weight"]  # Získá váhu hrany edge
     G.remove_edge(edge[0], edge[1])  # Odebere hranu z grafu
     u, j, v, weight= find_path(G, edge[0], edge[1])  # Najde nejkratší cestu mezi body edge[0] a edge[1]
@@ -50,3 +47,7 @@ def algorithmtwo(V:set):
     G.add_weighted_edges_from([(u, v, dist(u, v))])  # Přidá hranu u, v zpatky do grafu s její váhou
 
   return min_triangle, min_triangle_weight  # Vrací nejmenší trojúhelník a jeho váhu
+
+a = np.random.rand(20, 2)
+print(a)
+algorithmtwo(a)
