@@ -15,5 +15,6 @@ for n_points in range(20):
     one_time = np.append(one_time, after)
 
   # Udelat to 2D aby fungovalo s np.array
+  # V 1D PREPSAT TEXT MISTO .SORT NA .np array()
 
 print(one_time.mean())
