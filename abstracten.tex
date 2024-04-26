@@ -1,8 +1,8 @@
 \subsection*{Abstract}
 
-The aim of this work is to find a way how a polytope with maximal dimension but minimal perimeter in a set of points laying in $\R^n$. We will divide this problem into three variants: 1D, 2D, and in the general $n$D case. 
+The aim of this work is to determine how a polytope with maximal dimension but minimal perimeter in a set of points in $\R^n$. We will divide this problem into three variants: 1D, 2D, and general $n$D case. 
 
-In 1D, we will search for a minimal distance between two consecutive numbers from a sorted set of points. In 2D, we will create a graph with nodes representing points and weighted edges representing distances between each pair of points. We will then search for a cycle with minimal weight and length three. The problem slightly complicates because we need to check whether the dimension of the polytope is maximal, so we need to verify if the points do not lie on a line. In $n$D, I will search for a polytope formed by $n+1$ points. However, it will be much harder to check whether the polytope has maximum dimension.
+In 1D, we will search for a minimal distance between two consecutive numbers from a sorted set of points. In 2D, we will create a graph with nodes representing points and weighted edges representing segments between each pair of points. We will then search for a cycle with minimal weight and length three. The problem gets slightly complicated because we need to check whether the dimension of the polytope is maximal, so we need to verify if the points do not lie on a line. In $n$D, I will search for a polytope formed by $n+1$ points. However, it will be much harder to check whether the polytope has maximum dimension.
 
 In the practical part, I will develop a program for each algorithm from the theoretical part, measure how much time they need depending on the number of points, and finally compare them with each other.
 

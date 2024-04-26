@@ -81,6 +81,7 @@ def all():
 # 20, 10 = 101.5 sekund
 def nd_test():
   points = generate_random_points(50, 4)
+  print(points)
   before = time.time()
   algorithmnd(points)
   after = time.time() - before

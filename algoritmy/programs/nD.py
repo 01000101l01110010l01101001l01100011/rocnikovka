@@ -42,3 +42,6 @@ def algorithmnd(points):
         if determinant != 0: # Pokud je determinant nenulový, řešením je tento polytop
             return polytope, distance
         print("Checked polytope")
+
+l = np.array([[1, 2, 3], [3, 2, 1], [4, 7, 0], [9, 5, 2], [2, 4, 6]])
+print(algorithmnd(l))
