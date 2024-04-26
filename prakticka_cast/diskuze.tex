@@ -3,18 +3,16 @@
 
 V \myref{kapitole}{chap:programovani} jsem programoval algoritmy, které jsem uvedl v teoretické části. Programy jsem zkoušel na náhodně generovaných bodech a také jsem je zkontroloval jiným algoritmem, který zkouší úplně všechny možnosti. Podle testů, které jsem provedl, by měly fungovat správně. Může se ale stát, že Python nebo nějaké knihovny, které používám, se změní a poté se bude muset program upravit. 
 
-% Udělat graf s porovnáním čas / počet bodů a u nD něco jako čas při počtu bodů a při jaké dimenzi.
-
-\begin{figure}
+Na \myref{obrázku}{obr:graphs} můžete vidět časovou náročnost algoritmu pro $n$D v závislosti na počtu bodů spuštěný v 10D a 20D.
+\begin{figure}[H]
 \centering
-\begin{tikzpicture}[scale=0.5]
+\begin{tikzpicture}%[scale=0.9]
     \begin{axis}[
         xlabel={počet bodů},
         ylabel={čas v sekundách},
         legend pos=north west,
         grid=both,
     ]
-    
     % Function 4
     \addplot[color=orange, mark=*] coordinates {
         (10,0.0004)
@@ -54,6 +52,6 @@ V \myref{kapitole}{chap:programovani} jsem programoval algoritmy, které jsem uv
     \legend{Program pro $n$D spuštěný v 10D, Program pro $n$D spuštěný ve 20D}
     \end{axis}
 \end{tikzpicture}
-\caption{Three simple graphs}
-\label{obr:three graphs}
+\caption{Časová náročnost algoritmu pro $n$D v závislosti na počtu bodů.}
+\label{obr:graphs}
 \end{figure}
