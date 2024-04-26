@@ -2,3 +2,30 @@
 \label{sec:program_nD}
 
 Ve $2$D program vytvoří všechny $(n+1)$-prvkové podmnožiny z množiny bodů $V$. Poté program spočítá obvod polytopu a pokud je menší, než ten uložený, ověří, že se opravdu jedná o polytop, a pokud ano, uloží tento polytop jako minimální polytop.
+
+\begin{mdframed}[style=MyFrame]
+\begin{lstlisting}[style=metoo]
+num_points = len(points)  # Počet bodů.
+n = len(points[0])   # Dimenze.
+subsets = generate_subsets(points, n+1) # Vytvoří všechny (n+1)-prvkové podmnožiny.
+polytopes = [] # Seznam polytopů.
+for subset in subsets  # Pro podmnožinu (polytop).
+  perimeter = 0
+  edges = generate_subsets(subset, 2) # Množina všech 2-prvkových podmnožin.
+  for edge in edges:
+    perimeter += euclidean(edge[0], edge[1]) # Délka hrany.
+  polytopes.append((subset, perimeter)) # Přidá hranu do seznamu polytopů.
+sorted_polytopes = sorted(polytopes, key=lambda x: x[-1]) # Seřadí seznam polytopů podle jejich obvodu.
+while len(sorted_polytopes) > 0:
+  polytope, distance = sorted_polytopes[0] # Polytop a jeho obvod.
+  x1 = polytope[0] # První bod polytopu.
+  differences = [] # Seznam rozdílů.
+  for x in polytope[1:]: # Pro bod v polytopu.
+    difference = x - x1 # Rozdíl bodů.
+    differences.append(difference) # Přidá rozdíl do seznamu rozdílů.
+  matrix = np.vstack(differences) # Vytvoří matici z rozdílů.
+  determinant = np.linalg.det(matrix) # Spočítá determinant.
+  if determinant != 0: # Pokud je determinant nenulový, řešením je tento polytop.
+    return polytope, distance
+\end{lstlisting}
+\end{mdframed}

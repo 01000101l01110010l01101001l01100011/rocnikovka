@@ -1,7 +1,7 @@
 \section{Algoritmus v \texorpdfstring{$n$D}{nD}}
 V této sekci vám představím algoritmus, který řeší problém v $n$ dimenzích. Součástí algoritmu není algoritmus na počítání determinantu matice, protože existují různé algoritmy na jeho výpočet. V \myref{sekci}{sec:program_nD}, kde jsem algoritmus naprogramoval, používám knihovnu \href{https://numpy.org/doc/stable/index.html}{NumPy}, která je optimalizovaná na matematické výpočty. 
 
-Algoritmus dostane množinu bodů $V$. Dimenzi $n$ algoritmus zjistí podle počtu souřadnic jednoho bodu. Komentář v algoritmu označím symbolem //.
+Algoritmus dostane množinu bodů $V$. Dimenzi $n$ algoritmus zjistí podle počtu souřadnic jednoho bodu.
 
 \begin{algorithm}[H]
     \caption{Algoritmus na hledání polytopu maximální dimenze s minimálním obvodem.}
@@ -29,7 +29,7 @@ Algoritmus dostane množinu bodů $V$. Dimenzi $n$ algoritmus zjistí podle poč
       $C \leftarrow C \cup  (\mathcal{P}, p(\mathcal{P}))$ \;
     }
     $min_\mathcal{P} \leftarrow \emptyset$\;
-    \While{$C != \emptyset$}{ %Od cyklu, který má minimální obvod. 
+    \While{$C~!=~\emptyset$}{ %Od cyklu, který má minimální obvod. 
     $\mathcal{P}, p(\mathcal{P}) \leftarrow min(C)$ \;
         $x_1, \dots, x_{n+1} \leftarrow \mathcal{P}$\;
         $A \leftarrow \begin{pmatrix}
