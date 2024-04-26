@@ -1,7 +1,7 @@
 \section{Řešení problému v \texorpdfstring{$n$D}{nD}}
 \label{sec:reseni_1D}
 
-Problém v $n$ dimenzích bude komplikovanější a časově náročnější. Z množiny bodů $V = \{x_1,\ldots, x_k\} \in \R^n$ vytvoříme množinu všech $(n+1)$-prvkových podmnožin: $C = \binom{V}{n+1}$. Vybereme podmnožinu $\mathcal{P} = \{x_1, \dots, x_{n+1}\} \in C$, jejíž body tvoří polytop s minimálním obvodem. Obvod polytopu spočítáme následovně:
+Problém v $n$ dimenzích bude komplikovanější a časově náročnější. Z množiny bodů $V = \{x_1,\ldots, x_k\} \in \R^n$ vytvoříme množinu všech $(n+1)$-prvkových podmnožin: $C = \binom{V}{n+1}$. Vybereme podmnožinu $\mathcal{P} = \{x_1, \dots, x_{n+1}\} \in C$, jejíž body tvoří polytop s~minimálním obvodem. Obvod polytopu spočítáme následovně:
 
 Hlavní otázkou je, kolik hran opravdu tvoří obvod. (Například ve $3$D tělesová úhlopříčka krychle netvoří obvod.) Je jich přesně $\binom{n+1}{2}$. Toto číslo pochází ze vzorce $\binom{n+1}{m+1}$ \autocite[120]{coxeter1973regular},
 který udává počet $m$-dimenzionál\-ních podpolytopů v $n$-rozměrném polytopu ($\mathcal{P}_n$) za předpokladu, že $\mathcal{P}_n$ má minimální počet vrcholů. To je $n+1$. 

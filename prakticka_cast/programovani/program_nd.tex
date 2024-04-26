@@ -1,7 +1,7 @@
 \section{Program v \texorpdfstring{$n$D}{nD}}
 \label{sec:program_nD}
 
-Ve $2$D program vytvoří všechny $(n+1)$-prvkové podmnožiny z množiny bodů $V$. Poté program spočítá obvod polytopu a pokud je menší, než ten uložený, ověří, že se opravdu jedná o polytop, a pokud ano, uloží tento polytop jako minimální polytop.
+V $n$D program vytvoří všechny $(n+1)$-prvkové podmnožiny z množiny bodů $V$. Poté program spočítá obvod polytopu. Je-li menší, než ten uložený, ověří, že má maximální dimenzi. Pokud ano, uloží ho jako minimální.
 
 \begin{mdframed}[style=MyFrame]
 \begin{lstlisting}[style=metoo]
@@ -20,7 +20,7 @@ while len(sorted_polytopes) > 0:
   polytope, distance = sorted_polytopes[0] # Polytop a jeho obvod.
   x1 = polytope[0] # První bod polytopu.
   differences = [] # Seznam rozdílů.
-  for x in polytope[1:]: # Pro bod v polytopu.
+  for x in polytope[1:]: 
     difference = x - x1 # Rozdíl bodů.
     differences.append(difference) # Přidá rozdíl do seznamu rozdílů.
   matrix = np.vstack(differences) # Vytvoří matici z rozdílů.

@@ -22,15 +22,14 @@ Algoritmus dostane množinu bodů $V$. Dimenzi $n$ algoritmus zjistí podle poč
     }
     \BlankLine
 
-    $n \leftarrow \#x \in V$ \;
     $S \leftarrow \binom{V}{n+1}$\;
     $C \leftarrow \emptyset$\; 
     \For{$\mathcal{P} \in S$}{
-      $C \leftarrow C \cup  (\mathcal{P}, p(\mathcal{P}))$ \;
+      $C \leftarrow C \cup  \{\mathcal{P}\}$ \;
     }
     $min_\mathcal{P} \leftarrow \emptyset$\;
-    \While{$C~!=~\emptyset$}{ %Od cyklu, který má minimální obvod. 
-    $\mathcal{P}, p(\mathcal{P}) \leftarrow min(C)$ \;
+    \While{$C \neq \emptyset$}{ %Od cyklu, který má minimální obvod. 
+    $\mathcal{P} \leftarrow X\in C$, takový, že $p(X)$ je minimální\;
         $x_1, \dots, x_{n+1} \leftarrow \mathcal{P}$\;
         $A \leftarrow \begin{pmatrix}
           \x{1}{2} - \x{1}{1} & \x{2}{2} - \x{2}{1} & \cdots & \x{n}{2} - \x{n}{1} \\
@@ -43,7 +42,7 @@ Algoritmus dostane množinu bodů $V$. Dimenzi $n$ algoritmus zjistí podle poč
           \KwReturn{$min_{\mathcal{P}}, p(\mathcal{P})$}\;
         }
         \Else{
-          $C.remove(min(C))$\;
+          $C \leftarrow C \setminus \{\mathcal{P}\}$\;
         }
     }
     \KwReturn{$\emptyset$}\;

@@ -6,9 +6,9 @@ import numpy as np
 import csv
 
 
-number_of_cycles = 5
+number_of_cycles = 2
 numbers = []
-for i in range(32):
+for i in range(100000):
    numbers.append(i)
 for i in range(20):
    numbers.remove(i)
@@ -43,6 +43,7 @@ def all():
                 algorithmone(points)
                 after = time.time() - before
                 writer_1D.writerows([["1D", "Points:", n_points, "Time:", after]])
+                print("1D", n_points)
                 
 
               # 2D
@@ -53,39 +54,47 @@ def all():
                 algorithmtwo(points)
                 after = time.time() - before
                 writer_2D.writerows([["2D", "Points:", n_points, "Time:", after]])
+                print("2D", n_points)
 
+              # # nD
+              # for k in range(number_of_cycles):
+              #   points = generate_random_points(n_points, 2)
+              #   before = time.time()
+              #   algorithmnd(points)
+              #   after = time.time() - before
+              #   writer_nd.writerows([["nD - 2D", "Points:", n_points, "Time:", after]])
+              #   print("nd-2D", n_points)
 
-              # nD
-              for k in range(number_of_cycles):
-                points = generate_random_points(n_points, 2)
-                before = time.time()
-                algorithmnd(points)
-                after = time.time() - before
-                writer_nd.writerows([["nD - 2D", "Points:", n_points, "Time:", after]])
+              # for k in range(2):
+              #   points = generate_random_points(n_points, 10)
+              #   before = time.time()
+              #   algorithmnd(points)
+              #   after = time.time() - before
+              #   writer_ndd.writerows([["nD - 10D", "Points:", n_points, "Time:", after]])
+              #   print("nd-10D", n_points)
 
-              for k in range(number_of_cycles):
-                points = generate_random_points(n_points, 10)
-                before = time.time()
-                algorithmnd(points)
-                after = time.time() - before
-                writer_ndd.writerows([["nD - 10D", "Points:", n_points, "Time:", after]])
-
-              for k in range(number_of_cycles//2):
-                points = generate_random_points(n_points, 20)
-                before = time.time()
-                algorithmnd(points)
-                after = time.time() - before
-                writer_nddd.writerows([["nD - 20D", "Points:", n_points, "Time:", after]])
+              # for k in range(2):
+              #   points = generate_random_points(n_points, 20)
+              #   before = time.time()
+              #   algorithmnd(points)
+              #   after = time.time() - before
+              #   writer_nddd.writerows([["nD - 20D", "Points:", n_points, "Time:", after]])
+              #   print("nd-20D", n_points)
 
 
 # 20, 10 = 101.5 sekund
 def nd_test():
-  points = generate_random_points(50, 4)
-  print(points)
-  before = time.time()
-  algorithmnd(points)
-  after = time.time() - before
-  print(after)
+  print(numbers)
+  with open('data_2D.csv', 'w', newline='') as file_ndd:
+    writer_ndd = csv.writer(file_ndd)
+    for n_points in numbers:
+      points = generate_random_points(n_points, 20)
+      # print(points)
+      before = time.time()
+      algorithmnd(points)
+      after = time.time() - before
+      print(after)
+      writer_ndd.writerows([["nD - 20D", "Points:", n_points, "Time:", after]])
 
-
+# nd_test()
 all()

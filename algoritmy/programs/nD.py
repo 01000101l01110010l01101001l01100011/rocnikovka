@@ -30,7 +30,7 @@ def algorithmnd(points):
             distances[i, j] = euclidean(points[i], points[j])
             distances[j, i] = distances[i, j]
 
-    print("Generated subsets")
+    # print("Generated subsets")
     polytopes = []  # Seznam polytopů
     podmo = time.time()
     for i, subset in enumerate(subsets):  # Pro podmnožinu (polytop)
@@ -39,14 +39,14 @@ def algorithmnd(points):
         edges = generate_subsets(subset, 2)
         for edge in edges:
             perimeter += distances[edge[0], edge[1]]  # Délka hrany
-        print("Polytope", i, "of", math.comb(num_points, n+1))
+        # print("Polytope", i, "of", math.comb(num_points, n+1))
         # Přidá hranu do seznamu polytopů
         current_points = [points[j] for j in subset]
         polytopes.append((current_points, perimeter))
     # Seřadí seznam polytopů podle jejich obvodu
-    print(time.time()-podmo)
+    # print(time.time()-podmo)
     sorted_polytopes = sorted(polytopes, key=lambda x: x[-1])
-    print("Sorted polytopes")
+    # print("Sorted polytopes")
     while len(sorted_polytopes) > 0:
         polytope, distance = sorted_polytopes[0]  # Polytop a jeho obvod
         x1 = polytope[0]  # První bod polytopu
@@ -58,4 +58,7 @@ def algorithmnd(points):
         determinant = np.linalg.det(matrix)  # Spočítá determinant
         if determinant != 0:  # Pokud je determinant nenulový, řešením je tento polytop
             return polytope, distance
-        print("Checked polytope")
+        # print("Checked polytope")
+
+points = np.array([[1, 2, 3], [7, -5, 2], [4, 8, -4], [7, 10, 3], [-3, 3, 3], [5, 1, -4]])
+print(algorithmnd(points))
