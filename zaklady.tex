@@ -113,9 +113,10 @@
   \end{figure}
 \end{tvrzeni}
 
-\begin{definition}[Obvod trojúhelníku]
+\begin{definition}[Obvod polytopu]
   \label{definice:obvod_troj}
-  Definujeme zobrazení $p: \R\rightarrow \R^+$ podle předpisu: $p(a, b, c) \coloneqq d(a, b) + d(b, c) + d(a, c)$, které nám určuje obvod $\Delta(a,b,c)$.
+  Definujeme zobrazení $p: \R\rightarrow \R^+$ podle následujícího předpisu: \[ p(\mathcal{P}) = \sum_{i=1}^{n} \sum_{j=i+1}^{n+1}d(x_i, x_{j}). \]
+
 \end{definition}
 
 \begin{definition}[Landauova notace]
@@ -124,7 +125,7 @@
 
   \begin{figure}[H]
     \centering
-    \begin{tikzpicture}[scale=0.95]
+    \begin{tikzpicture}[scale=0.94]
       \begin{axis}
         [
         axis lines = left,

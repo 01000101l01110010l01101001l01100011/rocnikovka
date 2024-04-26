@@ -24,7 +24,7 @@ def find_path(G:Graph, start, end):
 
 def algorithmtwo(V:np.array):
   G = Graph()  # Prázdný graf
-  subsets = list(combinations(V, 2)) # Všchny dvouprvkové podmnožiny V
+  subsets = combinations(V, 2) # Všechny dvouprvkové podmnožiny V
   for edge in subsets: # Pro hranu v subsets.
     G.add_weighted_edges_from([((edge[0][0], edge[0][1]), (edge[1][0], edge[1][1]), dist(edge[0], edge[1]))])  # Přidá hranu edge do grafu G s její váhou.
 

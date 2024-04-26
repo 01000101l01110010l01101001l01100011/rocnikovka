@@ -1,22 +1,15 @@
 \section{Důkaz algoritmu na hledání cyklu délky tři}
 \label{dukaz_algoritmu}
 
-Abychom mohli dokázat korektnost algoritmu, musíme dokázat, že algoritmus skončí a že je správný, to znamená, že dělá přesně co chceme. \hyperref[sec:dijkstra]{Dijkstrův algoritmus}, který je součástí našeho algoritmu, dokazovat nebudu, protože důkaz je příliš dlouhý a je dostupný v literatuře.
+Abychom mohli dokázat korektnost algoritmu, musíme dokázat, že algoritmus skončí a že je správný, to znamená, že dělá přesně co chceme.
+
 \begin{tvrzeni}
-    \label{tvrzeni:dijkstra}
-    Dijkstrův algoritmus je korektní.
+    \label{tvrzeni:adaptace}
+    Algoritmus na hledání minimální cesty (v \myref{sekci}{sec:adaptace}) je korektní.
 \end{tvrzeni}
 \begin{proof}
-    \label{dukaz:dijkstra}
-    Vizte \autocite[113]{benlFormalCorrectnessProofs1999}.
-\end{proof}
-\begin{tvrzeni}
-    \label{tvrzeni:dijkstra_adaptace}
-    Adaptace Dijkstrova algoritmu je korektní.
-\end{tvrzeni}
-\begin{proof}
-    \label{dukaz:dijkstra_adaptace}
-    Algoritmus je konečný, protože prochází konečnou množinu vrcholů a je správný, protože ze všech cest z $a$ do $b$ vybere tu s minimální váhou. 
+    \label{dukaz:adaptace}
+    Algoritmus je konečný, protože prochází konečnou množinu vrcholů a je správ\-ný, protože ze všech cest z $a$ do $b$ vybere tu s minimální váhou. 
 \end{proof}
 \begin{tvrzeni}
     \label{tvrzeni:algoritmus}
@@ -24,11 +17,11 @@ Abychom mohli dokázat korektnost algoritmu, musíme dokázat, že algoritmus sk
 \end{tvrzeni}
 \begin{proof}
     \label{dukaz:algoritmus}
-Konečnost algoritmu je zřejmá; jediným cyklem v algoritmu je procházení všech stran. Jelikož je množina hran konečná a víme, že Dijkstrův algoritmus je korektní, můžeme říci, že náš algoritmus skončí.
+Konečnost algoritmu je zřejmá; jediným cyklem v algoritmu je procházení všech stran. Jelikož je množina hran konečná a víme, že algoritmus na hledání cesty s minimální váhou je korektní, můžeme říci, že náš algoritmus skončí.
 
 Správnost algoritmu dokážeme sporem. Budeme předpokládat, že existuje trojúhelník $x, y, z$, který má kratší obvod, než trojúhelník $a, b, c$, který našel algoritmus, neboli:
 \begin{equation*}
     \exists \{x, y, z\}\subseteq V: p(x, y, z) < p(a, b, c)~|~a, b, c \leftarrow algoritmus.
 \end{equation*}
-Znamená to, že náš algoritmus vybral jednu stranu trojúhelníku s minimálním obvodem špatně, a tím vznikl trojúhelník s delším obvodem. Jelikož náš algoritmus prochází všechny hrany, tak tam nemohl vybrat špatnou hranu. Tím pádem špatnou hranu musel vybrat když vybíral zbylé dvě hrany. Ty ale vybral Dijsktrův algoritmus, který \hyperref[dukaz:dijkstra]{je korektní}. Tím vznikl spor a korektnost algoritmu je dokázána. 
+Znamená to, že náš algoritmus vybral jednu stranu trojúhelníku s minimálním obvodem špatně, a tím vznikl trojúhelník s delším obvodem. Jelikož náš algoritmus prochází všechny hrany, tak tam nemohl vybrat špatnou hranu. Tím pádem špatnou hranu musel vybrat když vybíral zbylé dvě hrany. Ty ale vybral algoritmus na hledání cesty s minimální váhou, který \hyperref[dukaz:adaptace]{je korektní}. Tím vznikl spor a korektnost algoritmu je dokázána. 
 \end{proof}

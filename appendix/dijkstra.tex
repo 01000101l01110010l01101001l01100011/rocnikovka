@@ -1,7 +1,8 @@
-\section{Adaptace Dijkstrova algoritmu}
-\label{sec:dijkstra}
+\chapter{Dijkstrův algoritmus}
+% \appendix{Dijkstrův algoritmus}
+\label{appendix:dijkstra}
 
-Velmi důležitou části algoritmu je Dijkstrův Algoritmus, který v ohodnoceném grafu dokáže najít cestu s minimální váhou mezi dvěma body v čase $ \mathcal{O}(\#V^2)$. \autocite{benlFormalCorrectnessProofs1999} Obecně taková cesta může mít několik vrcholů, ale protože náš graf je převzatý z~roviny, povede právě přes jeden vrchol a bude se skládat ze dvou hran. To vyplývá z \hyperref[tvrzeni:trojuhelnikova_nerovnost]{trojúhelníkové nerovnosti}. Kdyby náš graf nebyl převzatý z~roviny, mohla nastat situace na \myref{obrázku}{obr:troj_ner_graf}. Dijkstrův algoritmus ale lehce upravíme, aby byl rychlejší. Jelikož Dijkstrův algoritmus neví, že náš graf je převzatý z roviny (to znamená, že v grafu platí \hyperref[tvrzeni:trojuhelnikova_nerovnost]{trojúhelníková nerovnost}), tak ho ukončíme dřív, aby nehledal cestu s minimální váhou přes více vrcholů. Tímto časovou náročnost zredukujeme na $ \mathcal{O}(\#V)$.
+Dijkstrův Algoritmus, dokáže v ohodnoceném grafu najít cestu s minimální váhou mezi dvěma body v čase $ \mathcal{O}(\#V^2)$. \autocite{benlFormalCorrectnessProofs1999} 
 
 \begin{figure}[H]
   \centering
@@ -24,24 +25,20 @@ Velmi důležitou části algoritmu je Dijkstrův Algoritmus, který v ohodnocen
     \draw[mygreen, line width=1.5pt] (D) -- node[above] {7} (E);
   \end{tikzpicture}
   \caption{V obecném grafu nemusí platit \hyperref[tvrzeni:trojuhelnikova_nerovnost]{trojúhelníková nerovnost}.}
-  \label{obr:troj_ner_graf}
+  \label{obr:troj_ner_graf_2}
 \end{figure}
 
-\subsection{Popis adaptace Dijkstrova algoritmu}
-\label{subsec:dijkstra_adaptace}
-  Vstupem je bod $a$ a cílem je bod $b$. Cestu s minimální váhou mezi těmito body můžeme najít všechny cesty, které vedou z $a$ do $b$ a vybrat tu nejkratší. V \myref{algoritmu}{alg:algoritmus} je adaptace Dijkstrova algoritmu funkce $path$.
+%\begin{figure}[H]
+%  \centering
+%  \begin{tikzpicture}[scale=0.1]
+%    \graph { subgraph K_n [n=5, clockwise, radius=0.1\textwidth, nodes={font=\small}] };
+%  \end{tikzpicture}
+%  \caption{Graf $K_5$, na kterém si můžete představit, jak by tento algoritmus fungoval.}
+%\end{figure}
 
-\begin{figure}[H]
-  \centering
-  \begin{tikzpicture}[scale=0.1]
-    \graph { subgraph K_n [n=5, clockwise, radius=0.1\textwidth, nodes={font=\small}] };
-  \end{tikzpicture}
-  \caption{Graf $K_5$, na kterém si můžete představit, jak by tento algoritmus fungoval.}
-\end{figure}
-
-\subsection{Popis Dijkstrova algoritmu}
+\section{Popis Dijkstrova algoritmu}
 \label{subsec:popis-algoritmu}
-Dijkstrův algoritmus počítá také nejkratší vzdálenosti z bodu $a$ do všech ostatních. Tyto vzdálenosti by teoreticky šly využít na zrychlení celého algoritmu, ale je otázkou co by bylo rychlejší: nechat doběhnout celý Dijkstrův algoritmus a pak z něho brát informace nebo využít adaptaci Dijkstrova algoritmu, která je rychlejší. Následuje popis Dijkstrova algoritmu.
+Dijkstrův algoritmus počítá také nejkratší vzdálenosti z bodu $a$ do všech ostatních. Záleží kdy je algoritmus ukončen. Jestli je ukončen, když aktuální bod je cílový, algoritmus najde cestu s minimální váhou z bodu $a$ do bodu $b$. Pokud ale ukončen není, najde cesty s minimální váhou do všech bodů. Následuje popis Dijkstrova algoritmu.
 
 \begin{enumerate}
   \item Vytvoříme množinu všech nenavštívených bodů a vybereme startovní a cílový bod. Označíme všechny body nenavštívenými.

@@ -10,7 +10,7 @@ Algoritmus dostane množinu bodů $V$. Dimenzi $n$ algoritmus zjistí podle poč
     \SetKwInOut{Input}{input}
     \SetKwInOut{Output}{output}
     \SetKw{KwReturn}{return}
-    \SetKwFunction{p}{$\rho$}
+    \SetKwFunction{p}{$p$}
     \SetKwProg{Fn}{Function}{:}{}
 
     \Input{$V = \{x_1,\ldots, x_k\} \in \R$.}
@@ -26,11 +26,11 @@ Algoritmus dostane množinu bodů $V$. Dimenzi $n$ algoritmus zjistí podle poč
     $S \leftarrow \binom{V}{n+1}$\;
     $C \leftarrow \emptyset$\; 
     \For{$\mathcal{P} \in S$}{
-      $C \leftarrow C \cup  (\mathcal{P}, \rho(\mathcal{P}))$ \;
+      $C \leftarrow C \cup  (\mathcal{P}, p(\mathcal{P}))$ \;
     }
     $min_\mathcal{P} \leftarrow \emptyset$\;
     \While{$C != \emptyset$}{ %Od cyklu, který má minimální obvod. 
-    $\mathcal{P}, \rho(\mathcal{P}) \leftarrow min(C)$ \;
+    $\mathcal{P}, p(\mathcal{P}) \leftarrow min(C)$ \;
         $x_1, \dots, x_{n+1} \leftarrow \mathcal{P}$\;
         $A \leftarrow \begin{pmatrix}
           \x{1}{2} - \x{1}{1} & \x{2}{2} - \x{2}{1} & \cdots & \x{n}{2} - \x{n}{1} \\
@@ -40,7 +40,7 @@ Algoritmus dostane množinu bodů $V$. Dimenzi $n$ algoritmus zjistí podle poč
         \end{pmatrix}$\;
         \If{$det(A) \neq 0$}{
           $min_\mathcal{P} \leftarrow \mathcal{P}$\;
-          \KwReturn{$min_{\mathcal{P}}, \rho(\mathcal{P})$}\;
+          \KwReturn{$min_{\mathcal{P}}, p(\mathcal{P})$}\;
         }
         \Else{
           $C.remove(min(C))$\;

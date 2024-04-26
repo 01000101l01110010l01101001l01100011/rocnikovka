@@ -1,0 +1,59 @@
+\section{Algoritmus v pseudokódu}
+\begin{algorithm}[H]
+    \caption{Algoritmus na hledání cyklu délky tři.}
+    \label{alg:algoritmus}
+
+    \SetKwInOut{Input}{input}
+    \SetKwInOut{Output}{output}
+    \SetKw{KwReturn}{return}
+    \SetKwFunction{path}{$path$}
+    \SetKwProg{Fn}{Function}{:}{}
+   
+    \Input{množina bodů $V$ v rovině, kde každý bod je reprezentován jako dvojice souřadnic $(v_x, v_y)$.}
+    \Output{cyklus délky tři a jeho váha.}
+    \BlankLine
+    \Fn{\path{$start, end$}}{
+        $min\_{path} \leftarrow \emptyset$\;
+        \For{$x \in V$}{
+            $path \leftarrow w(start, x, end)$\;
+            \If{$w(min\_{path}) > path$}{
+                $min\_{path} \leftarrow (start, x, end)$\;
+            }
+        }
+        \KwReturn{$min\_{path}$}\;
+    }
+    \BlankLine
+
+    \For{$u \in V$}{
+        \For{$v \in V$}{
+        $ w(\{u, v\}) \leftarrow d(u, v)$\;
+        }
+    }
+    $ E \leftarrow{\binom{V}{2}}$\;
+    $ G \leftarrow (V, E, w)$\;
+    $min_{\Delta} \leftarrow \emptyset$\;
+    \For{$\{u, v\} \in E$}{
+        $E \leftarrow E \setminus \{u, v\}$\;
+        $\{u,j,v\} \leftarrow path(G,u,v)$\;
+        % $a = min(u_x, j_x, v_x)$\;
+        % $c = max(u_x, j_x, v_x)$\;
+        % $b = \{u, j, v\} \setminus \{a, c\}$\;
+        \If{$ (v_y-u_y)(j_x-u_x)~=~(j_y-u_y)(v_x-u_x) $}{
+            \If{$d(u, j) > d(u, v)$}{
+                $E \leftarrow E \setminus \{u, j\}$\;
+            }
+            \ElseIf{$d(j, v) > d(u, v)$}{
+                $E \leftarrow E \setminus \{v, j\}$\;
+            }
+            \Else{
+                $continue$\;
+            }
+        }
+        \ElseIf{$p(u, j, v) < p(min_\Delta)$}{
+            $min_\Delta \leftarrow p(u, j, v)$\;
+
+        }
+        $ E \leftarrow E \cup \{u, v\}$\;
+    }
+    \KwReturn{$min_\Delta, p(min_\Delta)$}\;
+   \end{algorithm}

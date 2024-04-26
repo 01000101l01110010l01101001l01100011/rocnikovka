@@ -1,11 +1,13 @@
 \section{Program ve 2D}
 \label{sec:program_2D}
 
-Ve 2D je program trochu těžší, protože hledáme 3 body, které tvoří trojúhelník s minimálním obvodem a musíme kontrolovat pouze jestli nejsou na přímce. Tento program dostane jako vstup množinu bodů, kde body budou v $\R^2$ a výstupem budou 3 body, které tvoří trojúhelník s minimálním obvodem. 
+Ve 2D je problém trochu těžší, protože hledáme tři body, které tvoří trojúhelník s~minimálním obvodem a musíme pouze kontrolovat, jestli nejsou na přímce. Tento program dostane jako vstup množinu bodů v $\R^2$ a výstupem budou tři body tvořící trojúhelník s minimálním obvodem. 
 \begin{mdframed}[style=MyFrame]
 \begin{lstlisting}[style=metoo]
 from math import dist  # Importuje funkci dist z knihovny math pro výpočty.
-from networkx import Graph, neighbors  # Importuje třídu Graph a funkci neighbors z knihovny networkx pro práci s grafy.
+from networkx import Graph, neighbors  # Importuje třídu Graph a funkci neighbors z~knihovny networkx pro práci s grafy.
+from itertools import combinations
+import numpy as np  # Import dalších užitečných knihoven.
 
 def find_path(G:Graph, start, end):
   min_path = None, None, None, float("inf")  # Proměnná pro nejkratší cestu s nekonečnou vzdáleností.
@@ -15,15 +17,15 @@ def find_path(G:Graph, start, end):
       min_path = start, x, end, path  # Aktualizuje nejkratší cestu.
   return min_path  # Vrátí nejkratší cestu.
 
-def algorithm(V:set):
+def algorithm(V:np.array):
   G = Graph()  # Prázdný graf.
-  subsets = list(combinations(V, 2)) # Všchny dvouprvkové podmnožiny V.
+  subsets = combinations(V, 2) # Všechny dvouprvkové seznamy z~V.
   for edge in subsets: # Pro hranu v subsets.
     G.add_weighted_edges_from([((edge[0][0], edge[0][1]), (edge[1][0], edge[1][1]), dist(edge[0], edge[1]))])  # Přidá hranu edge do grafu G s její váhou.
 
   min_triangle = None  # Proměnná pro trojúhelník s minimální váhou.
   min_triangle_weight = float("inf")  # Proměnná pro minimální váhu trojúhelníku.
-  for edge in edges:  # Prochází hrany v seznamu hran.
+  for edge in G.edges():  
     edge_weight = G.get_edge_data(edge[0], edge[1])["weight"]        #~Váha~hrany~edge.
     G.remove_edge(edge[0], edge[1])  # Odebere hranu z grafu.
     u, j, v, weight= find_path(G, edge[0], edge[1])  # Najde nejkratší cestu mezi body edge[0] a edge[1].

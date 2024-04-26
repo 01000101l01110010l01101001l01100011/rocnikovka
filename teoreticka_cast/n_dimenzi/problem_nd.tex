@@ -7,7 +7,7 @@ Hlavní otázkou je, kolik hran opravdu tvoří obvod. (Například ve $3$D těl
 který udává počet $m$-dimenzionál\-ních podpolytopů v $n$-rozměrném polytopu ($\mathcal{P}_n$) za předpokladu, že $\mathcal{P}_n$ má minimální počet vrcholů. To je $n+1$. 
 Když víme, že počet vnějších hran v polytopu je $\binom{n+1}{2}$, musíme zjistit, které hrany z celkové množiny hran to jsou. Jsou to všechny, protože náš polytop má přesně $n+1$ vrcholů. Proto můžeme místo $n+1$ v $\binom{n+1}{2}$ dosadit množinu vrcholů polytopu ($\mathcal{P} = \{x_1, \dots, x_{n+1}\}$) a tím dostaneme $\binom{\mathcal{P}}{2}$, což jsou všechny dvouprvkové podmnožiny z $\mathcal{P}$, neboli všechny hrany polytopu. Obvod tedy spočítáme následovně:
 \begin{equation*}
-  \rho(\mathcal{P}) = \sum_{i=1}^{n} \sum_{j=i+1}^{n+1}d(x_i, x_{j}).
+  p(\mathcal{P}) = \sum_{i=1}^{n} \sum_{j=i+1}^{n+1}d(x_i, x_{j}).
 \end{equation*}
 
 Teď, když jsme vybrali polytop s minimálním obvodem, musíme ověřit, že jeho vrcholy opravdu tvoří polytop maximální dimenze (jako ve 2D, kde jsme ověřovali, jestli body neleží na přímce).
