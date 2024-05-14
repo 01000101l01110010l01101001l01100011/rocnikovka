@@ -18,6 +18,8 @@
 \definecolor{mygreen}{RGB}{55, 120, 55}
 \definecolor{graph}{RGB}{102,138,224}
 \definecolor{graph2}{RGB}{224,102,138}
+\definecolor{myorange}{RGB}{237, 120, 36}
+
 
 \definecolor{green1}{RGB}{5,147,84}
 \definecolor{green2}{RGB}{2,123,54}
@@ -56,6 +58,10 @@
     \setbeamercolor{block title}{fg=white,bg=myblue}%
     \begin{block}#2{#1}}{\end{block}}
 
+\newenvironment<>{otazka}[1]{%
+    \setlength{\textwidth}{1\textwidth}
+    \setbeamercolor{block title}{fg=white,bg=myorange}%
+    \begin{block}#2{#1}}{\end{block}}
 
 \usepackage{enumitem,amssymb}
 \newlist{todolist}{itemize}{2}
@@ -82,7 +88,7 @@
 
 \begin{document}
 
-\title[Ročníková práce]{Hledání polytopu maximální dimenze a minimálního obvodu s vrcholy v dané množině bodů.}
+\title[Ročníková práce]{Hledání polytopu maximální dimenze a minimálního obvodu s vrcholy v dané množině bodů}
 \author{Eric Dusart}
 \date{17. května 2024}
 
@@ -183,13 +189,40 @@
 \end{frame}
 
 \section{Otázky}
+% \begin{frame}
+%   \frametitle{Otázky}
+%   \begin{itemize}[label=\textbullet]
+%     \item Proč je užití Dijkstrova algoritmu v dvoudimenzionální variantě problému stejně efektivní jako procházení všech
+%     možností?
+%     \item Co má větší vliv na časovou náročnost algoritmu? Dimenze či počet bodů? V jakém smyslu a proč?
+%     \item Co když leží všechny vstupní body v jedné nadrovině?
+%     \item Můžeš odhadnou náročnost tvého algoritmu pro $n=10$ (alespoň přibližně)?
+%   \end{itemize}
+% \end{frame}
+% \subsection{Otázka 1}
 \begin{frame}
-  \frametitle{Otázky}
-  \begin{itemize}[label=\textbullet]
-    \item Proč je užití Dijkstrova algoritmu v dvoudimenzionální variantě problému stejně efektivní jako procházení všech
-    možností?
-    \item Co má větší vliv na časovou náročnost algoritmu? Dimenze či počet bodů? V jakém smyslu a proč?
-  \end{itemize}
+  \begin{otazka}{Proč je užití Dijkstrova algoritmu v dvoudimenzionální variantě problému stejně efektivní jako procházení všech
+    možností?}
+    
+  \end{otazka}
+\end{frame}
+% \subsection{Otázka 2}
+\begin{frame}
+  \begin{otazka}{Co když leží všechny vstupní body v jedné nadrovině?}
+    
+  \end{otazka}
+\end{frame}
+% \subsection{Otázka 3}
+\begin{frame}
+  \begin{otazka}{Co má větší vliv na časovou náročnost algoritmu? Dimenze či počet bodů? \\V jakém smyslu a proč?}
+    
+  \end{otazka}
+\end{frame}
+% \subsection{Otázka 4}
+\begin{frame}
+  \begin{otazka}{Můžeš odhadnout náročnost tvého algoritmu pro $n=10$ (alespoň přibližně)?}
+    
+  \end{otazka}
 \end{frame}
 
 
