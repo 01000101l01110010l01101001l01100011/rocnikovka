@@ -8,8 +8,9 @@
 \usepackage{csquotes}
 \usepackage{amsmath}
 \usepackage{tikz}
-
+\usefonttheme{professionalfonts}
 \usetikzlibrary{calc, perspective, shapes}
+\usepackage{tikz-3dplot}
 \usepackage{caption}
 \usepackage{subcaption}
 
@@ -201,27 +202,139 @@
 % \end{frame}
 % \subsection{Otázka 1}
 \begin{frame}
-  \begin{otazka}{Proč je užití Dijkstrova algoritmu v dvoudimenzionální variantě problému stejně efektivní jako procházení všech
-    možností?}
-    
+  \begin{otazka}{Proč je užití Dijkstrova algoritmu v dvoudimenzionální variantě problému stejně efektivní jako procházení všech možností?}
+    Pokud máme zvolený bod $a$ a hledáme nejkratší cestu do bodu $b$, tak Dijkstrův algoritmus bude fungovat následovně:
+    \begin{itemize}[label=\textbullet]
+      \item Vybere bod $a$ jako počáteční a přiřadí všem ostatním bodům vzdálenost $\infty$.
+      \item $\forall u \in V \setminus \{a\}$ zkontroluje, jestli $w(a, u) < \infty$, a pokud ano, vzdálenost změní.
+      \item \dots
+    \end{itemize}
+
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[scale=1.5]
+        % Vertices
+        \node[draw,circle,fill=mygreen,inner sep=0pt,minimum size=4pt] (v1) at (1, 0) {}; %START
+        \coordinate[label=left:$a$] (A) at (1,0);
+        \node[draw,circle,fill=purple,inner sep=0pt,minimum size=4pt] (v2) at (2, 0.5) {};
+        \node[draw,circle,fill=myblue,inner sep=0pt,minimum size=4pt] (v3) at (4, 0) {};
+        \node[draw,circle,fill=myred,inner sep=0pt,minimum size=4pt] (v4) at (2.5, 1.5) {}; %END
+        \coordinate[label=left:$b$] (A) at (2.5,1.5);
+        \node[draw,circle,fill=pink,inner sep=0pt,minimum size=4pt] (v5) at (3, 0.5) {};
+        % Edges
+        \draw[line width=0.5pt, dashed] (v1) -- (v4);
+        \draw[line width=0.5pt] (v3) -- (v5);
+        \draw[line width=0.5pt] (v2) -- (v3);
+        \draw[line width=0.5pt] (v2) -- (v5);
+        \draw[purple, line width=0.75pt] (v1) -- (v2);
+        \draw[myblue, line width=0.75pt] (v1) -- (v3);
+        \draw[pink, line width=0.75pt] (v1) -- (v5);
+        \draw[purple, line width=0.75pt] (v2) -- (v4);
+        \draw[myblue, line width=0.75pt] (v3) -- (v4);
+        \draw[pink, line width=0.75pt] (v4) -- (v5);
+
+      \end{tikzpicture}
+      \caption{Graf $K_5$}
+    \end{figure}
+
   \end{otazka}
 \end{frame}
 % \subsection{Otázka 2}
 \begin{frame}
   \begin{otazka}{Co když leží všechny vstupní body v jedné nadrovině?}
-    
+    \begin{itemize}[label=\textbullet]
+      \item Hledaný polytop neexistuje.
+    \end{itemize}
+    \tdplotsetmaincoords{60}{22.5} % Set the viewing angle
+    \begin{figure}
+      \begin{subfigure}{0.4\textwidth}
+        \begin{tikzpicture}[scale=2,tdplot_main_coords]
+          % Define coordinates
+          \coordinate (a) at (0.5,0.5,0);
+          \coordinate (b) at (1.5,0.5,0);
+          \coordinate (c) at (1.75,1.75,0);
+          \coordinate (d) at (0.5,1.5,0);
+
+          % Draw axes
+          \draw[->, line width = 0.75pt] (0,0,0) -- (2.2,0,0) node[below]{$x$};
+          \draw[->, line width = 0.75pt] (0,0,0) -- (0,2.2,0) node[above]{$y$};
+          \draw[->, line width = 0.75pt] (0,0,0) -- (0,0,2.2) node[above]{$z$};
+
+          % Draw points
+          \foreach \point/\position in {d/above,a/below,b/below,c/right}
+            {
+              \draw[fill=black] (\point) circle (1pt) node [\position=3pt] {$\point$};
+            }
+
+          % Draw lines connecting points
+          \draw[myred, line width = 0.75pt] (a) -- (d);
+          \draw[myred, line width = 0.75pt] (b) -- (d);
+          \draw[myred, line width = 0.75pt] (b) -- (a);
+
+
+          % Draw plane
+          \fill[blue, opacity=0.3] (d) -- (a) -- (b) -- (c) -- cycle;
+
+          % Label plane
+          % \node[blue, above right] at (B) {};
+        \end{tikzpicture}
+        \caption{3D s polytopem dimenze 2}
+      \end{subfigure}
+      \begin{subfigure}{0.4\textwidth}
+        \begin{tikzpicture}[scale=2,tdplot_main_coords]
+          % Define coordinates
+          \coordinate (a) at (0.5,0.5,0);
+          \coordinate (b) at (1.5,0.5,0);
+          \coordinate (c) at (1.5,1.25,1);
+          \coordinate (d) at (0.5,1.5,0);
+
+          % Draw axes
+          \draw[->, line width = 0.75pt] (0,0,0) -- (2.2,0,0) node[below]{$x$};
+          \draw[->, line width = 0.75pt] (0,0,0) -- (0,2.2,0) node[above]{$y$};
+          \draw[->, line width = 0.75pt] (0,0,0) -- (0,0,2.2) node[above]{$z$};
+
+          % Draw points
+          \foreach \point/\position in {d/above,a/below,b/below,c/right}
+            {
+              \draw[fill=black] (\point) circle (1pt) node [\position=3pt] {$\point$};
+            }
+
+          % Draw lines connecting points
+          \draw[myred, line width = 0.75pt] (a) -- (d);
+          \draw[myred, line width = 0.75pt, dotted] (b) -- (d);
+          \draw[myred, line width = 0.75pt] (b) -- (a);
+          \draw[myred, line width = 0.75pt] (a) -- (c);
+          \draw[myred, line width = 0.75pt] (b) -- (c);
+          \draw[myred, line width = 0.75pt] (d) -- (c);
+          % Draw plane
+          \fill[blue, opacity=0.3] (d) -- (a) -- (b) -- (c) -- cycle;
+        \end{tikzpicture}
+        \caption{3D s polytopem dimenze 3}
+      \end{subfigure}
+    \end{figure}
   \end{otazka}
 \end{frame}
 % \subsection{Otázka 3}
 \begin{frame}
   \begin{otazka}{Co má větší vliv na časovou náročnost algoritmu? Dimenze či počet bodů? \\V jakém smyslu a proč?}
-    
+    \begin{itemize}[label=\textbullet]
+      \item Pokud sortíme polytopy podle jejich obvodu:
+      \begin{itemize}[label=\textbullet]
+        \item Best: $\binom{\#V}{n+1}+\binom{n+1}{2}\binom{\#V}{n+1}+n \log n+n^3$
+        \item Worst:$\binom{\#V}{n+1}+\binom{n+1}{2}\binom{\#V}{n+1}+n \log n+ \binom{\#V}{n+1}n^3$: všechny polytopy + obvod pro všechny polytopy + sorting + determinant pro všechny polytopy
+      \end{itemize}
+      \item Pokud vybíráme minimální:
+      \begin{itemize}[label=\textbullet]
+        \item Best: $\binom{\#V}{n+1}+\binom{n+1}{2}\binom{\#V}{n+1}+n \cdot n^3$
+        \item Worst:$\binom{\#V}{n+1}+\binom{n+1}{2}\binom{\#V}{n+1}+n\binom{\#V}{n+1}n^3$: všechny polytopy + obvod pro všechny polytopy + determinant pro všechny polytopy ale po každé vybírám ten s minimálním obvodem (to je to $n$ před $\#VC(n+1)$)
+      \end{itemize}
+    \end{itemize}
   \end{otazka}
 \end{frame}
 % \subsection{Otázka 4}
 \begin{frame}
   \begin{otazka}{Můžeš odhadnout náročnost tvého algoritmu pro $n=10$ (alespoň přibližně)?}
-    
+
   \end{otazka}
 \end{frame}
 
