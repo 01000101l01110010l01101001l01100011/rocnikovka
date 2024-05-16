@@ -100,10 +100,10 @@
   \titlepage
 \end{frame}
 
-\begin{frame}
-  \frametitle{Obsah}
-  \tableofcontents
-\end{frame}
+% \begin{frame}
+%   \frametitle{Obsah}
+%   \tableofcontents
+% \end{frame}
 
 \section{Polytop}
 \begin{frame}
@@ -205,11 +205,16 @@
 % \subsection{Otázka 1}
 \begin{frame}
   \begin{otazka}{Proč je užití Dijkstrova algoritmu v dvoudimenzionální variantě problému stejně efektivní jako procházení všech možností?}
-    Pokud máme zvolený bod $a$ a hledáme nejkratší cestu do bodu $b$, tak Dijkstrův algoritmus bude fungovat následovně:
+    % Pokud máme zvolený bod $a$ a hledáme nejkratší cestu do bodu $b$, tak Dijkstrův algoritmus bude fungovat následovně:
+    % \begin{itemize}[label=\textbullet]
+    %   \item Vybere bod $a$ jako počáteční a přiřadí všem ostatním bodům vzdálenost $\infty$.
+    %   \item $\forall u \in V \setminus \{a\}$ zkontroluje, jestli $w(a, u) < \infty$, a pokud ano, vzdálenost změní.
+    %   \item \dots
+    % \end{itemize}
     \begin{itemize}[label=\textbullet]
-      \item Vybere bod $a$ jako počáteční a přiřadí všem ostatním bodům vzdálenost $\infty$.
-      \item $\forall u \in V \setminus \{a\}$ zkontroluje, jestli $w(a, u) < \infty$, a pokud ano, vzdálenost změní.
-      \item \dots
+      \item Dijkstrův algoritmus hledá nejkratší cestu mezi dvěma vrcholy.
+      \item Graf je skoro úplný (bez hrany $\{a, b\}$), který je přejatý z roviny, proto zde platí trojúhelníková nerovnost.
+      \item Cesta povede právě přes jeden vrchol.
     \end{itemize}
 
     \begin{figure}[H]
@@ -246,14 +251,15 @@
   \begin{otazka}{Co když leží všechny vstupní body v jedné nadrovině?}
     \begin{itemize}[label=\textbullet]
       \item Hledaný polytop neexistuje.
+      \item Hledaný polytop by měl mít dimenzi prostoru určeného vstupními body.
     \end{itemize}
     \tdplotsetmaincoords{60}{22.5} % Set the viewing angle
     \begin{figure}
       \begin{subfigure}{0.4\textwidth}
-        \begin{tikzpicture}[scale=2,tdplot_main_coords]
+        \begin{tikzpicture}[scale=1.9,tdplot_main_coords]
           % Define coordinates
           \coordinate (a) at (0.5,0.5,0);
-          \coordinate (b) at (1.5,0.5,0);
+          \coordinate (b) at (1.5,0.7,0);
           \coordinate (c) at (1.75,1.75,0);
           \coordinate (d) at (0.5,1.5,0);
 
@@ -285,10 +291,10 @@
         \caption{3D s polytopem dimenze 2}
       \end{subfigure}
       \begin{subfigure}{0.4\textwidth}
-        \begin{tikzpicture}[scale=2,tdplot_main_coords]
+        \begin{tikzpicture}[scale=1.9,tdplot_main_coords]
           % Define coordinates
           \coordinate (a) at (0.5,0.5,0);
-          \coordinate (b) at (1.5,0.5,0);
+          \coordinate (b) at (1.5,0.7,0);
           \coordinate (c) at (1.5,1.25,1);
           \coordinate (d) at (0.5,1.5,0);
 
@@ -342,10 +348,11 @@
         \item Ani jedno, vzájemně se doplňují.
         \item Pro fixní dimenzi se zvyšováním počtu bodů algoritmus výrazně zpomaluje.
         \item Pro fixní počet bodů je algoritmus:
-        \begin{itemize}
+        \begin{itemize}[label=\textbullet]
           \item nejrychlejší, když $n = 1,m - 1 $, a
           \item nejpomalejší, když $n = \lfloor m/2\rfloor$.
         \end{itemize}
+        \item Časová náročnost se odvíjí od počtu polytopů: $\binom{m}{n+1}$.
     \end{itemize}
   \end{otazka}
 \end{frame}
