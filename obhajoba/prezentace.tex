@@ -92,7 +92,7 @@
 
 \begin{document}
 
-\title[Ročníková práce]{Hledání polytopu maximální dimenze a minimálního obvodu s vrcholy v dané množině bodů}
+\title[Ročníková práce]{Hledání polytopu maximální dimenze a minimálního obvodu s~vrcholy v dané množině bodů}
 \author{Eric Dusart}
 \date{17. května 2024}
 
@@ -163,13 +163,13 @@
 \section{Moje práce}
 \begin{frame}
   \frametitle{Moje práce}
+
   \begin{vyzkum}{Výzkumná otázka}
     Jak najít polytop maximální dimenze a minimálního obvodu s vrcholy v dané množině bodů?
   \end{vyzkum}
 
   \vspace{1ex}
-  \begin{columns}
-    \begin{column}{0.5\textwidth}
+  \begin{minipage}{0.5\textwidth}
       \textbf{Rozdělení práce:}
       \begin{todolist}
         \item[\done] Problém v 1D, 2D a $n$D
@@ -179,17 +179,16 @@
           \item[\done] Naprogramovat algoritmus.
         \end{todolist}
       \end{todolist}
-    \end{column}
-    \begin{column}{0.5\textwidth}
-      \begin{random}{Proč jsem si vzbral toto téma:}
+  \end{minipage}
+  \begin{minipage}{0.5\textwidth}
+      \begin{random}{Proč jsem si vybral toto téma:}
         \begin{itemize}[label=\textbullet]
           \item Zájem o matematiku.
           \item Trojúhelníky ve 2D.
           \item Problém v $n$ dimenzích.
         \end{itemize}
       \end{random}
-    \end{column}
-  \end{columns}
+  \end{minipage}
 \end{frame}
 
 \section{Otázky}
@@ -263,11 +262,8 @@
           \draw[->, line width = 0.75pt] (0,0,0) -- (0,2.2,0) node[above]{$y$};
           \draw[->, line width = 0.75pt] (0,0,0) -- (0,0,2.2) node[above]{$z$};
 
-          % Draw points
-          \foreach \point/\position in {d/above,a/below,b/below,c/right}
-            {
-              \draw[fill=black] (\point) circle (1pt) node [\position=3pt] {$\point$};
-            }
+          
+
 
           % Draw lines connecting points
           \draw[myred, line width = 0.75pt] (a) -- (d);
@@ -277,6 +273,11 @@
 
           % Draw plane
           \fill[blue, opacity=0.3] (d) -- (a) -- (b) -- (c) -- cycle;
+          % Draw points
+          \foreach \point/\position in {d/above,a/below,b/below,c/right}
+          {
+            \draw[fill=black] (\point) circle (1pt) node [\position=3pt] {$\point$};
+          }
 
           % Label plane
           % \node[blue, above right] at (B) {};
@@ -296,11 +297,7 @@
           \draw[->, line width = 0.75pt] (0,0,0) -- (0,2.2,0) node[above]{$y$};
           \draw[->, line width = 0.75pt] (0,0,0) -- (0,0,2.2) node[above]{$z$};
 
-          % Draw points
-          \foreach \point/\position in {d/above,a/below,b/below,c/right}
-            {
-              \draw[fill=black] (\point) circle (1pt) node [\position=3pt] {$\point$};
-            }
+
 
           % Draw lines connecting points
           \draw[myred, line width = 0.75pt] (a) -- (d);
@@ -311,6 +308,11 @@
           \draw[myred, line width = 0.75pt] (d) -- (c);
           % Draw plane
           \fill[blue, opacity=0.3] (d) -- (a) -- (b) -- (c) -- cycle;
+          % Draw points
+          \foreach \point/\position in {d/above,a/below,b/below,c/right}
+            {
+              \draw[fill=black] (\point) circle (1pt) node [\position=3pt] {$\point$};
+            }
         \end{tikzpicture}
         \caption{3D s polytopem dimenze 3}
       \end{subfigure}
@@ -338,7 +340,12 @@
   \begin{otazka}{Co má větší vliv na časovou náročnost algoritmu? Dimenze či počet bodů? \\V jakém smyslu a proč?}
     \begin{itemize}[label=\textbullet]
         \item Ani jedno, vzájemně se doplňují.
-        \item $\binom{\#V}{n+1}+\binom{n+1}{2}\binom{\#V}{n+1}+n \log n+ \binom{\#V}{n+1}n^3$
+        \item Pro fixní dimenzi se zvyšováním počtu bodů algoritmus výrazně zpomaluje.
+        \item Pro fixní počet bodů je algoritmus:
+        \begin{itemize}
+          \item nejrychlejší, když $n = 1,m - 1 $, a
+          \item nejpomalejší, když $n = \lfloor m/2\rfloor$.
+        \end{itemize}
     \end{itemize}
   \end{otazka}
 \end{frame}
@@ -347,7 +354,7 @@
   \begin{otazka}{Můžeš odhadnout náročnost tvého algoritmu pro $n=10$ (alespoň přibližně)?}
   \begin{minipage}[t]{0.39\textwidth}
     \begin{itemize}[label=\textbullet]
-      \item Časová náročnost algoritmu v 10D s náhodně generovanými body:
+      \item Časová náročnost algoritmu v~10D s náhodně generovanými body:
       \begin{itemize}[label=\textbullet]
         \item $\mathcal{O}(m^{11}\cdot \log m)$, kde $m$ je počet bodů.
       \end{itemize}
@@ -362,8 +369,10 @@
               xlabel={počet bodů},
               ylabel={čas v sekundách},
               legend pos=north west,
-              grid=both,
-          ]
+                grid=both,
+                xtick={10,12, 14, 16, 18, 20, 22, 24, 26, 28},
+                ytick={0, 100, 200, 300, 400, 500, 600, 700, 800},
+              ]
           % Function 4
           \addplot[color=purple, mark=*] coordinates {
             (10, 0.0003)
@@ -386,10 +395,10 @@
             (27, 719.52)
           };
           
-          % \legend{Program pro $n$D spuštěný v 10D}
+          \legend{Časová náročnost algoritmu v 10D.}
           \end{axis}
       \end{tikzpicture}
-      \caption{Časová náročnost algoritmu v 10D.}
+      % \caption*{ Časová náročnost algoritmu v 10D.}
       \label{obr:graphs}
       \end{figure}
   \end{minipage}
@@ -397,8 +406,7 @@
   \end{otazka}
   
 \end{frame}
-\begin{frame}
-
-\end{frame}
-
+% \begin{frame}
+%   \frametitle{Děkuji za pozornost}
+% \end{frame}
 \end{document}
