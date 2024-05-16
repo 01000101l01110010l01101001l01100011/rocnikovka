@@ -51,5 +51,5 @@ def algorithmnd(points):
         if determinant != 0:  # Pokud je determinant nenulový, řešením je tento polytop.
             return polytope, distance
 
-points = np.array([[1, 2, 3], [7, -5, 2], [4, 8, -4], [7, 10, 3], [-3, 3, 3], [5, 1, -4]])
-print(algorithmnd(points))
+# points = np.array([[1, 2, 3], [7, -5, 2], [4, 8, -4], [7, 10, 3], [-3, 3, 3], [5, 1, -4]])
+# print(algorithmnd(points))

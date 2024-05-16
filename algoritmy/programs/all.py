@@ -10,7 +10,7 @@ number_of_cycles = 2
 numbers = []
 for i in range(100000):
    numbers.append(i)
-for i in range(20):
+for i in range(10):
    numbers.remove(i)
 
 one_time = np.array([])
@@ -85,16 +85,16 @@ def all():
 # 20, 10 = 101.5 sekund
 def nd_test():
   print(numbers)
-  with open('data_2D.csv', 'w', newline='') as file_ndd:
+  with open('data_10D.csv', 'w', newline='') as file_ndd:
     writer_ndd = csv.writer(file_ndd)
     for n_points in numbers:
-      points = generate_random_points(n_points, 20)
+      points = generate_random_points(n_points, 10)
       # print(points)
       before = time.time()
       algorithmnd(points)
       after = time.time() - before
-      print(after)
-      writer_ndd.writerows([["nD - 20D", "Points:", n_points, "Time:", after]])
+      print(n_points, ":", after)
+      writer_ndd.writerows([["nD - 10D", "Points:", n_points, "Time:", after]])
 
-# nd_test()
-all()
+nd_test()
+# all()

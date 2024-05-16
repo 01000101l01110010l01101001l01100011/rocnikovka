@@ -9,7 +9,10 @@
 \usepackage{amsmath}
 \usepackage{tikz}
 \usefonttheme{professionalfonts}
-\usetikzlibrary{calc, perspective, shapes}
+\usetikzlibrary{%
+ positioning, graphs, graphs.standard, shapes.geometric,quotes, calc, perspective, shapes, arrows.meta
+}
+\usepackage{pgfplots}
 \usepackage{tikz-3dplot}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -315,28 +318,87 @@
   \end{otazka}
 \end{frame}
 % \subsection{Otázka 3}
+% \begin{frame}
+%   \begin{otazka}{Co má větší vliv na časovou náročnost algoritmu? Dimenze či počet bodů? \\V jakém smyslu a proč?}
+%     \begin{itemize}[label=\textbullet]
+%       \item Pokud sortíme polytopy podle jejich obvodu:
+%       \begin{itemize}[label=\textbullet]
+%         \item Best: $\binom{\#V}{n+1}+\binom{n+1}{2}\binom{\#V}{n+1}+n \log n+n^3$
+%         \item Worst:$\binom{\#V}{n+1}+\binom{n+1}{2}\binom{\#V}{n+1}+n \log n+ \binom{\#V}{n+1}n^3$: všechny polytopy + obvod pro všechny polytopy + sorting + determinant pro všechny polytopy
+%       \end{itemize}
+%       \item Pokud vybíráme minimální:
+%       \begin{itemize}[label=\textbullet]
+%         \item Best: $\binom{\#V}{n+1}+\binom{n+1}{2}\binom{\#V}{n+1}+n \cdot n^3$
+%         \item Worst:$\binom{\#V}{n+1}+\binom{n+1}{2}\binom{\#V}{n+1}+n\binom{\#V}{n+1}n^3$: všechny polytopy + obvod pro všechny polytopy + determinant pro všechny polytopy ale po každé vybírám ten s minimálním obvodem (to je to $n$ před $\#VC(n+1)$)
+%       \end{itemize}
+%     \end{itemize}
+%   \end{otazka}
+% \end{frame}
 \begin{frame}
   \begin{otazka}{Co má větší vliv na časovou náročnost algoritmu? Dimenze či počet bodů? \\V jakém smyslu a proč?}
     \begin{itemize}[label=\textbullet]
-      \item Pokud sortíme polytopy podle jejich obvodu:
-      \begin{itemize}[label=\textbullet]
-        \item Best: $\binom{\#V}{n+1}+\binom{n+1}{2}\binom{\#V}{n+1}+n \log n+n^3$
-        \item Worst:$\binom{\#V}{n+1}+\binom{n+1}{2}\binom{\#V}{n+1}+n \log n+ \binom{\#V}{n+1}n^3$: všechny polytopy + obvod pro všechny polytopy + sorting + determinant pro všechny polytopy
-      \end{itemize}
-      \item Pokud vybíráme minimální:
-      \begin{itemize}[label=\textbullet]
-        \item Best: $\binom{\#V}{n+1}+\binom{n+1}{2}\binom{\#V}{n+1}+n \cdot n^3$
-        \item Worst:$\binom{\#V}{n+1}+\binom{n+1}{2}\binom{\#V}{n+1}+n\binom{\#V}{n+1}n^3$: všechny polytopy + obvod pro všechny polytopy + determinant pro všechny polytopy ale po každé vybírám ten s minimálním obvodem (to je to $n$ před $\#VC(n+1)$)
-      \end{itemize}
+        \item Ani jedno, vzájemně se doplňují.
+        \item $\binom{\#V}{n+1}+\binom{n+1}{2}\binom{\#V}{n+1}+n \log n+ \binom{\#V}{n+1}n^3$
     \end{itemize}
   \end{otazka}
 \end{frame}
 % \subsection{Otázka 4}
 \begin{frame}
   \begin{otazka}{Můžeš odhadnout náročnost tvého algoritmu pro $n=10$ (alespoň přibližně)?}
-
+  \begin{minipage}[t]{0.39\textwidth}
+    \begin{itemize}[label=\textbullet]
+      \item Časová náročnost algoritmu v 10D s náhodně generovanými body:
+      \begin{itemize}[label=\textbullet]
+        \item $\mathcal{O}(m^{11}\cdot \log m)$, kde $m$ je počet bodů.
+      \end{itemize}
+    \end{itemize}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.6\textwidth}
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[scale=0.7]
+          \begin{axis}[
+              xlabel={počet bodů},
+              ylabel={čas v sekundách},
+              legend pos=north west,
+              grid=both,
+          ]
+          % Function 4
+          \addplot[color=purple, mark=*] coordinates {
+            (10, 0.0003)
+            (11, 0.0003)
+            (12, 0.0004)
+            (13, 0.0016)
+            (14, 0.0039)
+            (15, 0.0137)
+            (16, 0.0436)
+            (17, 0.1290)
+            (18, 0.3331)
+            (19, 0.7893)
+            (20, 1.8222)
+            (21, 4.1202)
+            (22, 8.0600)
+            (23, 15.826)
+            (24, 29.858)
+            (25, 54.231)
+            (26, 105.23)
+            (27, 719.52)
+          };
+          
+          % \legend{Program pro $n$D spuštěný v 10D}
+          \end{axis}
+      \end{tikzpicture}
+      \caption{Časová náročnost algoritmu v 10D.}
+      \label{obr:graphs}
+      \end{figure}
+  \end{minipage}
+  
   \end{otazka}
+  
 \end{frame}
+\begin{frame}
 
+\end{frame}
 
 \end{document}
