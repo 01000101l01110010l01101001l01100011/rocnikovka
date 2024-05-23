@@ -112,7 +112,7 @@
     \begin{itemize}[label=\textbullet]
       \item \emph{Polytop} dimenze $n \in \mathbb{N}$ je uzavřená podmnožina $P \subseteq \R^{n}$.
       \item Polytop maximální dimenze a minimálního obvodu má $n+1$ vrcholů.
-      \item Neexistuje nadrovina (podprostor dimenze $n - 1$), která by obsahovala všechny vrcholy polytopu.
+      \item Neexistuje nadrovina (podprostor dimenze $n - 1$), která by obsahovala všechny vrcholy polytopu dimenze $n$.
     \end{itemize}
   \end{informace}
 
@@ -350,7 +350,7 @@
         \item Pro fixní počet bodů je algoritmus:
         \begin{itemize}[label=\textbullet]
           \item nejrychlejší, když $n = 1,m - 1 $, a
-          \item nejpomalejší, když $n = \lfloor m/2\rfloor$.
+          \item nejpomalejší, když $n = \lfloor m/2\rfloor$, kde $m$ je počet bodů.
         \end{itemize}
         \item Časová náročnost se odvíjí od počtu polytopů: $\binom{m}{n+1}$.
     \end{itemize}
